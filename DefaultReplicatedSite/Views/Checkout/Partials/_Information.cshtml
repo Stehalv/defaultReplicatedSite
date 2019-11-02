@@ -1,0 +1,93 @@
+﻿@model CheckoutViewModel
+@using (Html.BeginForm("Information", "Checkout"))
+{
+    <section id="information-contact-info">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Contact Info</h3>
+            </div>
+            <div class="col-sm-6 text-right have-account">
+                <span id="have-account-text">Do you have an account? <a href="#">Log in</a></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextBoxFor(c => c.Address.ContactInfo.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.ContactInfo.Email) })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.CheckBoxFor(c => c.Address.OptIn) <span id="optin-text">Keep me updated on news and offers</span>
+            </div>
+        </div>
+    </section>
+    <section id="information-shipping-info">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Shipping Info</h3>
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Address.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.FirstName) })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Address.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.LastName) })
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextBoxFor(c => c.Address.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address) })
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            @if (Settings.Shop.AddressFields.Address2)
+            {
+                <div class="col-sm-12">
+                    @Html.TextBoxFor(c => c.Address.Address2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address2) })
+                </div>
+            }
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            @if (Settings.Shop.AddressFields.Address3)
+            {
+                <div class="col-sm-12">
+                    @Html.TextBoxFor(c => c.Address.Address3, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address3) })
+                </div>
+            }
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            @if (Settings.Shop.AddressFields.State)
+            {
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(c => c.Address.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.City) })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(c => c.Address.State, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.State) })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(c => c.Address.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Zip) })
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(c => c.Address.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.City) })
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(c => c.Address.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Zip) })
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.CheckBoxFor(c => c.Address.SaveInformation) <span id="optin-text">Save Information For Later</span>
+            </div>
+        </div>
+    </section>
+}

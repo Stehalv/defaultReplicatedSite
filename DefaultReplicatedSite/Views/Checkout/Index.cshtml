@@ -1,0 +1,55 @@
+﻿@model DefaultReplicatedSite.ViewModels.CheckoutViewModel
+<div id="checkout-page" class="container-fluid">
+    <div class="wrap">
+        <div id="sidebar-form" class="col-sm-6">
+            <div class="col-sm-8 pull-right main">
+                <div id="checkout-steps" class="row">
+                    <div class="col-sm-12">
+                        <ul class="steps">
+                            <li>
+                                Shoppincart
+                            </li>
+                            <li>
+                                Information
+                            </li>
+                            <li>
+                                Shipping
+                            </li>
+                            <li>
+                                Payment
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <section id="checkout-form-container">
+                    @Html.Partial("Partials/_information", Model)
+                </section>
+                <div class="space-20"></div>
+                <section id="checkout-navigation">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="#"><< Back to shopping</a>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <button class="btn btn-primary">Shipping</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <aside id="sidebar-cart">
+            <section id="cart">
+                @Html.Partial("Partials/_Cart", Model.CartViewModel)
+            </section>
+        </aside>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        function registerEventHandlers() {
+        }
+        registerEventHandlers();
+    </script>
+
+}

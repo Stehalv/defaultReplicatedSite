@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Styles/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <header id="main-header">
+        <nav class="container-fluid">
+            <div class="col-sm-4 menu left">
+                <ul class="nav vertical-center">
+                    <li class="menu-item"><a href="#">Home</a></li>
+                    <li class="menu-item"><a href="#">Opportunity</a></li>
+                    <li class="menu-item"><a href="#">Products</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 centered-logo">
+                <div class="logo-container">
+                    <a href="">
+                        <img src="~/Content/images/luxxium_white_header_logo-1.png" class="img-responsive" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 menu right">
+                <ul class="nav vertical-center">
+                    <li class="menu-item"><a href="#">Join Now</a></li>
+                    <li class="menu-item"><a href="#">Contact</a></li>
+                    <li class="menu-item"><a href="#">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container-fluid">
+        @RenderBody()
+    </main>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Html.Partial("_GlobalScripts")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

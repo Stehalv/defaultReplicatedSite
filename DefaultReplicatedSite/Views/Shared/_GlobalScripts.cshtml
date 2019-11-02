@@ -1,0 +1,77 @@
+﻿<script>
+        var elements;
+        var windowHeight;
+
+        // Event Handlers
+        function registerEventHandlers() {
+            $(window).scroll(function () {
+                console.log("scroll");
+                actions.setMenustatus();
+                actions.checkPosition();
+            });
+            $(".mobile_menu_bar_toggle").on("click", function () {
+                if ($("#mobile_menu").hasClass("open")) {
+                    $("#mobile_menu").removeClass("open");
+                } else {
+                    $("#mobile_menu").addClass("open");
+                }
+            });
+        };
+        // Actions
+            var actions = {
+            checkPosition: function() {
+                for (var i = 0; i < elements.length; i++) {
+                    var element = elements[i];
+                    if (!$(element).hasClass("fadedin")) {
+                        var positionFromTop = elements[i].getBoundingClientRect().top;
+                        if (positionFromTop - windowHeight <= 0) {
+                            if ($(element).hasClass("fadein")) {
+                                actions.animateElement(element);
+                            } else {
+                                actions.animateContainerChild(element);
+                            }
+                        }
+                    }
+                }
+            },
+            animateContainerChild: function (e) {
+                $(e).each(function () {
+                    var time = 1;
+                    $(this).children().each(function (i, e) {
+                        setTimeout( function(){ $(e).animate({ 'opacity': 1.0 }, 500); }, time )
+                        time = time + 500;
+                    });
+                    $(e).addClass("fadedin");
+                });
+            },
+            animateElement: function (e) {
+                $(e).each(function () {
+                    $(this).animate({ 'opacity': 1.0 }, 500);
+                    $(this).addClass("fadedin");
+                });
+            },
+            setMenustatus: function() {
+                var menu = $('#main-header'),
+                  scroll = $(window).scrollTop();
+                console.log(menu);
+                if (scroll >= 1) {
+                    menu.addClass('fixed-header');
+                }
+                else {
+                    menu.removeClass('fixed-header');
+                }
+            }
+        };
+
+
+        // Initialization
+        function init() {
+            elements = document.querySelectorAll('.animate');
+            windowHeight = window.innerHeight;
+            registerEventHandlers();
+            actions.checkPosition()
+
+        }
+
+        init();
+</script>
