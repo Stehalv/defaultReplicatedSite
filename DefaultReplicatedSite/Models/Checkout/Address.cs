@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
-using System.ComponentModel;
 
 namespace DefaultReplicatedSite.Models
 {
-    public class CheckoutAddress
+    public class Address : IAddress
     {
-        public ContactInfo ContactInfo { get; set; }
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [DisplayName("Middle Name")]
@@ -27,7 +26,5 @@ namespace DefaultReplicatedSite.Models
         public string State { get; set; }
         [DisplayName("Zip")]
         public string Zip { get; set; }
-        public bool SaveInformation { get; set; }
-        public bool OptIn { get; set; }
     }
 }

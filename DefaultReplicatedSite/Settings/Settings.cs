@@ -13,6 +13,7 @@ namespace DefaultReplicatedSite
         }
         public static class Shop
         {
+            public static bool AllowDiscountCodes = true;
             public static class AddressFields
             {
                 public static bool State = true;

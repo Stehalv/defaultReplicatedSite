@@ -1,4 +1,9 @@
 ﻿@model DefaultReplicatedSite.ViewModels.CartViewModel
-<section id="information-contact-info">
-    
-</section>
+@if (Model.Order != null)
+{
+    @Html.Partial("Partials/_CartDetails", Model.Order)
+}
+@if (Model.AutoOrder != null)
+{
+    @Html.Partial("Partials/_CartDetails", Model.AutoOrder)
+}

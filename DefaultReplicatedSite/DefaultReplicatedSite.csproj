@@ -126,11 +126,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Checkout\ContactInfo.cs" />
     <Compile Include="Models\Checkout\Address.cs" />
+    <Compile Include="Models\Checkout\ContactInfo.cs" />
+    <Compile Include="Models\Checkout\CheckoutAddress.cs" />
+    <Compile Include="Models\Checkout\Interfaces\IAddress.cs" />
+    <Compile Include="Models\Shopping\Interfaces\IOrder.cs" />
     <Compile Include="Models\Shopping\Interfaces\IShoppingCart.cs" />
     <Compile Include="Models\Shopping\Interfaces\IShoppingCartItem.cs" />
     <Compile Include="Models\Shopping\Item.cs" />
+    <Compile Include="Models\Shopping\AutoOrder.cs" />
+    <Compile Include="Models\Shopping\Order.cs" />
     <Compile Include="Models\Shopping\ShoppingCart.cs" />
     <Compile Include="Models\Shopping\ShoppingCartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,8 +214,9 @@
     <Content Include="Views\Shared\_GlobalScripts.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Partials\_Information.cshtml" />
-    <Content Include="Views\Checkout\Partials\_ContactInfo.cshtml" />
     <Content Include="Views\Checkout\Partials\_Cart.cshtml" />
+    <Content Include="Views\Checkout\Partials\_CartDetails.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

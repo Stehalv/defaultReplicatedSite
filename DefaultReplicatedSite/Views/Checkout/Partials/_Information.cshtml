@@ -1,4 +1,4 @@
-﻿@model CheckoutViewModel
+﻿@model CheckoutAddress
 @using (Html.BeginForm("Information", "Checkout"))
 {
     <section id="information-contact-info">
@@ -12,12 +12,12 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                @Html.TextBoxFor(c => c.Address.ContactInfo.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.ContactInfo.Email) })
+                @Html.TextBoxFor(c => c.ContactInfo.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.ContactInfo.Email) })
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                @Html.CheckBoxFor(c => c.Address.OptIn) <span id="optin-text">Keep me updated on news and offers</span>
+                @Html.CheckBoxFor(c => c.OptIn) <span id="optin-text">Keep me updated on news and offers</span>
             </div>
         </div>
     </section>
@@ -27,66 +27,10 @@
                 <h3>Shipping Info</h3>
             </div>
         </div>
-        <div class="space-10"></div>
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.TextBoxFor(c => c.Address.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.FirstName) })
-            </div>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(c => c.Address.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.LastName) })
-            </div>
-        </div>
-        <div class="space-10"></div>
+        @Html.EditorFor(c => c)
         <div class="row">
             <div class="col-sm-12">
-                @Html.TextBoxFor(c => c.Address.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address) })
-            </div>
-        </div>
-        <div class="space-10"></div>
-        <div class="row">
-            @if (Settings.Shop.AddressFields.Address2)
-            {
-                <div class="col-sm-12">
-                    @Html.TextBoxFor(c => c.Address.Address2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address2) })
-                </div>
-            }
-        </div>
-        <div class="space-10"></div>
-        <div class="row">
-            @if (Settings.Shop.AddressFields.Address3)
-            {
-                <div class="col-sm-12">
-                    @Html.TextBoxFor(c => c.Address.Address3, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Address3) })
-                </div>
-            }
-        </div>
-        <div class="space-10"></div>
-        <div class="row">
-            @if (Settings.Shop.AddressFields.State)
-            {
-                <div class="col-sm-4">
-                    @Html.TextBoxFor(c => c.Address.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.City) })
-                </div>
-                <div class="col-sm-4">
-                    @Html.TextBoxFor(c => c.Address.State, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.State) })
-                </div>
-                <div class="col-sm-4">
-                    @Html.TextBoxFor(c => c.Address.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Zip) })
-                </div>
-            }
-            else
-            {
-                <div class="col-sm-8">
-                    @Html.TextBoxFor(c => c.Address.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.City) })
-                </div>
-                <div class="col-sm-4">
-                    @Html.TextBoxFor(c => c.Address.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address.Zip) })
-                </div>
-            }
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @Html.CheckBoxFor(c => c.Address.SaveInformation) <span id="optin-text">Save Information For Later</span>
+                @Html.CheckBoxFor(c => c.SaveInformation) <span id="optin-text">Save Information For Later</span>
             </div>
         </div>
     </section>

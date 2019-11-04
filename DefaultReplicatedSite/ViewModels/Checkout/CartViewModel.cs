@@ -9,7 +9,7 @@ namespace DefaultReplicatedSite.ViewModels
     public class CartViewModel
     {
         public IShoppingCart ShoppingCart { get; set; }
-        public List<Item> OrderItems { get; set; }
-        public List<Item> AutoOrderItems { get; set; }
+        public Order Order { get; set; }
+        public AutoOrder AutoOrder { get; set; }
     }
 }

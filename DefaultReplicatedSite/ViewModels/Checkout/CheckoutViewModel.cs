@@ -8,7 +8,13 @@ namespace DefaultReplicatedSite.ViewModels
 {
     public class CheckoutViewModel
     {
+        public CheckoutViewModel()
+        {
+            ShoppingCart = new CartViewModel();
+            Address = new CheckoutAddress();
+        }
         public CartViewModel ShoppingCart { get; set; }
-        public CheckoutAddress Address { get; set; }
+        public IAddress Address { get; set; }
+        public int EnrollerID { get; set; }
     }
 }

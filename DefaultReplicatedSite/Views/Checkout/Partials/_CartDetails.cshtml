@@ -1,0 +1,75 @@
+﻿@model IOrder
+@{ 
+    var isAutoOrder = (Model is AutoOrder);
+}
+    <section id="ckeckout-order-summary">
+        <div class="summary-items">
+            @foreach (var item in Model.Items)
+            {
+                <div class="product-image">
+                    <div class="product-thumbnail">
+                        <div class="product-thumbnail-wrapper">
+                            <img alt="" class="product-thumbnail-image" src="@item.ItemImage">
+                        </div>
+                        <span class="product-thumbnail-quantity" aria-hidden="true">@item.Quantity</span>
+                    </div>
+                </div>
+                <div class="product-description" scope="row">
+                    <span class="product-description-name order-summary-emphasis">@item.ItemDescription</span>
+                    <span class="product-description-variant order-summary-small-text">@item.ShortDetail1</span>
+                </div>
+                <div class="product-price">
+                    <span class="order-summary-emphasis">@item.Price.ToString("C")</span>
+                </div>
+            }
+        </div>
+        @if (Settings.Shop.AllowDiscountCodes)
+        {
+            <div class="order-summary-discount" data-reduction-form="update">
+                <h3 class="visually-hidden">Rabatt</h3>
+            </div>
+        }
+
+
+        <div class="order-summary-total-lines">
+            <div class="total-line row">
+                <span class="pull-left">
+                    Sub Total
+                </span>
+                <span class="pull-right">
+                    @Model.SubTotal.ToString("C")
+                </span>
+            </div>
+            @if (Model.Shipping > 0)
+            {
+                <div class="total-line row">
+                    <span class="pull-left">
+                        Shipping
+                    </span>
+                    <span class="pull-right">
+                        @Model.Shipping.ToString("C")
+                    </span>
+                </div>
+            }
+
+            @if (Model.Tax > 0)
+            {
+                <div class="total-line row">
+                    <span class="pull-left">
+                        Tax
+                    </span>
+                    <span class="pull-right">
+                        @Model.Tax.ToString("C")
+                    </span>
+                </div>
+            }        
+        </div>
+        <div class="order-summary-total order-summary-emphasis">
+            <span class="pull-left">
+                Total
+            </span>
+            <span class="pull-right large">
+                @Model.Total.ToString("C")
+            </span>
+        </div>
+    </section>
