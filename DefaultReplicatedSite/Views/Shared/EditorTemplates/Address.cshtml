@@ -1,0 +1,65 @@
+﻿@model Address
+<div class="space-10"></div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.FirstName) })
+        @Html.ValidationMessageFor(c => c.FirstName)
+    </div>
+    <div class="col-sm-6">
+        @Html.TextBoxFor(c => c.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.LastName) })
+        @Html.ValidationMessageFor(c => c.LastName)
+    </div>
+</div>
+<div class="space-10"></div>
+<div class="row">
+    <div class="col-sm-12">
+        @Html.TextBoxFor(c => c.StreetAddress, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.StreetAddress) })
+        @Html.ValidationMessageFor(c => c.StreetAddress)
+    </div>
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (Settings.Shop.AddressFields.Address2)
+    {
+        <div class="col-sm-12">
+            @Html.TextBoxFor(c => c.Address2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address2) })
+        </div>
+    }
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (Settings.Shop.AddressFields.Address3)
+    {
+        <div class="col-sm-12">
+            @Html.TextBoxFor(c => c.Address3, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address3) })
+        </div>
+    }
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (Settings.Shop.AddressFields.State)
+    {
+    <div class="col-sm-4">
+        @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
+        @Html.ValidationMessageFor(c => c.City)
+    </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.State, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.State) })
+        </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Zip) })
+            @Html.ValidationMessageFor(c => c.Zip)
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-8">
+            @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
+            @Html.ValidationMessageFor(c => c.City)
+        </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Zip) })
+            @Html.ValidationMessageFor(c => c.Zip)
+        </div>
+    }
+</div>

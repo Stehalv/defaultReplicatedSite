@@ -15,7 +15,7 @@ namespace DefaultReplicatedSite.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
         [DisplayName("Address")]
-        public string Address { get; set; }
+        public string StreetAddress { get; set; }
         [DisplayName("Address 2")]
         public string Address2 { get; set; }
         [DisplayName("Address 3")]

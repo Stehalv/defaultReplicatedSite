@@ -10,5 +10,8 @@ namespace DefaultReplicatedSite.Models
     {
         [DisplayName("Please Provide your email Address")]
         public string Email { get; set; }
+
+        [DisplayName("Password")]
+        public string Password { get; set; }
     }
 }

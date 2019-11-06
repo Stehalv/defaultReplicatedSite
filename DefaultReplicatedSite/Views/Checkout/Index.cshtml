@@ -4,37 +4,82 @@
         <div id="sidebar-form">
             <div class="pull-right main">
                 <div id="checkout-steps" class="row">
+                    <input type="hidden" id="CurrentStep" value="1" />
                     <div class="col-sm-12">
                         <ul class="steps">
-                            <li>
-                                Shoppincart
+                            <li class="step0">
+                                <a href="#">Shoppingcart</a>
                             </li>
-                            <li>
-                                Information
+                            <li class="step1">
+                                <a href="#">Information</a>
                             </li>
-                            <li>
-                                Shipping
+                            <li class="step2">
+                                <a href="#">Shipping</a>
                             </li>
-                            <li>
-                                Payment
+                            <li class="step3">
+                                <a href="#">Payment</a>
+                            </li>
+                            <li class="step4">
+                                <span>Order Confirmation</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <section id="checkout-form-container">
-                    @Html.Partial("Partials/_information", Model.Address)
-                </section>
-                <div class="space-20"></div>
-                <section id="checkout-navigation">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="#"><< Back to shopping</a>
+                @using (Ajax.BeginForm("SumbitCheckout", "Checkout", new AjaxOptions { 
+                    OnBegin = "actions.beginRequest",
+                    OnSuccess = "actions.orderCreated",
+                    OnFailure = "action.orderCreationFailed"
+                }))
+                {
+                    <section id="checkout-form-container">
+                        <div id="information" class="step1">
+                                @Html.EditorFor(c => c.Customer)
                         </div>
-                        <div class="col-sm-6 text-right">
-                            <button class="btn btn-primary">Shipping</button>
+                        <div id="shipping" class="step2">
+                            @Html.EditorFor(c => c.Shipping)
                         </div>
-                    </div>
-                </section>
+                        <div id="Payment" class="step3">
+                            @Html.EditorFor(c => c.Payment)
+                        </div>
+                        <div id="OrderCompleted" class="step4">
+                        </div>
+                    </section>
+                    <div class="space-20"></div>
+                    <section id="checkout-navigation">
+                        <div class="row step1">
+                            <div class="col-sm-6">
+                                <a href="#"><< Back to shopping</a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a data-role="go-to-shipping" class="btn btn-primary recalc-cart">Shipping</a>
+                            </div>
+                        </div>
+                        <div class="row step2">
+                            <div class="col-sm-6">
+                                <a href="#"><< Back to information</a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a data-role="go-to-payment" class="btn btn-primary">Payment</a>
+                            </div>
+                        </div>
+                        <div class="row step3">
+                            <div class="col-sm-6">
+                                <a href="#"><< Back to shipping</a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a data-role="place-order" class="btn btn-primary">Place Order</a>
+                            </div>
+                        </div>
+                        <div class="row step4">
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary">Login </a>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <a href="#" class="btn btn-primary">Go back to shop </a>
+                            </div>
+                        </div>
+                    </section>
+                }
             </div>
         </div>
         <aside id="sidebar-cart">
@@ -45,11 +90,11 @@
     </div>
 </div>
 @section Scripts{
-
     <script>
-        function registerEventHandlers() {
-        }
-        registerEventHandlers();
+        //need script to handle the foloowing
+        //1.Steps - When a new step is selected we need to use the step classes to change display of the form
+        //2.Updating of the cart when changes in the form require it - Shipping will require re-calculation use class recalc-cart on button
+        //
     </script>
 
 }

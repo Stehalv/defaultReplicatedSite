@@ -11,7 +11,7 @@ namespace DefaultReplicatedSite.Models
         string FirstName { get; set; }
         string MiddleName { get; set; }
         string LastName { get; set; }
-        string Address { get; set; }
+        string StreetAddress { get; set; }
         string Address2 { get; set; }
         string Address3 { get; set; }
         string City { get; set; }

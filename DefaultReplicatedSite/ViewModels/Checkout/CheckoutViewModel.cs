@@ -1,4 +1,6 @@
 ﻿using DefaultReplicatedSite.Models;
+using MakoLibrary.Contracts;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,25 @@ namespace DefaultReplicatedSite.ViewModels
         public CheckoutViewModel()
         {
             ShoppingCart = new CartViewModel();
-            Address = new CheckoutAddress();
+            Customer = new CRMCustomerContract();
+        }
+        public CheckoutViewModel(long id)
+        {
+            Customer = Teqnavi.ServiceContext().GetCrmCustomerByCustomerId(id);
         }
         public CartViewModel ShoppingCart { get; set; }
-        public IAddress Address { get; set; }
+        public CRMCustomerContract Customer { get; set; }
+        public CheckoutShipping Shipping { get; set; }
+        public CheckoutPayment Payment { get; set; }
         public int EnrollerID { get; set; }
+        public CheckoutSteps CheckoutStep { get; set; }
+        public CreateCustomerContract AddressContract { get; set; }
+        public void test()
+        {
+            var service = new MakoLibrary.Services.MakoService(MakoLibrary.Services.Environment.Production.ToString());
+            service.AddCustomer( new CreateCustomerContract { 
+             
+            });
+        }
     }
 }
