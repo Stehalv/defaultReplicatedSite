@@ -17,7 +17,8 @@ namespace DefaultReplicatedSite.ViewModels
         }
         public CheckoutViewModel(long id)
         {
-            Customer = Teqnavi.ServiceContext().GetCrmCustomerByCustomerId(id);
+            //Customer = Teqnavi.ServiceContext().GetCrmCustomerByCustomerId(id);
+            Customer = null;
         }
         public CartViewModel ShoppingCart { get; set; }
         public CRMCustomerContract Customer { get; set; }

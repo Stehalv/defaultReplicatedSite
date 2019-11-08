@@ -2,126 +2,31 @@
     ViewBag.Title = "Home Page";
 }
 <style>
-    .background-content .content{
-        max-width:1080px;
-        margin: 0px auto 0px;
-        padding: 48px 4%;
-        position:relative;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1em 0 2em;
-    }
-    .banner-container .article{
-        padding: 0px 5%;
-    }
-    .text-white h2{
-        color:white;
-    }
-    .text-white{
-        color:white;
-    }
-    .first-banner-content {
-        margin-top: 330px;
-    }
-    p {
-        line-height: 1.7;
-        padding: 12px 0px;
-        margin: 0px;
-    }
-    .button {
-        background-color: #32373c;
-        border: none;
-        border-radius: 28px;
-        box-shadow: none;
-        color: inherit;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 18px;
-        margin: 0;
-        padding: 12px 24px;
-        text-align: center;
-        text-decoration: none;
-        overflow-wrap: break-word;
-    }
-    .button:hover{
-        color:#fff;
-        text-decoration:none;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-    }
-    .gold{
-        background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
-                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-    }
-    #home-search . content{
-        padding:0px;
-    }
-    .social-icons li a {
-        color: rgba(0, 0, 0, 0.4);
-         border: 1px solid rgba(0, 0, 0, .12); 
-         border-radius: 18px; 
-    }
-    .social-icons li a {
-        display: block;
-        color: #666666;
-        text-align: center;
-        text-decoration: none;
-        line-height: 36px;
-        min-width: 36px;
-        margin: 4px;
+
+
+
+
+    #home-search .content {
         padding: 0px;
     }
-    .social-icons li {
-        display: inline-block;
-        list-style: none;
-        margin: 0px;
-        padding: 0px;
-    }
+
+    
 </style>
-<div class="background-cover" style="background-image: url('../../Content/images/luxxium_front_page.jpg');">
+<div class="background-cover" style="background-image: url('../../Content/images/luxxium_front_page.jpg?resize=2400%2C1800&ssl=1');">
     <div class="banner-container content">
         <div class="article clearfix">
-            <div class="first-banner-content" style="margin-left:10%; width:500px">
+            <div class="first-banner-content">
                 <div class="text-white animate fadein">
                     <h2>Luxury</h2>
                     <h2><em>&amp; Opportunity</em></h2>
                     <div style="height:20px"></div>
                     <p style="text-align:left">A revolutionary lifestyle subscription tailored to your individual desires, Luxxium delivers the utmost lavish skincare products and groundbreaking lifestyle care. Join an elite assembly of clientele enjoying the benefits of our exclusive R + R, Renew and Reward System™and&nbsp;&nbsp;proven compensation structure.&nbsp;&nbsp;Products you believed were only for the upper echelon are now available to you at reduced costs, and subscriber only prices.&nbsp;</p>
                     <div>
-                        <a class="button gold" href="https://luxxium.net/r-r-program/" style="background-color:#a3842e">R + R, Renew and Reward System™</a>
+                        <a class="rounded-button gold" href="https://luxxium.net/r-r-program/" style="background-color:#a3842e">R + R, Renew and Reward System™</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="home-search" style="height:100vh">
-    <div class="content">
-        <div class="col-sm-6">
-            <div class="social-menu">
-                <ul id="menu-social" class="social-icons">
-                    <li id="menu-item-284" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-284"><a target="_blank" rel="noopener noreferrer" href="mailto:info@luxxium.net"><i class="fade fa-mail"></i></a></li>
-                    <li id="menu-item-152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-152"><a href="http://www.facebook.com/luxxium"><span>Facebook</span></a></li>
-                    <li id="menu-item-154" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154"><a href="http://www.instagram.com/aimeebaram"><span>Instagram</span></a></li>
-                    <li id="menu-item-281" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-281"><a target="_blank" rel="noopener noreferrer" href="http://twitter.com"><span>Twitter</span></a></li>
-                    <li id="menu-item-282" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-282"><a target="_blank" rel="noopener noreferrer" href="http://linkedin.com"><span>linkedin</span></a></li>
-                    <li id="menu-item-285" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-285"><a target="_blank" rel="noopener noreferrer" href="http://plus.google.com"><span>google</span></a></li>
-                    <li id="menu-item-286" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-286"><a href="http://pinterest.com"><span>pinterest</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="align-right">
-            <div class="search-bar">
-                <form method="get" id="searchform" class="clearfix" action="https://luxxium.net/" role="search">
-                    <label for="s" class="assistive-text">Search</label>
-                    <input type="text" class="field" name="s" value="" id="s" placeholder="Search …">
-                    <input type="submit" class="submit" name="submit" id="searchsubmit" value="Go">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("_SocialIconsBar")

@@ -23,7 +23,7 @@ namespace DefaultReplicatedSite
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap.css", "~/Content/Styles/Site.css"));
         }
     }
 }

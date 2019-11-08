@@ -65,7 +65,8 @@ namespace DefaultReplicatedSite.Services
                 1,
                 identity.User.CustomerId.ToString(),
                 DateTime.Now,
-                DateTime.Now.AddMinutes(Properties.SessionTimeout),
+                DateTime.Now,
+                //DateTime.Now.AddMinutes(Properties.SessionTimeout),
                 false,
                 identity.SerializeProperties());
 
@@ -110,7 +111,8 @@ namespace DefaultReplicatedSite.Services
                     {
                         User = new UserIdentity.TicketProperties()
                         {
-                            AppVersion = Properties.Version,
+                            //AppVersion = Properties.Version,
+                            AppVersion = "1.0",
                             CustomerId = customer.Data.CustomerIdExternal,
                             FirstName = customer.Data.FirstName,
                             LastName = customer.Data.LastName,
