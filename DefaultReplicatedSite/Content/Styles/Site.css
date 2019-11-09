@@ -79,6 +79,7 @@ td, th {
 
 .summary-items {
   display: flex;
+  flex-direction: column;
   padding-top: 30px;
   padding-bottom: 30px;
   position: relative; }
@@ -97,6 +98,10 @@ td, th {
   transition: background-color 0.3s cubic-bezier(0.3, 0, 0, 1);
   width: 100%;
   z-index: 4; }
+
+.summary-item {
+  display: flex;
+  margin-bottom: 15px; }
 
 .product-thumbnail {
   width: 4.6em;

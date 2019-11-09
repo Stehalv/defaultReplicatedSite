@@ -29,10 +29,6 @@ namespace DefaultReplicatedSite
                 return currentPeriod ?? new PeriodContract();
             }
 
-            internal object GetCurrentPeriod(object periodTyes)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model ShippingStep
+    <section id="information-contact-info">
+        <div class="col-sm-12">
+            <h3>Shipping</h3>
+        </div>
+        @if (Model.HasAutoOrder)
+        {
+
+        }
+        <div class="space-10"></div>
+        <div class="col-sm-12">
+            @Html.CheckBoxFor(c => c.ShippingSameAsAccount) <span id="optin-text">Shipping Address same as account Address</span>
+        </div>
+        <div class="shipping-address-container">
+            @Html.EditorFor(c => c.ShippingAddress, "Address")
+        </div>
+        <div class="space-10"></div>
+        <div class="step-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#"><< Back to customer information</a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button type="submit" class="btn btn-primary">Payment</button>
+                </div>
+            </div>
+        </div>
+    </section>

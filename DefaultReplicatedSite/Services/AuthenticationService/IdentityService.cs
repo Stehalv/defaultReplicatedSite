@@ -65,7 +65,7 @@ namespace DefaultReplicatedSite.Services
                 1,
                 identity.User.CustomerId.ToString(),
                 DateTime.Now,
-                DateTime.Now.AddMinutes(Properties.SessionTimeout),
+                DateTime.Now.AddMinutes(Settings.API.SessionTimeout),
                 false,
                 identity.SerializeProperties());
 
@@ -110,7 +110,7 @@ namespace DefaultReplicatedSite.Services
                     {
                         User = new UserIdentity.TicketProperties()
                         {
-                            AppVersion = Properties.Version,
+                            AppVersion = Settings.API.Version,
                             CustomerId = customer.Data.CustomerIdExternal,
                             FirstName = customer.Data.FirstName,
                             LastName = customer.Data.LastName,
@@ -133,5 +133,40 @@ namespace DefaultReplicatedSite.Services
 
             return identity;
         }
+
+    //    public OwnerIdentity GetOwnerIdentity(string webAlias)
+    //    {
+    //        webAlias = webAlias.ToUpper();
+    //        var cacheKey = string.Format("{0}-OwnerIdentity-{1}", Settings.Company.Name, webAlias);
+    //        var identity = HttpContext.Current.Cache[cacheKey] as OwnerIdentity;
+
+    //        //if (identity == null)
+    //        //{
+    //        //    try
+    //        //    {
+    //        //        MakoLibrary.Contracts.CRMCustomerContract
+    //        //        identity = Teqnavi.ServiceContext().GetCrmCustomers()
+
+    //        //        // Save the identity
+    //        //        HttpContext.Current.Cache.Insert(cacheKey,
+    //        //            identity,
+    //        //            null,
+    //        //            DateTime.Now.AddMinutes(GlobalSettings.ReplicatedSites.IdentityRefreshInterval),
+    //        //            System.Web.Caching.Cache.NoSlidingExpiration,
+    //        //            System.Web.Caching.CacheItemPriority.Normal,
+    //        //            null);
+    //        //    }
+    //        //    catch (Exception ex)
+    //        //    {
+    //        //        if (ex.Message.Contains("Default user missing"))
+    //        //        {
+    //        //            throw ex;
+    //        //        }
+    //        //        return null;
+    //        //    }
+    //        //}
+
+    //        return identity;
+    //    }
     }
 }

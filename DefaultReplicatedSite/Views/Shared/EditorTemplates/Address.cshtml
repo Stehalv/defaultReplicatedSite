@@ -1,25 +1,17 @@
-﻿@model Address
-<div class="space-10"></div>
-<div class="row">
-    <div class="col-sm-6">
-        @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.FirstName) })
-        @Html.ValidationMessageFor(c => c.FirstName)
-    </div>
-    <div class="col-sm-6">
-        @Html.TextBoxFor(c => c.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.LastName) })
-        @Html.ValidationMessageFor(c => c.LastName)
-    </div>
-</div>
+﻿@model CRMExtendedAddress
+    @{ 
+        var currentMarket = new UnitedStatesMarket();
+    }
 <div class="space-10"></div>
 <div class="row">
     <div class="col-sm-12">
-        @Html.TextBoxFor(c => c.StreetAddress, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.StreetAddress) })
-        @Html.ValidationMessageFor(c => c.StreetAddress)
+        @Html.TextBoxFor(c => c.Address1, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address1) })
+        @Html.ValidationMessageFor(c => c.Address1)
     </div>
 </div>
 <div class="space-10"></div>
 <div class="row">
-    @if (Settings.Shop.AddressFields.Address2)
+    @if (currentMarket.AddressSettings.Address2)
     {
         <div class="col-sm-12">
             @Html.TextBoxFor(c => c.Address2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address2) })
@@ -28,7 +20,7 @@
 </div>
 <div class="space-10"></div>
 <div class="row">
-    @if (Settings.Shop.AddressFields.Address3)
+    @if (currentMarket.AddressSettings.Address3)
     {
         <div class="col-sm-12">
             @Html.TextBoxFor(c => c.Address3, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address3) })
@@ -37,18 +29,18 @@
 </div>
 <div class="space-10"></div>
 <div class="row">
-    @if (Settings.Shop.AddressFields.State)
+    @if (currentMarket.AddressSettings.State)
     {
     <div class="col-sm-4">
         @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
         @Html.ValidationMessageFor(c => c.City)
     </div>
         <div class="col-sm-4">
-            @Html.TextBoxFor(c => c.State, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.State) })
+            @Html.TextBoxFor(c => c.RegionProvState, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.RegionProvState) })
         </div>
         <div class="col-sm-4">
-            @Html.TextBoxFor(c => c.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Zip) })
-            @Html.ValidationMessageFor(c => c.Zip)
+            @Html.TextBoxFor(c => c.PostalCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.PostalCode) })
+            @Html.ValidationMessageFor(c => c.PostalCode)
         </div>
     }
     else
@@ -58,8 +50,8 @@
             @Html.ValidationMessageFor(c => c.City)
         </div>
         <div class="col-sm-4">
-            @Html.TextBoxFor(c => c.Zip, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Zip) })
-            @Html.ValidationMessageFor(c => c.Zip)
+            @Html.TextBoxFor(c => c.PostalCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.PostalCode) })
+            @Html.ValidationMessageFor(c => c.PostalCode)
         </div>
     }
 </div>

@@ -1,0 +1,20 @@
+﻿<script>
+    var settings = {
+        urls: {
+            AddItemToOrder: "@Url.Action("AddItemToOrder", "Shopping")",
+            AddItemToAutoOrder: "@Url.Action("AddItemToAutoOrder", "Shopping")",
+        }
+    }
+    function registerEventHandlers() {
+        $(".add-item-to-order").on("click", function () {
+            var $item = $(this).closest('form').submit();
+        });
+    }
+    function addToOrderBegin(e) {
+
+    }
+    function addToOrderSuccess(response) {
+        console.log(response);
+    }
+    registerEventHandlers();
+</script>

@@ -1,9 +1,9 @@
-﻿@model DefaultReplicatedSite.ViewModels.CartViewModel
+﻿@model CartModel
 @if (Model.Order != null)
 {
     @Html.Partial("Partials/_CartDetails", Model.Order)
 }
-@if (Model.AutoOrder != null)
+@if (Model.AutoOrder.Items != null)
 {
     @Html.Partial("Partials/_CartDetails", Model.AutoOrder)
 }

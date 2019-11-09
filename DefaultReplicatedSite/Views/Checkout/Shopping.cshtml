@@ -1,0 +1,68 @@
+﻿@model ShoppingFlow
+<div id="checkout-page">
+    <div class="wrap">
+        <div id="sidebar-form">
+            <div class="pull-right main">
+
+                @using (Html.BeginForm("Index", "Checkout", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    OnBegin = "beginRequest",
+                    OnFailure = "saveFailed"
+                }))
+                {
+                    <div id="checkout-steps" class="row">
+                        @Html.HiddenFor(c => c.Flow)
+                        <div class="col-sm-12">
+                            <ul class="steps">
+                                @foreach (var step in Model.CheckoutStepList)
+                                {
+                                    <li class="step-@step">
+                                        <a href="#">@step.ToString()</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <section id="checkout-form-container">
+                        @if (Model.CurrentStep == CheckoutSteps.Information)
+                        {
+                            <div id="information" class="step1">
+                                @Html.EditorFor(c => c.InformationStep, "NewContactInformation")
+                            </div>
+                        }
+
+                        @if (Model.CurrentStep == CheckoutSteps.Shipping)
+                        {
+                            <div id="information" class="step1">
+                                @Html.EditorFor(c => c.ShippingStep, "Shipping")
+                            </div>
+                        }
+
+                        @if (Model.CurrentStep == CheckoutSteps.Shipping)
+                        {
+                            <div id="information" class="step1">
+                                @Html.EditorFor(c => c.PaymentStep, "Payments")
+                            </div>
+                        }
+                    </section>
+                }
+            </div>
+        </div>
+        <aside id="sidebar-cart">
+            <section id="cart">
+                @Html.Partial("Partials/_Cart", Model.ShoppingCart)
+            </section>
+        </aside>
+    </div>
+</div>
+
+<script>
+
+    function beginRequest(e) {
+        console.log(e);
+    }
+    function SaveFailed(response) {
+        alert(response);
+    }
+</script>

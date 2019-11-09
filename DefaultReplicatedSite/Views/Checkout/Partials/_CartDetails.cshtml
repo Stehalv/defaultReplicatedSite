@@ -1,4 +1,4 @@
-﻿@model IOrder
+﻿@model Cart
 @{ 
     var isAutoOrder = (Model is AutoOrder);
 }
@@ -6,20 +6,22 @@
         <div class="summary-items">
             @foreach (var item in Model.Items)
             {
-                <div class="product-image">
-                    <div class="product-thumbnail">
-                        <div class="product-thumbnail-wrapper">
-                            <img alt="" class="product-thumbnail-image" src="@item.ItemImage">
+                <div class="summary-item">
+                    <div class="product-image">
+                        <div class="product-thumbnail">
+                            <div class="product-thumbnail-wrapper">
+                                <img alt="" class="product-thumbnail-image" src="@item.SmallImage">
+                            </div>
+                            <span class="product-thumbnail-quantity" aria-hidden="true">@item.Quantity</span>
                         </div>
-                        <span class="product-thumbnail-quantity" aria-hidden="true">@item.Quantity</span>
                     </div>
-                </div>
-                <div class="product-description" scope="row">
-                    <span class="product-description-name order-summary-emphasis">@item.ItemDescription</span>
-                    <span class="product-description-variant order-summary-small-text">@item.ShortDetail1</span>
-                </div>
-                <div class="product-price">
-                    <span class="order-summary-emphasis">@item.Price.ToString("C")</span>
+                    <div class="product-description" scope="row">
+                        <span class="product-description-name order-summary-emphasis">@item.Title</span>
+                        <span class="product-description-variant order-summary-small-text">@item.ShortDescr</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="order-summary-emphasis">@item.ItemPrice.ItemPrice.ToString("C")</span>
+                    </div>
                 </div>
             }
         </div>

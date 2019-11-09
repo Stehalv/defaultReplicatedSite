@@ -1,0 +1,58 @@
+﻿@model InformationStep
+    <input type="hidden" name="CurrentStep" value="@DefaultReplicatedSite.Services.CheckoutSteps.Information" />
+    <input type="hidden" name="NextStep" value="@DefaultReplicatedSite.Services.CheckoutSteps.Shipping" />
+    <section id="contact-information">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Contact Info</h3>
+            </div>
+            <div class="col-sm-6 text-right have-account">
+                <span id="have-account-text">Do you have an account? <a href="#">Log in</a></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.FirstName) })
+                @Html.ValidationMessageFor(c => c.Customer.FirstName)
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.LastName) })
+                @Html.ValidationMessageFor(c => c.Customer.LastName)
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextBoxFor(c => c.Customer.EmailAddress, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.EmailAddress) })
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.PasswordFor(c => c.Customer.UserPassword, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.UserPassword) })
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.CheckBoxFor(c => c.Customer.EmailSubscribed) <span id="optin-text">Keep me updated on news and offers</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Shipping Info</h3>
+            </div>
+        </div>
+        @Html.EditorFor(c => c.Customer.MailingAddress, "Address")
+        <div class="space-10"></div>
+        <div class="step-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#"><< Back to shopping</a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button type="submit" class="btn btn-primary">Shipping</button>
+                </div>
+            </div>
+        </div>
+    </section>
