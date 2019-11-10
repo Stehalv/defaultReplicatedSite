@@ -6,32 +6,73 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Styles/Site.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/840f2e2cb6.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="nav-mobile hidden-md hidden-lg">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!-- BEGIN #navigation -->
+            <nav id="navigation" class="main-small-navigation" role="navigation">
+                <div class="mobile-menu-mobile-container       ">
+                    <ul id="menu-mobile" class="mobile-menu toggled-on" style="touch-action: pan-y;">
+                        <li id="menu-item-1535" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1535"><a href="https://luxxium.net" aria-current="page">Home</a></li>
+                        <li id="menu-item-2858" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2858"><a href="https://luxxium.net/r-r-program/">OPPORTUNITY</a></li>
+                        <li id="menu-item-1536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1536"><a href="https://luxxium.net/products/">PRODUCT LINES</a></li>
+                        <li id="menu-item-2199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2199"><a href="https://luxxium.net/membership-level/membership-contact/">JOIN NOW</a></li>
+                        <li id="menu-item-1540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1540">
+                            <a href="https://luxxium.net/contact/" class="sf-with-ul">CONTACT US</a>
+                            <ul class="sub-menu" style="display: none;">
+                                <span class="nav-arrow"></span>
+                                <li id="menu-item-1538" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1538"><a href="https://luxxium.net/testimonials/">TESTIMONIALS</a></li>
+                                <li id="menu-item-1539" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1539"><a href="https://luxxium.net/about-us/">ABOUT</a></li>
+                                <li id="menu-item-3166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3166"><a href="https://luxxium.net/home-2/how-to-luxxium/">HOW TO LUXXIUM</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END #navigation -->
+            </nav>
+
+            <!-- END .row .nav-mobile -->
+        </div>
+    </div>
     <header id="main-header">
         <nav class="container-fluid">
-            <div class="col-sm-4 menu left">
-                <ul class="nav vertical-center">
-                    <li class="menu-item"><a href="#">Home</a></li>
-                    <li class="menu-item"><a href="#">Opportunity</a></li>
-                    <li class="menu-item"><a href="#">Products</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-4 centered-logo">
-                <div class="logo-container">
-                    <a href="">
-                        <img src="~/Content/images/luxxium_white_header_logo-1.png" class="img-responsive" />
-                    </a>
+            <div class="menu-wrapper">
+                <div class="col-md-5 menu-left hidden-xs hidden-sm vertical-center">
+                    <ul class="nav">
+                        <li class="menu-item"><a href="#">Home</a></li>
+                        <li class="menu-item"><a href="#">Opportunity</a></li>
+                        <li class="menu-item"><a href="#">Products</a>
+                                              <ul class="sub-menu" style="display: block;">
+                                                  <span class="nav-arrow"></span>
+                                                  <li id="menu-item-2277" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2277"><a href="https://luxxium.net/products/kristals/">KRISTALS SKINCARE</a></li>
+                                                  <li id="menu-item-2279" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2279"><a href="https://luxxium.net/products/techture/">TECHTURE BEAUTY</a></li>
+                                              </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-md-2 centered-logo horizontal-center">
+                    <div class="logo-container">
+                        <a href="">
+                            <img src="~/Content/images/luxxium_white_header_logo-1.png" class="banner-logo img-responsive" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5 menu-right hidden-sm hidden-xs vertical-center">
+                    <ul class="nav">
+                        <li class="menu-item"><a href="#">Join Now</a></li>
+                        <li class="menu-item"><a href="#">Contact</a></li>
+                        <li class="menu-item"><a href="#">About Us</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-sm-4 menu right">
-                <ul class="nav vertical-center">
-                    <li class="menu-item"><a href="#">Join Now</a></li>
-                    <li class="menu-item"><a href="#">Contact</a></li>
-                    <li class="menu-item"><a href="#">About Us</a></li>
-                </ul>
-            </div>
+            
         </nav>
     </header>
     <main class="container-fluid">
