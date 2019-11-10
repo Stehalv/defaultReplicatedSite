@@ -35,11 +35,6 @@ td, th {
       width: 100%; } }
 
 #sidebar-cart {
-  padding-top: 30px;
-  position: relative;
-  color: #535353;
-  background: #fafafa;
-  border-left: 1px solid gray;
   height: 100vh; }
   @media (min-width: 1000px) {
     #sidebar-cart {
