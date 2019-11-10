@@ -10,29 +10,37 @@ td, th {
 }
 .wrap {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     margin: 0 auto;
     max-width: 40em;
+
     @media (min-width: 1000px) {
         width: 90%;
         max-width: 90em;
+    }
+
+    @media (max-width: 1000px) {
+        display:block;
     }
 }
 #sidebar-form {
     padding-right: 6%;
     padding-top: 30px;
+
+    @media (max-width: 1000px) {
+        width:100%;
+    }
 }
 #sidebar-cart {
-    padding-top: 30px;
-    position: relative;
-    color: #535353;
-    background: #fafafa;
-    border-left: 1px solid gray;
     height: 100vh;
 
     @media (min-width: 1000px) {
         width: 45%;
         padding-left: 4%;
+    }
+
+    @media (max-width: 1000px) {
+        display:none;
     }
 
     .cart {
@@ -52,24 +60,31 @@ td, th {
     box-shadow: 0 -1px 0 #e1e1e1 inset;
 }
 #checkout-steps {
+    min-width: 560px;
+
+    @media (max-width: 768px) {
+        min-width:0px;
+    }
+
     ul {
         list-style: none;
+        padding-left: 0px;
     }
 
     ul li {
         display: inline-block;
+        margin-left: 10px;
     }
 
     ul li::after {
         content: ">";
-        margin-left: 20px;
-        margin-right:10px;
-        font-weight:600;
+        margin-left: 10px;
+        font-weight: 600;
     }
 
-    ul:last-child ::after {
+    li:last-child:after {
         content: "";
-        margin-left: 30px;
+        margin-left: 0px;
     }
 }
 #checkout-form-container section{
@@ -82,11 +97,12 @@ td, th {
 #ckeckout-order-summary{
     margin-top:20px;
 }
-.summary-items{
-    display:flex;
-    padding-top:30px;
-    padding-bottom:30px;
-    position:relative;
+.summary-items {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: relative;
 }
 .summary-items:after, 
 .order-summary-total-lines:after, 
@@ -102,6 +118,10 @@ td, th {
     transition: background-color 0.3s cubic-bezier(0.3, 0, 0, 1);
     width: 100%;
     z-index: 4;
+}
+.summary-item {
+    display:flex;
+    margin-bottom:15px;
 }
 .product-thumbnail {
     width: 4.6em;

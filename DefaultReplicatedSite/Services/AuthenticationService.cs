@@ -21,7 +21,7 @@ namespace DefaultReplicatedSite
             }
 
             // check token exists and is valid - if not renew/create
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["MakoRepsiteToken"];
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[Settings.API.APITokenName];
 
             if (cookie != null)
             {
@@ -51,7 +51,7 @@ namespace DefaultReplicatedSite
                 }
             }
 
-            var service = new MakoService(Settings.API.TokenUsername, Settings.API.TokenPassword, Settings.API.CompanyId);
+            var service = new MakoService(Settings.API.TokenUsername, Settings.API.TokenPassword, Settings.API.CompanyId, MakoLibrary.Services.Environment.Development);
             SaveToken(service.Token);
 
             return service;
@@ -62,9 +62,9 @@ namespace DefaultReplicatedSite
             // only want to renew once, so save to the request (cookie won't be updated until client request)
             HttpContext.Current.Items.Add("MakoJWT", token);
 
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["MakoRepsiteToken"];
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[Settings.API.APITokenName];
 
-            cookie = new HttpCookie("MakoRepsiteToken", token)
+            cookie = new HttpCookie(Settings.API.APITokenName, token)
             {
                 HttpOnly = true
             };

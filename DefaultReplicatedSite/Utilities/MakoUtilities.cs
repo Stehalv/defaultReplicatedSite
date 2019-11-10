@@ -1,10 +1,13 @@
 ﻿using MakoLibrary.Contracts;
 using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
+using System.Web;
 
 namespace DefaultReplicatedSite
 {
-    public static partial class GlobalUtilities
+    public partial class GlobalUtilities
     {
         public class Mako
         {
@@ -29,9 +32,85 @@ namespace DefaultReplicatedSite
                 return currentPeriod ?? new PeriodContract();
             }
 
-            internal object GetCurrentPeriod(object periodTyes)
+        }
+        public static class Globalization
+        {
+            public static string GetSelectedLanguage()
             {
-                throw new NotImplementedException();
+                var defaultLanguage = Settings.Globalization.Markets.AvailableMarkets.Where(c => c.IsDefault).FirstOrDefault().CultureCode;
+                var languageCookie = HttpContext.Current.Request.Cookies[Settings.Globalization.LanguageCookieName];
+
+                if (languageCookie == null)
+                {
+                    languageCookie = new HttpCookie(Settings.Globalization.LanguageCookieName);
+                    languageCookie.Value = defaultLanguage;
+                    languageCookie.HttpOnly = false;
+                    HttpContext.Current.Response.Cookies.Add(languageCookie);
+                } languageCookie.Value = defaultLanguage;
+
+
+                return languageCookie.Value;
+            }
+            public static void SetCurrentCulture(string cultureCode)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureCode);
+            }
+
+            public static void SetCurrentUICulture(string cultureCode)
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultureCode);
+            }
+
+            public static string GetSelectedCountryCode(string countryCode = "US")
+            {
+                var cookie = HttpContext.Current.Request.Cookies[Settings.Globalization.CountryCookieName];
+
+                if (countryCode != "US")
+                {
+                    cookie = new HttpCookie(Settings.Globalization.CountryCookieName);
+                    cookie.Value = countryCode;
+                    cookie.HttpOnly = false;
+                    HttpContext.Current.Response.Cookies.Add(cookie);
+
+                    return countryCode;
+                }
+
+                if (cookie != null && !cookie.Value.IsEmpty())
+                {
+                    return cookie.Value;
+                }
+                else
+                {
+                    cookie = new HttpCookie(Settings.Globalization.CountryCookieName);
+                    cookie.Value = countryCode;
+                    cookie.HttpOnly = false;
+                    HttpContext.Current.Response.Cookies.Add(cookie);
+
+                    return cookie.Value;
+                }
+            }
+
+            public static string SetSelectedCountryCode(string countryCode)
+            {
+                var cookie = HttpContext.Current.Request.Cookies[Settings.Globalization.CountryCookieName];
+
+                if (cookie != null && !cookie.Value.IsEmpty())
+                {
+                    cookie.HttpOnly = false;
+                    cookie.Value = countryCode;
+                    HttpContext.Current.Response.Cookies.Add(cookie);
+
+                    return cookie.Value;
+                }
+                else
+                {
+                    cookie = new HttpCookie(Settings.Globalization.CountryCookieName);
+                    cookie.Value = countryCode;
+                    cookie.HttpOnly = false;
+                    HttpContext.Current.Response.Cookies.Add(cookie);
+
+                    return cookie.Value;
+                }
             }
         }
     }

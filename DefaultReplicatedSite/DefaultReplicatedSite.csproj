@@ -73,6 +73,9 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.6.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -123,6 +126,15 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -141,32 +153,60 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Luxxium\LuxxiumAreaRegistration.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Extensions\Controller.cs" />
     <Compile Include="Extensions\HtmlHelper.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FormHelpers.cs" />
+    <Compile Include="Helpers\JsonNetResult.cs" />
+    <Compile Include="Models\Authentication\Customer.cs" />
+    <Compile Include="Models\Authentication\Interface\ICustomer.cs" />
+    <Compile Include="Models\Authentication\OwnerIdentity.cs" />
     <Compile Include="Models\Authentication\UserIdentity.cs" />
     <Compile Include="Models\Checkout\Address.cs" />
-    <Compile Include="Models\Checkout\CheckoutPayment.cs" />
-    <Compile Include="Models\Checkout\CheckoutShipping.cs" />
-    <Compile Include="Models\Checkout\ContactInfo.cs" />
-    <Compile Include="Models\Checkout\Interfaces\IAddress.cs" />
-    <Compile Include="Models\Enums\CheckoutSteps.cs" />
-    <Compile Include="Models\Shopping\Interfaces\IOrder.cs" />
-    <Compile Include="Models\Shopping\Interfaces\IShoppingCart.cs" />
-    <Compile Include="Models\Shopping\Interfaces\IShoppingCartItem.cs" />
+    <Compile Include="Models\Checkout\CreditCard.cs" />
+    <Compile Include="Models\Checkout\Interfaces\IOrder.cs" />
+    <Compile Include="Services\CheckoutService\CartModel.cs" />
+    <Compile Include="Services\CheckoutService\CheckoutFlowTypes.cs" />
+    <Compile Include="Services\CheckoutService\CheckoutSteps.cs" />
+    <Compile Include="Models\PropertyBags\BasePropertyBag.cs" />
+    <Compile Include="Models\PropertyBags\CheckoutPropertyBag.cs" />
+    <Compile Include="Models\PropertyBags\Interface\IPropertyBag.cs" />
+    <Compile Include="Models\Checkout\AutoOrder.cs" />
+    <Compile Include="Models\Checkout\Order.cs" />
+    <Compile Include="Models\PropertyBags\ShoppingCartPropertyBag.cs" />
+    <Compile Include="Models\Shopping\Interface\IShoppingCartItem.cs" />
     <Compile Include="Models\Shopping\Item.cs" />
-    <Compile Include="Models\Shopping\AutoOrder.cs" />
-    <Compile Include="Models\Shopping\Order.cs" />
-    <Compile Include="Models\Shopping\ShoppingCart.cs" />
     <Compile Include="Models\Shopping\ShoppingCartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\AuthenticationService\IdentityService.cs" />
+    <Compile Include="Services\CheckoutService\CheckoutService.cs" />
+    <Compile Include="Services\CheckoutService\Flows\EnrollmentFlow.cs" />
+    <Compile Include="Services\CheckoutService\Flows\SimpleEnrollment.cs" />
+    <Compile Include="Services\CheckoutService\Interface\IFlow.cs" />
+    <Compile Include="Services\CheckoutService\Steps\CompleteCheckout.cs" />
+    <Compile Include="Services\CheckoutService\Steps\Payment.cs" />
+    <Compile Include="Services\CheckoutService\Steps\CustomerInformation.cs" />
+    <Compile Include="Services\ItemService\ItemRequest.cs" />
+    <Compile Include="Services\ItemService\ItemService.cs" />
+    <Compile Include="Models\Shopping\ShoppingCartItemCollection.cs" />
+    <Compile Include="Services\ItemService\WebCategoryRequest.cs" />
+    <Compile Include="Services\PropertyBagService\PropertyBagService.cs" />
+    <Compile Include="Settings\Configurations\Interface\IConfiguration.cs" />
+    <Compile Include="Settings\Configurations\Interface\IMarket.cs" />
+    <Compile Include="Settings\Configurations\Interface\IMarketConfiguration.cs" />
+    <Compile Include="Settings\Configurations\Market.cs" />
+    <Compile Include="Settings\Configurations\UnitedStates\Market.cs" />
+    <Compile Include="Settings\Configurations\UnitedStates\Configuration.cs" />
     <Compile Include="Settings\Mapping\ApiQuery.cs" />
     <Compile Include="Settings\Mapping\PeriodTypes.cs" />
     <Compile Include="Settings\Mapping\RankGroups.cs" />
@@ -174,8 +214,9 @@
     <Compile Include="Settings\Mapping\TreeTypes.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Utilities\MakoUtilities.cs" />
-    <Compile Include="ViewModels\Checkout\CartViewModel.cs" />
-    <Compile Include="ViewModels\Checkout\CheckoutViewModel.cs" />
+    <Compile Include="Services\CheckoutService\Steps\Cart.cs" />
+    <Compile Include="Services\CheckoutService\Flows\ShoppingFlow.cs" />
+    <Compile Include="Services\CheckoutService\Steps\Shipping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -202,6 +243,7 @@
     <None Include="Content\Styles\fonts\fonts.scss" />
     <None Include="Content\Styles\framework\spaces.scss" />
     <Content Include="Content\Styles\components\formelements.css" />
+    <None Include="Content\Styles\sections\contentpages.scss" />
     <Content Include="Content\Styles\Site.css">
       <DependentUpon>Site.scss</DependentUpon>
     </Content>
@@ -220,17 +262,21 @@
     <None Include="Content\Styles\Site.scss" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Styles\Themes\Luxxium.css" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Shopping.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -246,17 +292,42 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_GlobalScripts.cshtml" />
-    <Content Include="Views\Checkout\Index.cshtml" />
+    <Content Include="Views\Checkout\Shopping.cshtml" />
     <Content Include="Views\Checkout\Partials\_Cart.cshtml" />
     <Content Include="Views\Checkout\Partials\_CartDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
-    <Content Include="Views\Checkout\Editortemplates\CreateCustomer.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\ContactInformation.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\Shipping.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\Payments.cshtml" />
+    <Content Include="Views\Shopping\Index.cshtml" />
+    <Content Include="Views\Shopping\Partials\Items\_AddToCartButton.cshtml" />
+    <Content Include="Views\Shared\Scripts\Shopping.cshtml" />
+    <Content Include="Views\Checkout\Enrollment.cshtml" />
+    <Content Include="Views\Checkout\DisplayTemplates\CheckoutCompleted.cshtml" />
+    <Content Include="Views\Shopping\Partials\Items\_productCardSingleItem.cshtml" />
+    <Content Include="Views\Shopping\ProductDetail.cshtml" />
+    <Content Include="Views\Shopping\CategoryList.cshtml" />
+    <Content Include="Views\Shopping\CategoryProductList.cshtml" />
+    <Content Include="Views\Shopping\_layout.cshtml" />
+    <Content Include="Views\Checkout\ShoppingCart.cshtml" />
+    <Content Include="Views\Shopping\ProductSerach.cshtml" />
+    <Content Include="Views\Shopping\Partials\_ProductSearchResult.cshtml" />
+    <Content Include="Views\Checkout\SimpleEnrollment.cshtml" />
+    <Content Include="Views\Checkout\Partials\_EnrollmentInformation.cshtml" />
+    <Content Include="Views\Checkout\Partials\_CheckoutStepsList.cshtml" />
+    <Content Include="Views\Checkout\Partials\_CheckoutStepFooter.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\CreditCard.cshtml" />
+    <Content Include="Views\Shared\_PageTemplate.cshtml" />
+    <Content Include="Views\Shared\Partials\_FrontPageBanner.cshtml" />
+    <Content Include="Views\Shared\Partials\_PageBanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Luxxium\Controllers\" />
     <Folder Include="Areas\Luxxium\Models\" />
     <Folder Include="Areas\Luxxium\Views\Shared\" />
+    <Folder Include="ViewModels\Interface\" />
+    <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

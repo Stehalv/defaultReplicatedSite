@@ -1,0 +1,67 @@
+﻿@model ShippingStep
+    <style>
+        ul li {
+            list-style:none;
+            padding-top:8px;
+            padding-bottom:8px;
+        }
+        #shipping-methods .shipmethod-label{
+            margin-left:15px;
+            font-weight:400;
+        }
+    </style>
+    <section id="information-contact-info">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Shipping</h3>
+            </div>
+        </div>
+        <div class="space-20"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Select Shipping Method</h4>
+            </div>
+        </div>
+        <div class="space-10">
+            <div class="row">
+                <div id="shipping-methods" class="col-sm-12">
+                    <ul class="methods-list">
+                        <li><input type="radio" /> <span class="shipmethod-label">Method 1</span></li>
+                        <li><input type="radio" /> <span class="shipmethod-label">Method 2</span></li>
+                        <li><input type="radio" /> <span class="shipmethod-label">Method 3</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="space-20"></div>
+        <hr />
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Shipping Address</h4>
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.CheckBoxFor(c => c.ShippingSameAsAccount, new Dictionary<string, object> { { "onchange", "shippingAddressSameAsChange.call(this)" } })
+                <span id="shipping-same-as-text">Shipping Address same as account Address</span>
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="shipping-address-container">
+                @Html.EditorFor(c => c.ShippingAddress, "Address")
+            </div>
+        </div>
+        <div class="space-10"></div>
+    </section>
+<script>
+    function shippingAddressSameAsChange() {
+        if (this.checked) {
+            $(".shipping-address-container").hide();
+        } else {
+            $(".shipping-address-container").show();
+        }
+    }
+</script>
