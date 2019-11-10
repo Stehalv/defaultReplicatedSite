@@ -1,19 +1,33 @@
 ﻿using DefaultReplicatedSite.Models;
 using MakoLibrary.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace DefaultReplicatedSite.Services
 {
     public class ShippingStep
     {
-        private CheckoutService _service = new CheckoutService();
+        public ShippingStep(CheckoutFlowType type, CheckoutSteps previousStep, CheckoutPropertyBag propertyBag, ShoppingCartPropertyBag shoppingCart)
+        {
+            Type = type;
+            PreviousStep = previousStep;
+            PropertyBag = propertyBag;
+            ShoppingCart = shoppingCart;
+            ShippingAddress = PropertyBag.Customer.ShippingAddress;
+            if(Settings.Shop.AllowSeparateAutoOrderAddress)
+            {
+                AutoOrderSameAsAccount = PropertyBag.AutoOrderSameAsMailing;
+                AutoOrderAddress = propertyBag.Customer.OtherAddress1;
+            }
+            HasAutoOrder = ShoppingCart.AutoOrderItems.Count() > 0;
+            ShippingSameAsAccount = PropertyBag.ShippingSameAsMailing;
+
+        }
         public CheckoutSteps Step => CheckoutSteps.Shipping;
-        public CheckoutSteps CurrentStep { get; set; }
-        public CheckoutSteps NextStep { get; set; }
-        public bool RecalculateCart => true;
+        public CheckoutSteps PreviousStep { get; set; }
+        public CheckoutFlowType Type { get; set; }
+        public CheckoutPropertyBag PropertyBag { get; set; }
+        public ShoppingCartPropertyBag ShoppingCart { get; set; }
         public bool HasOrder { get; set; }
         public bool HasAutoOrder { get; set; }
         public List<CRMOrderCalcShipMethodContract> ShipMethods { get; set; }
@@ -22,17 +36,32 @@ namespace DefaultReplicatedSite.Services
         public bool AutoOrderSameAsAccount { get; set; }
         public CRMExtendedAddress AutoOrderAddress { get; set; }
         public void SubmitStep()
-        { 
-            var CustomerPropertyBag = _service.CustomerPropertyBag;
-            var CheckoutPropertyBag = _service.CheckoutPropertyBag;
-            CheckoutPropertyBag.Order.Address1 = ShippingAddress.Address1;
-            CheckoutPropertyBag.Order.Address2 = ShippingAddress.Address2;
-            CheckoutPropertyBag.Order.City = ShippingAddress.City;
-            CheckoutPropertyBag.Order.State = ShippingAddress.RegionProvState;
-            CheckoutPropertyBag.Order.Zip = ShippingAddress.PostalCode;
-            CustomerPropertyBag.Customer.ShippingAddress = ShippingAddress;
-            PropertyBagService.Update(CheckoutPropertyBag);
-            PropertyBagService.Update(CustomerPropertyBag);
+        {
+            PropertyBag.ShippingSameAsMailing = ShippingSameAsAccount;
+            if(!ShippingSameAsAccount)
+            {
+                PropertyBag.Order.Address1 = ShippingAddress.Address1;
+                PropertyBag.Order.Address2 = ShippingAddress.Address2;
+                PropertyBag.Order.City = ShippingAddress.City;
+                PropertyBag.Order.State = ShippingAddress.RegionProvState;
+                PropertyBag.Order.Zip = ShippingAddress.PostalCode;
+                PropertyBag.Customer.ShippingAddress = ShippingAddress;
+                PropertyBagService.Update(PropertyBag);
+            }
+            if(Settings.Shop.AllowSeparateAutoOrderAddress)
+            {
+                PropertyBag.AutoOrderSameAsMailing = AutoOrderSameAsAccount;
+                if (!AutoOrderSameAsAccount)
+                {
+                    PropertyBag.AutoOrder.Address1 = AutoOrderAddress.Address1;
+                    PropertyBag.AutoOrder.Address2 = AutoOrderAddress.Address2;
+                    PropertyBag.AutoOrder.City = AutoOrderAddress.City;
+                    PropertyBag.AutoOrder.State = AutoOrderAddress.RegionProvState;
+                    PropertyBag.AutoOrder.Zip = AutoOrderAddress.PostalCode;
+                    PropertyBag.Customer.OtherAddress1 = AutoOrderAddress;
+                    PropertyBagService.Update(PropertyBag);
+                }
+            }
         }
     }
 }

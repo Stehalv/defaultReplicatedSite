@@ -12,5 +12,6 @@ namespace DefaultReplicatedSite.Models
         int ItemId { get; set; }
         string ItemCode { get; set; }
         decimal Quantity { get; set; }
+        int OrderLineNumber { get; set; }
     }
 }

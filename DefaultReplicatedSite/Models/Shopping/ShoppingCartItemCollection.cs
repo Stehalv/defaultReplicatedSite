@@ -14,7 +14,7 @@ namespace DefaultReplicatedSite.Models
             var newItem = new ShoppingCartItem(item);
             // Don't process items with no quantities
             if (newItem.Quantity == 0) return;
-
+            newItem.OrderLineNumber = this.Count() + 1;
             // Get a list of all items that have the same item code and type.
             var preExistingItems = this.FindAll(i =>
                   i.ItemCode == newItem.ItemCode);

@@ -10,6 +10,10 @@ namespace DefaultReplicatedSite.Controllers
     {
         public ActionResult Index()
         {
+            if(Identity.Owner != null)
+            {
+                var CustomerID = Identity.Owner.CustomerId;
+            }
             return View();
         }
 

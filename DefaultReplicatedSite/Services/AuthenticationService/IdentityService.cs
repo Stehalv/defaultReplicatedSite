@@ -134,39 +134,52 @@ namespace DefaultReplicatedSite.Services
             return identity;
         }
 
-    //    public OwnerIdentity GetOwnerIdentity(string webAlias)
-    //    {
-    //        webAlias = webAlias.ToUpper();
-    //        var cacheKey = string.Format("{0}-OwnerIdentity-{1}", Settings.Company.Name, webAlias);
-    //        var identity = HttpContext.Current.Cache[cacheKey] as OwnerIdentity;
+        public OwnerIdentity GetOwnerIdentity(string webAlias)
+        {
+            webAlias = webAlias.ToUpper();
+            var cacheKey = string.Format("{0}-OwnerIdentity-{1}", Settings.Company.Name, webAlias);
+            var identity = HttpContext.Current.Cache[cacheKey] as OwnerIdentity;
 
-    //        //if (identity == null)
-    //        //{
-    //        //    try
-    //        //    {
-    //        //        MakoLibrary.Contracts.CRMCustomerContract
-    //        //        identity = Teqnavi.ServiceContext().GetCrmCustomers()
+            if (identity == null)
+            {
+                try
+                {
+                    var customer = Teqnavi.ServiceContext().GetCustomer(webAlias);
+                    identity = new OwnerIdentity()
+                    {
+                        CustomerId = customer.Data.CustomerIdExternal,
+                        WebAlias = customer.Data.CustomerIdExternal,
+                        FirstName = customer.Data.FirstName,
+                        LastName = customer.Data.LastName,
+                        Gender = customer.Data.Gender,
+                        CustomerTypeId = customer.Data.CustomerType,
+                        CustomerTypeDescription = customer.Data.CustomerTypeDescription,
+                        CustomerStatusId = customer.Data.CustomerStatusType,
+                        CustomerStatusDescription = customer.Data.CustomerStatusTypeDescription,
+                        Country = customer.Data.CountryCode,
+                        RankId = customer.Data.RankId,
+                        RankDescription = customer.Data.RankIdDescription
+                    };
+                    // Save the identity
+                    HttpContext.Current.Cache.Insert(cacheKey,
+                        identity,
+                        null,
+                        DateTime.Now.AddMinutes(Settings.Site.IdentityRefreshInterval),
+                        System.Web.Caching.Cache.NoSlidingExpiration,
+                        System.Web.Caching.CacheItemPriority.Normal,
+                        null);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("Default user missing"))
+                    {
+                        throw ex;
+                    }
+                    return null;
+                }
+            }
 
-    //        //        // Save the identity
-    //        //        HttpContext.Current.Cache.Insert(cacheKey,
-    //        //            identity,
-    //        //            null,
-    //        //            DateTime.Now.AddMinutes(GlobalSettings.ReplicatedSites.IdentityRefreshInterval),
-    //        //            System.Web.Caching.Cache.NoSlidingExpiration,
-    //        //            System.Web.Caching.CacheItemPriority.Normal,
-    //        //            null);
-    //        //    }
-    //        //    catch (Exception ex)
-    //        //    {
-    //        //        if (ex.Message.Contains("Default user missing"))
-    //        //        {
-    //        //            throw ex;
-    //        //        }
-    //        //        return null;
-    //        //    }
-    //        //}
-
-    //        return identity;
-    //    }
+            return identity;
+        }
     }
 }

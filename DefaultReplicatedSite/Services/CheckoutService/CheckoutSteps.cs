@@ -8,9 +8,9 @@ namespace DefaultReplicatedSite.Services
     public enum CheckoutSteps
     {
         ShoppingCart = 1,
-        Information = 2,
+        CustomerInformation = 2,
         Shipping = 3,
         Payment = 4,
-        OrderCompleted = 5
+        CompleteCheckout = 5
     }
 }

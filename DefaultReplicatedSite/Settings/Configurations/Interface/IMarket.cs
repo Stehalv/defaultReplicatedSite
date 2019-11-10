@@ -9,5 +9,8 @@ namespace DefaultReplicatedSite
     public interface IMarket
     {
         string CountryCode { get; set; }
+        string CultureCode { get; set; }
+        string CurrencyCode { get; set; }
+        bool IsDefault { get; set; }
     }
 }

@@ -22,5 +22,7 @@ namespace DefaultReplicatedSite.Models
                 return OrderItems.Count() > 0 || AutoOrderItems.Count() > 0;
             }
         }
+        public CRMOrderCalcResponseContract CalculatedOrder { get; set; }
+        public CheckoutFlowType FlowType { get; set; }
     }
 }

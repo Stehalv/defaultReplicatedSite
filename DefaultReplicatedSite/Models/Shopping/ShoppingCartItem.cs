@@ -11,6 +11,7 @@ namespace DefaultReplicatedSite.Models
             ItemId = 0;
             ItemCode = string.Empty;
             Quantity = 0;
+            OrderLineNumber = 0;
         }
         public ShoppingCartItem(IShoppingCartItem item)
         {
@@ -18,6 +19,7 @@ namespace DefaultReplicatedSite.Models
             ItemId = item.ItemId;
             ItemCode = item.ItemCode;
             Quantity = item.Quantity;
+            OrderLineNumber = item.OrderLineNumber;
         }
         public Guid ID { get; set; }
     }

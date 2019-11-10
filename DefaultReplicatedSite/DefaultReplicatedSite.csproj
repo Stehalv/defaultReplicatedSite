@@ -156,6 +156,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Luxxium\LuxxiumAreaRegistration.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Extensions\Controller.cs" />
@@ -164,15 +165,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FormHelpers.cs" />
     <Compile Include="Helpers\JsonNetResult.cs" />
     <Compile Include="Models\Authentication\Customer.cs" />
     <Compile Include="Models\Authentication\Interface\ICustomer.cs" />
     <Compile Include="Models\Authentication\OwnerIdentity.cs" />
     <Compile Include="Models\Authentication\UserIdentity.cs" />
     <Compile Include="Models\Checkout\Address.cs" />
+    <Compile Include="Models\Checkout\CreditCard.cs" />
     <Compile Include="Models\Checkout\Interfaces\IOrder.cs" />
     <Compile Include="Services\CheckoutService\CartModel.cs" />
-    <Compile Include="Services\CheckoutService\CheckoutFlows.cs" />
+    <Compile Include="Services\CheckoutService\CheckoutFlowTypes.cs" />
     <Compile Include="Services\CheckoutService\CheckoutSteps.cs" />
     <Compile Include="Models\PropertyBags\BasePropertyBag.cs" />
     <Compile Include="Models\PropertyBags\CheckoutPropertyBag.cs" />
@@ -187,7 +190,12 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\AuthenticationService\IdentityService.cs" />
     <Compile Include="Services\CheckoutService\CheckoutService.cs" />
-    <Compile Include="Services\CheckoutService\Steps\Information.cs" />
+    <Compile Include="Services\CheckoutService\Flows\EnrollmentFlow.cs" />
+    <Compile Include="Services\CheckoutService\Flows\SimpleEnrollment.cs" />
+    <Compile Include="Services\CheckoutService\Interface\IFlow.cs" />
+    <Compile Include="Services\CheckoutService\Steps\CompleteCheckout.cs" />
+    <Compile Include="Services\CheckoutService\Steps\Payment.cs" />
+    <Compile Include="Services\CheckoutService\Steps\CustomerInformation.cs" />
     <Compile Include="Services\ItemService\ItemRequest.cs" />
     <Compile Include="Services\ItemService\ItemService.cs" />
     <Compile Include="Models\Shopping\ShoppingCartItemCollection.cs" />
@@ -207,9 +215,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Utilities\MakoUtilities.cs" />
     <Compile Include="Services\CheckoutService\Steps\Cart.cs" />
-    <Compile Include="Models\PropertyBags\CustomerPropertyBag.cs" />
-    <Compile Include="Services\CheckoutService\Shopping\ShoppingFlow.cs" />
-    <Compile Include="Services\CheckoutService\Steps\Payment.cs" />
+    <Compile Include="Services\CheckoutService\Flows\ShoppingFlow.cs" />
     <Compile Include="Services\CheckoutService\Steps\Shipping.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -288,20 +294,35 @@
     <Content Include="Views\Checkout\Partials\_Cart.cshtml" />
     <Content Include="Views\Checkout\Partials\_CartDetails.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
-    <Content Include="Views\Checkout\Editortemplates\NewContactInformation.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\ContactInformation.cshtml" />
     <Content Include="Views\Checkout\Editortemplates\Shipping.cshtml" />
     <Content Include="Views\Checkout\Editortemplates\Payments.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
     <Content Include="Views\Shopping\Partials\Items\_AddToCartButton.cshtml" />
     <Content Include="Views\Shared\Scripts\Shopping.cshtml" />
+    <Content Include="Views\Checkout\Enrollment.cshtml" />
+    <Content Include="Views\Checkout\DisplayTemplates\CheckoutCompleted.cshtml" />
+    <Content Include="Views\Shopping\Partials\Items\_productCardSingleItem.cshtml" />
+    <Content Include="Views\Shopping\ProductDetail.cshtml" />
+    <Content Include="Views\Shopping\CategoryList.cshtml" />
+    <Content Include="Views\Shopping\CategoryProductList.cshtml" />
+    <Content Include="Views\Shopping\_layout.cshtml" />
+    <Content Include="Views\Checkout\ShoppingCart.cshtml" />
+    <Content Include="Views\Shopping\ProductSerach.cshtml" />
+    <Content Include="Views\Shopping\Partials\_ProductSearchResult.cshtml" />
+    <Content Include="Views\Checkout\SimpleEnrollment.cshtml" />
+    <Content Include="Views\Checkout\Partials\_EnrollmentInformation.cshtml" />
+    <Content Include="Views\Checkout\Partials\_CheckoutStepsList.cshtml" />
+    <Content Include="Views\Checkout\Partials\_CheckoutStepFooter.cshtml" />
+    <Content Include="Views\Checkout\Editortemplates\CreditCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Luxxium\Controllers\" />
     <Folder Include="Areas\Luxxium\Models\" />
     <Folder Include="Areas\Luxxium\Views\Shared\" />
-    <Folder Include="Models\Enums\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

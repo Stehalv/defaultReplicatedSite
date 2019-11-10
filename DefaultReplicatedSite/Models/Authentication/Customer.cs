@@ -9,6 +9,16 @@ namespace DefaultReplicatedSite.Models
 {
     public class Customer : CRMCustomerCreateContract
     {
+        public Customer()
+        {
+            MailingAddress = new CRMExtendedAddress();
+            ShippingAddress = new CRMExtendedAddress();
+            BillingAddress = new CRMExtendedAddress();
+            if(Settings.Shop.AllowSeparateAutoOrderAddress)
+            {
+                OtherAddress1 = new CRMExtendedAddress();
+            }
+        }
         [Required]
         public new string FirstName { get; set; }
         [Required]

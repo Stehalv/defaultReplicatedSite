@@ -14,36 +14,53 @@ namespace DefaultReplicatedSite.Controllers
     public class CheckoutController : Controller
     {
         private CheckoutService _checkoutService = new CheckoutService();
-        private IOrderConfiguration OrderConfiguration = new UnitedStatesMarket().Configurations.Order;
-        public ActionResult Shopping(CheckoutSteps step = CheckoutSteps.Information)
+        #region Cart
+        public ActionResult Cart()
         {
+            var model = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
+            return View(model);
+        }
+        #endregion
+
+        #region Shopping
+        private IOrderConfiguration OrderConfiguration = new UnitedStatesMarket().Configurations.Order;
+        private IOrderConfiguration AutoOrderConfiguration = new UnitedStatesMarket().Configurations.AutoOrder;
+
+        [Route("shopping/{step:int=1}")]
+        public ActionResult Shopping(CheckoutSteps step = CheckoutSteps.CustomerInformation)
+        {
+            _checkoutService.ValidatePropertyBags(CheckoutFlowType.Shopping);
+            if(Identity.Customer != null)
+            {
+                //Set Customer
+            }
             var model = new ShoppingFlow();
             model.CurrentStep = step;
             if (_checkoutService.ShoppingCart.HasItems)
             {
-                if (step == CheckoutSteps.Information)
+                if (step == CheckoutSteps.CustomerInformation)
                 {
-                    model.PreviousStep = CheckoutSteps.ShoppingCart;
                     model.CurrentStep = step;
-                    model.NextStep = CheckoutSteps.Shipping;
                 }
                 if(step == CheckoutSteps.Shipping)
                 {
-                    model.PreviousStep = CheckoutSteps.Information;
                     model.CurrentStep = step;
-                    model.NextStep = CheckoutSteps.Payment;
                 }
                 if (step == CheckoutSteps.Payment)
                 {
                     model.CurrentStep = step;
-                    model.NextStep = CheckoutSteps.OrderCompleted;
                 }
                 var recalculate = false;
                 if(model.CurrentStep == CheckoutSteps.Shipping)
                 {
                     recalculate = true;
                 }
-                model.ShoppingCart = _checkoutService.GetShoppingCart(OrderConfiguration, OrderConfiguration, recalculate);
+                model.ShoppingCart = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration, recalculate);
+                if(model.CurrentStep == CheckoutSteps.CompleteCheckout)
+                {
+                    PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
+                    PropertyBagService.Delete(_checkoutService.ShoppingCart);
+                }
                 return View(model);
             }
             return RedirectToAction("Index", "Shopping");
@@ -51,10 +68,111 @@ namespace DefaultReplicatedSite.Controllers
         [HttpPost]
         public ActionResult SubmitShoppingFlow(ShoppingFlow model)
         {
-            model.InformationStep.SubmitStep();
-            model.ShippingStep.SubmitStep();
-            model.PaymentStep.SubmitStep();
-            return RedirectToAction("Index", new { step = model.NextStep });
+            if(model.CurrentStep == CheckoutSteps.CustomerInformation)
+            {
+                model.InformationStep.SubmitStep();
+            }
+            if (model.CurrentStep == CheckoutSteps.Shipping)
+            {
+                model.ShippingStep.SubmitStep();
+            }
+            if (model.CurrentStep == CheckoutSteps.Payment)
+            {
+                model.PaymentStep.SubmitStep();
+                model.CheckoutCompleteStep.SubmitStep();
+            }
+            return RedirectToAction("Shopping", new { step = model.NextStep });
         }
+        #endregion
+
+        #region Enrollment
+
+        private IOrderConfiguration EnrollmentConfiguration = new UnitedStatesMarket().Configurations.Enrollment;
+        private IOrderConfiguration EnrollmentAutoOrderConfiguration = new UnitedStatesMarket().Configurations.EnrollmentAutoOrder;
+        public ActionResult Enrollment(CheckoutSteps step = CheckoutSteps.CustomerInformation)
+        {
+            _checkoutService.ValidatePropertyBags(CheckoutFlowType.Enrollment);
+            var model = new EnrollmentFlow();
+            model.CurrentStep = step;
+            if (_checkoutService.ShoppingCart.HasItems)
+            {
+                if (step == CheckoutSteps.CustomerInformation)
+                {
+                    model.CurrentStep = step;
+                }
+                if (step == CheckoutSteps.Shipping)
+                {
+                    model.CurrentStep = step;
+                }
+                if (step == CheckoutSteps.Payment)
+                {
+                    model.CurrentStep = step;
+                }
+                if (step == CheckoutSteps.CompleteCheckout)
+                {
+                    model.CurrentStep = step;
+                }
+                var recalculate = false;
+                if (model.CurrentStep == CheckoutSteps.Shipping)
+                {
+                    recalculate = true;
+                }
+                model.ShoppingCart = _checkoutService.GetShoppingCart(EnrollmentConfiguration, EnrollmentAutoOrderConfiguration, recalculate);
+                if (model.CurrentStep == CheckoutSteps.CompleteCheckout)
+                {
+                    PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
+                    PropertyBagService.Delete(_checkoutService.ShoppingCart);
+                }
+                return View(model);
+            }
+            return RedirectToAction("Index", "Shopping");
+        }
+        [HttpPost]
+        public ActionResult SubmitEnrollment(EnrollmentFlow model)
+        {
+            if (model.CurrentStep == CheckoutSteps.CustomerInformation)
+            {
+                model.InformationStep.SubmitStep();
+            }
+            if (model.CurrentStep == CheckoutSteps.Shipping)
+            {
+                model.ShippingStep.SubmitStep();
+            }
+            if (model.CurrentStep == CheckoutSteps.Payment)
+            {
+                model.PaymentStep.SubmitStep();
+                model.CheckoutCompleteStep.SubmitStep();
+            }
+            return RedirectToAction("Enrollment", new { step = model.NextStep });
+        }
+        #endregion
+
+        #region SimpleEnrollment
+        public ActionResult SimpleEnrollment(CheckoutSteps step = CheckoutSteps.CustomerInformation)
+        {
+            _checkoutService.ValidatePropertyBags(CheckoutFlowType.SimpleEnrollment);
+            var model = new SimpleEnrollmentFlow();
+            model.CurrentStep = step;
+            if (step == CheckoutSteps.CustomerInformation)
+            {
+                model.CurrentStep = step;
+            }
+            if (step == CheckoutSteps.CompleteCheckout)
+            {
+                model.CurrentStep = step;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SubmitSimpleEnrollment(SimpleEnrollmentFlow model)
+        {
+            if (model.CurrentStep == CheckoutSteps.CustomerInformation)
+            {
+                model.InformationStep.SubmitStep();
+                model.CheckoutCompleteStep.SubmitStep();
+            }
+            return RedirectToAction("SimpleEnrollment", new { step = model.NextStep });
+        }
+        #endregion
     }
 }

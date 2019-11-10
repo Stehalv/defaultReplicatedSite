@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using DefaultReplicatedSite;
 
 public static class StringExtensions
 {
@@ -86,8 +87,9 @@ public static class StringExtensions
     /// <param name="value">The amount</param>
     /// <param name="cultureName">The culture code to use when formatting</param>
     /// <returns>The formatted string result</returns>
-    public static string ToCurrency(this decimal value, string cultureName)
+    public static string ToCurrency(this decimal value)
     {
+        var cultureName = GlobalUtilities.Globalization.GetSelectedCountryCode();
         CultureInfo currentCulture = new CultureInfo(cultureName);
         return (string.Format(currentCulture, "{0:C}", value));
     }

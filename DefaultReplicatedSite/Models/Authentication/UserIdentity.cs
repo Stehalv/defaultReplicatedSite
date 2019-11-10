@@ -25,23 +25,23 @@ namespace DefaultReplicatedSite
                 }
             }
         }
-        //public static OwnerIdentity Owner
-        //{
-        //    get
-        //    {
-        //        var identity = (HttpContext.Current.Items["OwnerWebIdentity"] as OwnerIdentity);
+        public static OwnerIdentity Owner
+        {
+            get
+            {
+                var identity = (HttpContext.Current.Items["OwnerWebIdentity"] as OwnerIdentity);
 
-        //        if (identity == null)
-        //        {
+                if (identity == null)
+                {
 
-        //            var identityService = new IdentityService();
-        //            identity = identityService.GetOwnerIdentity(Settings.Site.DefaultWebalias);
-        //            HttpContext.Current.Items["OwnerWebIdentity"] = identity;
-        //        }
+                    var identityService = new IdentityService();
+                    identity = identityService.GetOwnerIdentity(Settings.Site.DefaultWebalias);
+                    HttpContext.Current.Items["OwnerWebIdentity"] = identity;
+                }
 
-        //        return identity;
-        //    }
-        //}
+                return identity;
+            }
+        }
     }
 
     public class UserIdentity : IIdentity

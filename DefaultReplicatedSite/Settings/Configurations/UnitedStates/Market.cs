@@ -11,6 +11,9 @@ namespace DefaultReplicatedSite
            : base()
         {
             CountryCode = "US";
+            CultureCode = "en-US";
+            CountryCode = "usd";
+            IsDefault = true;
             AddressSettings = new AddressFields
             {
                 Address2 = true,

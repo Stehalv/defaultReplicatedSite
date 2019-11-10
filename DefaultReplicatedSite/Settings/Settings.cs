@@ -26,11 +26,13 @@ namespace DefaultReplicatedSite
         {
             public static string Name = "Luxxium";
             public static string CookieName = "Luxxium";
+            public static string ReplicatedHost = "";
         }
         public static class Site
         {
-            public static string DefaultWebalias = "www";
-            public static bool AllowOrphans = true; 
+            public static string DefaultWebalias = "5";
+            public static bool AllowOrphans = true;
+            public static int IdentityRefreshInterval = 31;
         }
         public static class Shop
         {
@@ -39,14 +41,20 @@ namespace DefaultReplicatedSite
         }
         public static class Globalization
         {
+            public static string CookieKey = "Luxxium";
+            public static string CountryCookieName = CookieKey + "SelectedCountry";
+            public static string LanguageCookieName = CookieKey + "SelectedLanguage";
             public static class Markets
             {
-                public static List<Market> AvailableMarkets()
+                public static List<Market> AvailableMarkets
                 {
-                    return new List<Market>
+                    get
+                    {
+                        return new List<Market>
                     {
                         new UnitedStatesMarket(),
                     };
+                    }
                 }
             }
             public static class Language

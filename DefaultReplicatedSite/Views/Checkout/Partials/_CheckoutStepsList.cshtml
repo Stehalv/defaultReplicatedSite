@@ -1,0 +1,22 @@
+﻿@model IFlow
+<div id="checkout-steps" class="row">
+    <div class="col-sm-12">
+        <ul class="steps">
+            @foreach (var step in Model.CheckoutStepList)
+            {
+                if (step >= Model.CurrentStep)
+                {
+                    <li class="step-@step">
+                        @step.ToString()
+                    </li>
+                }
+                else
+                {
+                    <li class="step-@step">
+                        <a href="#">@step.ToString()</a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

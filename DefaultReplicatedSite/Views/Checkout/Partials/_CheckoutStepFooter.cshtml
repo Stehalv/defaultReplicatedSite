@@ -1,0 +1,29 @@
+﻿@model IFlow
+    <section>
+        <hr/>
+        <div class="space-10"></div>
+        <div class="step-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    @if (Model.PreviousStep != 0)
+                    {
+                        <a href="@Url.Action(Model.Type.ToString(), "Checkout", new { step = Model.PreviousStep })"><< @Model.PreviousStep.ToString()</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("index", "Home")">Back to Homepage</a>
+                    }
+                </div>
+                <div class="col-sm-6 text-right">
+                    @if (Model.NextStep != 0)
+                    {
+                        <button type="submit" class="btn btn-primary">@Model.NextStep.ToString()</button>
+                    }
+                    else
+                    {
+                        <a href="#">Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>

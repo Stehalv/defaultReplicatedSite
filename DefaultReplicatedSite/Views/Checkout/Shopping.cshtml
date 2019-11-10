@@ -4,31 +4,15 @@
         <div id="sidebar-form">
             <div class="pull-right main">
 
-                @using (Html.BeginForm("Index", "Checkout", new AjaxOptions
+                @using (Html.BeginForm("SubmitShoppingFlow", "Checkout"))
                 {
-                    HttpMethod = "POST",
-                    OnBegin = "beginRequest",
-                    OnFailure = "saveFailed"
-                }))
-                {
-                    <div id="checkout-steps" class="row">
-                        @Html.HiddenFor(c => c.Flow)
-                        <div class="col-sm-12">
-                            <ul class="steps">
-                                @foreach (var step in Model.CheckoutStepList)
-                                {
-                                    <li class="step-@step">
-                                        <a href="#">@step.ToString()</a>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
+                    @Html.HiddenFor(c => c.CurrentStep)
+                    @Html.Partial("Partials/_CheckoutStepsList", Model)
                     <section id="checkout-form-container">
-                        @if (Model.CurrentStep == CheckoutSteps.Information)
+                        @if (Model.CurrentStep == CheckoutSteps.CustomerInformation)
                         {
                             <div id="information" class="step1">
-                                @Html.EditorFor(c => c.InformationStep, "NewContactInformation")
+                                @Html.EditorFor(c => c.InformationStep, "ContactInformation")
                             </div>
                         }
 
@@ -39,13 +23,21 @@
                             </div>
                         }
 
-                        @if (Model.CurrentStep == CheckoutSteps.Shipping)
+                        @if (Model.CurrentStep == CheckoutSteps.Payment)
                         {
                             <div id="information" class="step1">
                                 @Html.EditorFor(c => c.PaymentStep, "Payments")
                             </div>
                         }
+
+                        @if (Model.CurrentStep == CheckoutSteps.CompleteCheckout)
+                        {
+                            <div id="information" class="step1">
+                                @Html.DisplayFor(c => c.CheckoutCompleteStep, "CheckoutCompleted")
+                            </div>
+                        }
                     </section>
+                    @Html.Partial("Partials/_CheckoutStepFooter", Model)
                 }
             </div>
         </div>
@@ -59,9 +51,6 @@
 
 <script>
 
-    function beginRequest(e) {
-        console.log(e);
-    }
     function SaveFailed(response) {
         alert(response);
     }

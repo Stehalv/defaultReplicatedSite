@@ -1,14 +1,76 @@
 ﻿@model PaymentStep
-    <section id="information-contact-info">
-        <div class="space-10"></div>
-        <div class="step-footer">
-            <div class="row">
-                <div class="col-sm-6">
-                    <a href="#"><< Back to shipping</a>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <button type="submit" class="btn btn-primary">Place Order</button>
-                </div>
+<style>
+    ul li {
+        list-style: none;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    #shipping-methods .shipmethod-label {
+        margin-left: 15px;
+        font-weight: 400;
+    }
+</style>
+<section id="information-contact-info">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Payment</h3>
+        </div>
+    </div>
+    <div class="space-20"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Select Payment Method</h4>
+        </div>
+    </div>
+    <div class="space-10">
+        <div class="row">
+            <div id="shipping-methods" class="col-sm-12">
+                <ul class="methods-list">
+                    <li><input type="radio" checked="checked" /> <span class="shipmethod-label">CreditCard</span></li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="space-20"></div>
+    <hr />
+
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>CreditCard Info</h4>
+        </div>
+    </div>
+    <div class="space-10"></div>
+    @Html.EditorFor(c => c.Card, "CreditCard")
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Billing Address</h4>
+        </div>
+    </div>
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.CheckBoxFor(c => c.BillingSameAsAccount, new Dictionary<string, object> { { "onchange", "billingAddressSameAsChange.call(this)" } })
+            <span id="shipping-same-as-text">Billing Address same as account Address</span>
+        </div>
+    </div>
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="billing-address-container">
+            @Html.EditorFor(c => c.BillingAddress, "Address")
+        </div>
+    </div>
+    <div class="space-10"></div>
+</section>
+
+<script>
+    function billingAddressSameAsChange() {
+        if (this.checked) {
+            $(".billing-address-container").hide();
+        } else {
+            $(".billing-address-container").show();
+        }
+    }
+</script>

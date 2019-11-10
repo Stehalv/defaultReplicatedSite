@@ -1,0 +1,30 @@
+﻿@model CompleteCheckoutStep
+@{
+    var isEnrollment = (Model.Type == CheckoutFlowType.Enrollment || Model.Type == CheckoutFlowType.SimpleEnrollment);
+}
+    <section id="contact-information">
+        <div class="row">
+            <div class="col-sm-6">
+                @if (isEnrollment)
+                {
+                    <h3>Enrollment Completed</h3>
+                }
+                else
+                {
+                    <h3>Order Completed</h3>
+                }
+            </div>
+        </div>
+
+        <div class="space-10"></div>
+        <div class="step-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="@Url.Action("index", "Home")">Back to Homepage</a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </section>

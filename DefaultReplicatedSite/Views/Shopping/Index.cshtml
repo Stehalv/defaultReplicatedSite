@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         @item.Title<br />
-                        @item.ItemPrice.ItemPrice
+                        @item.ItemPrice.ItemPrice.ToString("C")
                     </div>
                     <div class="col-sm-12">
                         @Html.Partial("Partials/Items/_AddToCartButton", item)
