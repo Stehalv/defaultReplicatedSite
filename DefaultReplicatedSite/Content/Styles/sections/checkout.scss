@@ -21,7 +21,6 @@ td, th {
 
     @media (max-width: 1000px) {
         display:block;
-
     }
 }
 #sidebar-form {
@@ -33,11 +32,6 @@ td, th {
     }
 }
 #sidebar-cart {
-    padding-top: 30px;
-    position: relative;
-    color: #535353;
-    background: #fafafa;
-    border-left: 1px solid gray;
     height: 100vh;
 
     @media (min-width: 1000px) {

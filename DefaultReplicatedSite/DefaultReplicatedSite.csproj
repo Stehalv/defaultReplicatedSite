@@ -243,6 +243,7 @@
     <None Include="Content\Styles\fonts\fonts.scss" />
     <None Include="Content\Styles\framework\spaces.scss" />
     <Content Include="Content\Styles\components\formelements.css" />
+    <None Include="Content\Styles\sections\contentpages.scss" />
     <Content Include="Content\Styles\Site.css">
       <DependentUpon>Site.scss</DependentUpon>
     </Content>
@@ -261,6 +262,7 @@
     <None Include="Content\Styles\Site.scss" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Styles\Themes\Luxxium.css" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -315,13 +317,16 @@
     <Content Include="Views\Checkout\Partials\_CheckoutStepsList.cshtml" />
     <Content Include="Views\Checkout\Partials\_CheckoutStepFooter.cshtml" />
     <Content Include="Views\Checkout\Editortemplates\CreditCard.cshtml" />
+    <Content Include="Views\Shared\_PageTemplate.cshtml" />
+    <Content Include="Views\Shared\Partials\_FrontPageBanner.cshtml" />
+    <Content Include="Views\Shared\Partials\_PageBanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Luxxium\Controllers\" />
     <Folder Include="Areas\Luxxium\Models\" />
     <Folder Include="Areas\Luxxium\Views\Shared\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Interface\" />
     <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>
