@@ -377,12 +377,20 @@ h2 {
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s; }
 
+.btn.fullwidth {
+  width: 100%; }
+
 .fadein-element {
   opacity: 0;
   -moz-transition: opacity 1.5s;
   -webkit-transition: opacity 1.5s;
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s; }
+
+.content {
+  max-width: 1180px;
+  margin: 0px auto 0px;
+  padding: 48px 4%; }
 
 #main-header {
   position: fixed;

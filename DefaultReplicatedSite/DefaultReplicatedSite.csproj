@@ -174,6 +174,10 @@
     <Compile Include="Models\Checkout\Address.cs" />
     <Compile Include="Models\Checkout\CreditCard.cs" />
     <Compile Include="Models\Checkout\Interfaces\IOrder.cs" />
+    <Compile Include="Models\Checkout\Interfaces\IShoppingCartItem.cs" />
+    <Compile Include="Models\Checkout\ShoppingCartItem.cs" />
+    <Compile Include="Models\Checkout\ShoppingCartItemCollection.cs" />
+    <Compile Include="Models\Shopping\WebCategory.cs" />
     <Compile Include="Services\CheckoutService\CartModel.cs" />
     <Compile Include="Services\CheckoutService\CheckoutFlowTypes.cs" />
     <Compile Include="Services\CheckoutService\CheckoutSteps.cs" />
@@ -183,9 +187,7 @@
     <Compile Include="Models\Checkout\AutoOrder.cs" />
     <Compile Include="Models\Checkout\Order.cs" />
     <Compile Include="Models\PropertyBags\ShoppingCartPropertyBag.cs" />
-    <Compile Include="Models\Shopping\Interface\IShoppingCartItem.cs" />
     <Compile Include="Models\Shopping\Item.cs" />
-    <Compile Include="Models\Shopping\ShoppingCartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\AuthenticationService\IdentityService.cs" />
@@ -198,7 +200,6 @@
     <Compile Include="Services\CheckoutService\Steps\CustomerInformation.cs" />
     <Compile Include="Services\ItemService\ItemRequest.cs" />
     <Compile Include="Services\ItemService\ItemService.cs" />
-    <Compile Include="Models\Shopping\ShoppingCartItemCollection.cs" />
     <Compile Include="Services\ItemService\WebCategoryRequest.cs" />
     <Compile Include="Services\PropertyBagService\PropertyBagService.cs" />
     <Compile Include="Settings\Configurations\Interface\IConfiguration.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Services\CheckoutService\Steps\Cart.cs" />
     <Compile Include="Services\CheckoutService\Flows\ShoppingFlow.cs" />
     <Compile Include="Services\CheckoutService\Steps\Shipping.cs" />
+    <Compile Include="ViewModels\WebCategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -250,6 +252,12 @@
     <Content Include="Content\Styles\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\Styles\Themes\Luxxium.css">
+      <DependentUpon>Luxxium.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\Themes\Luxxium.min.css">
+      <DependentUpon>Luxxium.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -262,7 +270,7 @@
     <None Include="Content\Styles\Site.scss" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\Styles\Themes\Luxxium.css" />
+    <None Include="Content\Styles\Themes\Luxxium.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -300,7 +308,7 @@
     <Content Include="Views\Checkout\Editortemplates\Shipping.cshtml" />
     <Content Include="Views\Checkout\Editortemplates\Payments.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
-    <Content Include="Views\Shopping\Partials\Items\_AddToCartButton.cshtml" />
+    <Content Include="Views\Shopping\Partials\Items\_DetailPageAddToCartButton.cshtml" />
     <Content Include="Views\Shared\Scripts\Shopping.cshtml" />
     <Content Include="Views\Checkout\Enrollment.cshtml" />
     <Content Include="Views\Checkout\DisplayTemplates\CheckoutCompleted.cshtml" />
@@ -308,7 +316,7 @@
     <Content Include="Views\Shopping\ProductDetail.cshtml" />
     <Content Include="Views\Shopping\CategoryList.cshtml" />
     <Content Include="Views\Shopping\CategoryProductList.cshtml" />
-    <Content Include="Views\Shopping\_layout.cshtml" />
+    <Content Include="Views\Shopping\_Layout.cshtml" />
     <Content Include="Views\Checkout\ShoppingCart.cshtml" />
     <Content Include="Views\Shopping\ProductSerach.cshtml" />
     <Content Include="Views\Shopping\Partials\_ProductSearchResult.cshtml" />
@@ -320,13 +328,15 @@
     <Content Include="Views\Shared\_PageTemplate.cshtml" />
     <Content Include="Views\Shared\Partials\_FrontPageBanner.cshtml" />
     <Content Include="Views\Shared\Partials\_PageBanner.cshtml" />
+    <Content Include="Views\Shared\_SocialIconsBar.cshtml" />
+    <Content Include="Views\Shopping\Partials\Categories\_CategoryItem.cshtml" />
+    <Content Include="Views\Shopping\Partials\Items\_CardAddToCartButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Luxxium\Controllers\" />
     <Folder Include="Areas\Luxxium\Models\" />
     <Folder Include="Areas\Luxxium\Views\Shared\" />
-    <Folder Include="ViewModels\Interface\" />
     <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,11 +4,13 @@ using System.Web.Mvc;
 using MakoLibrary.Contracts;
 using DefaultReplicatedSite.Models;
 using DefaultReplicatedSite.Services;
+using DefaultReplicatedSite.ViewModels;
+using System.Linq;
 
 namespace DefaultReplicatedSite.Controllers
 {
 
-    [RoutePrefix("shop")]
+    [RoutePrefix("{webalias}/products")]
     public class ShoppingController : Controller
     {
         private ItemService _itemService = new ItemService();
@@ -27,12 +29,48 @@ namespace DefaultReplicatedSite.Controllers
             }
         }
         // GET: Shopping
+        [Route("all")]
         public ActionResult Index()
         {
-            var model = new TestObject();
-            var shoppingCart = ShoppingCart;
+            var model = new WebCategoryViewModel
+            {
+                ChildCategories = new List<WebCategory>
+                {
+                    new WebCategory
+                    {
+                        Name = "Kristals Gemstone Skincare",
+                        MediumImage = "https://i1.wp.com/luxxium.net/wp-content/uploads/2019/04/unnamed.jpg?w=760&amp;ssl=1",
+                        WebCategoryId = 1,
+                        Descr = "KRISTALS<br> GEMSTONE SKINCARE"
+                    },
+                    new WebCategory
+                    {
+                        Name = "TechTure advanced skincare techology",
+                        MediumImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/TECH.png?w=760&amp;ssl=1",
+                        WebCategoryId = 2,
+                        Descr = "TECHTURE ADVANCED <br>SKINCARE TECHNOLOGY"
+                    },
+                }
+            };
+            return View(model);
+        }
+        [Route("category/{category}")]
+        public ActionResult CategoryList(int category)
+        {
+            var model = new WebCategoryViewModel();
+            model.ChildCategories = _itemService.GetWebCategories(new WebCategoryRequest()).Select(c => new WebCategory { 
+                WebCategoryId = c.WebCategoryId,
+                Descr = c.Descr,
+                MediumImage = c.MediumImage
+            }).ToList();
+            return View(model);
+        }
+
+        [Route("{category}")]
+        public ActionResult CategoryProductList(int category)
+        {
+            var model = new WebCategoryViewModel();
             model.Items = _itemService.GetItems(new ItemRequest(OrderConfiguration));
-            model.Cats = _itemService.GetWebCategories(new WebCategoryRequest());
             return View(model);
         }
         #region AjaxRequests
@@ -41,7 +79,6 @@ namespace DefaultReplicatedSite.Controllers
             if(ShoppingCart.FlowType != CheckoutFlowType.Shopping)
             {
                 PropertyBagService.Delete(ShoppingCart);
-                ShoppingCart.FlowType = CheckoutFlowType.Shopping;
             }
             ShoppingCart.FlowType = CheckoutFlowType.Shopping;
             ShoppingCart.OrderItems.Add(item);
@@ -58,8 +95,8 @@ namespace DefaultReplicatedSite.Controllers
             if (ShoppingCart.FlowType != CheckoutFlowType.Shopping)
             {
                 PropertyBagService.Delete(ShoppingCart);
-                ShoppingCart.FlowType = CheckoutFlowType.Shopping;
             }
+            ShoppingCart.FlowType = CheckoutFlowType.Shopping;
             ShoppingCart.AutoOrderItems.Add(item);
             PropertyBagService.Update(ShoppingCart);
             return new JsonNetResult(new

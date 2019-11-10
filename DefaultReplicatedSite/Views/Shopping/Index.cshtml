@@ -1,32 +1,61 @@
-﻿@model TestObject
-    @{ 
-        ViewBag.Title = "Shop";
-    }
-    <div class="container" style="margin-top:160px">
-        <div class="col-sm-6">
-            @foreach (var item in Model.Items)
+﻿@model WebCategoryViewModel
+@{
+    ViewBag.Title = "Product Lines";
+    ViewBag.HeaderImg = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/shutterstock_735691957.jpg?resize=2400%2C1800&amp;ssl=1";
+}
+@section PageHeader{
+    @Html.Partial("Partials/_PageBanner")
+}
+<style>
+    p {
+    font-family: "proxima-nova","proxima-nova-1",sans-serif;
+    line-height: 1.7;
+    padding: 12px 0px;
+    margin: 0px;
+}
+.article {
+    padding: 0px 12% 24px 12%;
+}
+.page .article>p:first-child {
+    color: #040230;
+    font-size: 1.3em;
+    font-weight: 300;
+    line-height: 1.6;
+    padding-top: 24px;
+}
+
+.block-image {
+    max-width: 100%;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+.main-category-image{
+    min-height:425px;
+}
+</style>
+<section class="container article">
+    <section id="page-content">
+        <p style="text-align:center">Luxxium carries a diverse collection of products to cater to every skincare  &amp; lifestyle need. From targeting problem areas, to gender specific products, Luxxium can help you achieve your best you! </p>
+    </section>
+    <hr class="wp-block-separator">
+    <section id="product-categories">
+        <div class="row text-center">
+            @foreach (var category in Model.ChildCategories)
             {
-                item.Quantity = 1;
-                <div class="row">
-                    <div class="col-sm-12">
-                        @item.Title<br />
-                        @item.ItemPrice.ItemPrice.ToString("C")
-                    </div>
-                    <div class="col-sm-12">
-                        @Html.Partial("Partials/Items/_AddToCartButton", item)
+                <div class="col-sm-6">
+                    <div class="block-image">
+                        <figure class="aligncenter">
+                            <a href="@Url.Action("CategoryList", "Shopping", new { category = category.WebCategoryId })">
+                                <img src="@category.MediumImage" class="img-responsive main-category-image" />
+                            </a>
+                            <figcaption>@Html.Raw(category.Descr)</figcaption>
+                        </figure>
                     </div>
                 </div>
             }
         </div>
-        <div class="col-sm-6">
-            @foreach (var item in Model.Cats)
-            {
-                <div class="row">
-                    <div class="col-sm-12">
-                        @item.Descr<br />
-                        @item.WebCategoryId
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+    </section>
+    <section id="banner">
+    </section>
+</section>

@@ -1,17 +1,19 @@
-﻿@{
-    Layout = null;
+﻿@model WebCategoryViewModel
+@{
+    Layout = "~/Views/Shopping/_Layout.cshtml";
+    ViewBag.Title = Model.Name;
+    ViewBag.HeaderImg = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/shutterstock_735691957.jpg?resize=2400%2C1800&amp;ssl=1";
+    ViewBag.ProductlineImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/10/kristals_logo_black.jpg?fit=300%2C207&amp;ssl=1";
 }
+<section id="webcategory-list">
+    <section id="webcategory-list-description">
+        <div class="col-sm-12">
+            @Html.Raw(Model.Descr)
+        </div>
+    </section>
+    @foreach(var category in Model.ChildCategories)
+    {
+        @Html.Partial("Partials/Categories/_CategoryItem", category)
+    }
+</section>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>

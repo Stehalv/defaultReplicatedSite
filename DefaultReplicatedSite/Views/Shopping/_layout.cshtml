@@ -1,17 +1,28 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+@section PageHeader{
+    @Html.Partial("Partials/_PageBanner")
+}
+<style>
+    #categories-sidebar{
+        border-right: 1px solid black;
+        height:900px;
+    }
+    #shop-content{
+        padding-left:80px;
+        padding-right:80px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div id="categories-sidebar" class="col-sm-4">
+                <div class="col-sm-12">
+                    <img src="@ViewBag.ProductlineImage" class="img-responsive">
+                </div>
+        </div>
+        <div id="shop-content" class="col-sm-8">
+            @RenderBody()
+        </div>
     </div>
-</body>
-</html>
+</div>

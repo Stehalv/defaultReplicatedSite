@@ -164,4 +164,4 @@ C:\Users\stein\source\repos\defaultReplicatedSite2\DefaultReplicatedSite\bin\Mic
 C:\Users\stein\source\repos\defaultReplicatedSite2\DefaultReplicatedSite\obj\Debug\DefaultReplicatedSite.csproj.CopyComplete
 C:\Users\stein\source\repos\defaultReplicatedSite2\DefaultReplicatedSite\obj\Debug\DefaultReplicatedSite.dll
 C:\Users\stein\source\repos\defaultReplicatedSite2\DefaultReplicatedSite\obj\Debug\DefaultReplicatedSite.pdb
-C:\Users\stein\source\repos\defaultReplicatedSite2\DefaultReplicatedSite\obj\Debug\DefaultReplicatedSite.csprojAssemblyReference.cache
+C:\Users\stein\Source\Repos\defaultReplicatedSite2\DefaultReplicatedSite\obj\Debug\DefaultReplicatedSite.csprojAssemblyReference.cache
