@@ -1,4 +1,5 @@
-﻿using DefaultReplicatedSite.ViewModels;
+﻿using DefaultReplicatedSite.Models;
+using DefaultReplicatedSite.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,25 @@ namespace DefaultReplicatedSite.Services
     {
         public CartModel()
         {
-            Order = new Cart();
-            AutoOrder = new Cart();
+            Order = new Order();
+            AutoOrder = new AutoOrder();
         }
-        public Cart Order { get; set; }
-        public Cart AutoOrder { get; set; }
+        public Order Order { get; set; }
+        public AutoOrder AutoOrder { get; set; }
+        public CheckoutFlowType Type { get; set; }
+        public bool HasAutoOrder
+        {
+            get
+            {
+                return (AutoOrder.Items != null && AutoOrder.Items.Count() > 0);
+            }
+        }
+        public bool HasOrder
+        {
+            get
+            {
+                return (Order.Items != null && Order.Items.Count() > 0);
+            }
+        }
     }
 }

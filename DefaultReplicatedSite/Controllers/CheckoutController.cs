@@ -15,10 +15,32 @@ namespace DefaultReplicatedSite.Controllers
     public class CheckoutController : Controller
     {
         private CheckoutService _checkoutService = new CheckoutService();
+        public ActionResult Index(CheckoutFlowType type = 0)
+        {
+            if(type == CheckoutFlowType.Shopping)
+            {
+                return RedirectToAction("Shopping");
+            }
+            else if(type == CheckoutFlowType.Enrollment)
+            {
+                return RedirectToAction("Enrollment");
+            }
+            else if(type == CheckoutFlowType.SimpleEnrollment)
+            {
+                return RedirectToAction("SimpleErollment");
+            }
+            else
+            {
+                return RedirectToAction("ShoppingCart");
+            }
+        }
         #region Cart
-        public ActionResult Cart()
+        public ActionResult ShoppingCart()
         {
             var model = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
+            model.Order.IsEditable = true;
+            model.AutoOrder.IsEditable = true;
+            model.Type = _checkoutService.ShoppingCart.FlowType;
             return View(model);
         }
         #endregion
@@ -91,7 +113,7 @@ namespace DefaultReplicatedSite.Controllers
 
         private IOrderConfiguration EnrollmentConfiguration = new UnitedStatesMarket().Configurations.Enrollment;
         private IOrderConfiguration EnrollmentAutoOrderConfiguration = new UnitedStatesMarket().Configurations.EnrollmentAutoOrder;
-        [Route("enrollment/{step}")]
+        [Route("enrollment")]
         public ActionResult Enrollment(CheckoutSteps step = CheckoutSteps.CustomerInformation)
         {
             _checkoutService.ValidatePropertyBags(CheckoutFlowType.Enrollment);
@@ -131,7 +153,7 @@ namespace DefaultReplicatedSite.Controllers
             return RedirectToAction("Index", "Shopping");
         }
         [HttpPost]
-        [Route("submitenrolment/{step}")]
+        [Route("submitenrolment")]
         public ActionResult SubmitEnrollment(EnrollmentFlow model)
         {
             if (model.CurrentStep == CheckoutSteps.CustomerInformation)
@@ -152,7 +174,7 @@ namespace DefaultReplicatedSite.Controllers
         #endregion
 
         #region SimpleEnrollment
-        [Route("simpleenrollment/{step}")]
+        [Route("simpleenrollment")]
         public ActionResult SimpleEnrollment(CheckoutSteps step = CheckoutSteps.CustomerInformation)
         {
             _checkoutService.ValidatePropertyBags(CheckoutFlowType.SimpleEnrollment);
@@ -169,7 +191,7 @@ namespace DefaultReplicatedSite.Controllers
             return View(model);
         }
         [HttpPost]
-        [Route("submitsimpleenrollment/{step}")]
+        [Route("submitsimpleenrollment")]
         public ActionResult SubmitSimpleEnrollment(SimpleEnrollmentFlow model)
         {
             if (model.CurrentStep == CheckoutSteps.CustomerInformation)

@@ -38,9 +38,9 @@ namespace DefaultReplicatedSite.Models
             }
         }
 
-        public void Update(Guid id, decimal quantity)
+        public void Update(int id, decimal quantity)
         {
-            var item = this.Where(c => c.ID == id).FirstOrDefault();
+            var item = this.Where(c => c.ItemId == id).FirstOrDefault();
             if (item == null) return;
 
             // Remove the item if it is an invalid quantity
@@ -50,7 +50,7 @@ namespace DefaultReplicatedSite.Models
             }
             else
             {
-                this.Remove(item.ID);
+                this.Remove(item.ItemId);
             }
         }
         public void Update(ShoppingCartItem item)
@@ -59,7 +59,7 @@ namespace DefaultReplicatedSite.Models
             if (oldItem == null) return;
 
             // Remove the old item
-            this.Remove(oldItem.ID);
+            this.Remove(oldItem.ItemId);
 
             // If we have a valid quantity, add the new item
             if (item.Quantity > 0)
@@ -68,9 +68,9 @@ namespace DefaultReplicatedSite.Models
             }
         }
 
-        public void Remove(Guid id)
+        public void Remove(int id)
         {
-            var matchingItems = this.Where(item => item.ID == id).ToList();
+            var matchingItems = this.Where(item => item.ItemId == id).ToList();
             foreach (var item in matchingItems)
             {
                 base.Remove(item);

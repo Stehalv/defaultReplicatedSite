@@ -31,5 +31,6 @@ namespace DefaultReplicatedSite.Models
                 return SubTotal + Shipping + Tax;
             }
         }
+        public bool IsEditable { get; set; }
     }
 }

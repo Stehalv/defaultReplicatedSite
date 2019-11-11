@@ -154,7 +154,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Areas\Luxxium\LuxxiumAreaRegistration.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +177,11 @@
     <Compile Include="Models\Checkout\ShoppingCartItem.cs" />
     <Compile Include="Models\Checkout\ShoppingCartItemCollection.cs" />
     <Compile Include="Models\Shopping\WebCategory.cs" />
+    <Compile Include="App_GlobalResources\Checkout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Checkout.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\CheckoutService\CartModel.cs" />
     <Compile Include="Services\CheckoutService\CheckoutFlowTypes.cs" />
     <Compile Include="Services\CheckoutService\CheckoutSteps.cs" />
@@ -209,13 +213,14 @@
     <Compile Include="Settings\Configurations\UnitedStates\Market.cs" />
     <Compile Include="Settings\Configurations\UnitedStates\Configuration.cs" />
     <Compile Include="Settings\Mapping\ApiQuery.cs" />
+    <Compile Include="Settings\Mapping\ItemTypes.cs" />
     <Compile Include="Settings\Mapping\PeriodTypes.cs" />
+    <Compile Include="Settings\Mapping\OrderTypes.cs" />
     <Compile Include="Settings\Mapping\RankGroups.cs" />
     <Compile Include="Settings\Mapping\SubscriberTypes.cs" />
     <Compile Include="Settings\Mapping\TreeTypes.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Utilities\MakoUtilities.cs" />
-    <Compile Include="Services\CheckoutService\Steps\Cart.cs" />
     <Compile Include="Services\CheckoutService\Flows\ShoppingFlow.cs" />
     <Compile Include="Services\CheckoutService\Steps\Shipping.cs" />
     <Compile Include="ViewModels\WebCategoryViewModel.cs" />
@@ -241,7 +246,6 @@
     <Content Include="Content\fonts\ProximaNova\Proxima Nova Extrabold.otf" />
     <Content Include="Content\fonts\ProximaNova\Proxima Nova Thin.otf" />
     <Content Include="Content\fonts\ProximaNova\ProximaNova-Regular.otf" />
-    <Content Include="Areas\Luxxium\Views\web.config" />
     <None Include="Content\Styles\fonts\fonts.scss" />
     <None Include="Content\Styles\framework\spaces.scss" />
     <Content Include="Content\Styles\components\formelements.css" />
@@ -331,12 +335,10 @@
     <Content Include="Views\Shared\_SocialIconsBar.cshtml" />
     <Content Include="Views\Shopping\Partials\Categories\_CategoryItem.cshtml" />
     <Content Include="Views\Shopping\Partials\Items\_CardAddToCartButton.cshtml" />
+    <Content Include="Views\Checkout\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Luxxium\Controllers\" />
-    <Folder Include="Areas\Luxxium\Models\" />
-    <Folder Include="Areas\Luxxium\Views\Shared\" />
     <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +353,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Checkout.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Checkout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

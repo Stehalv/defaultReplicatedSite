@@ -11,23 +11,24 @@ namespace DefaultReplicatedSite.Models
     {
         public Customer()
         {
-            MailingAddress = new CRMExtendedAddress();
-            ShippingAddress = new CRMExtendedAddress();
-            BillingAddress = new CRMExtendedAddress();
+            MailingAddress = new Address();
+            ShippingAddress = new Address();
+            BillingAddress = new Address();
             if(Settings.Shop.AllowSeparateAutoOrderAddress)
             {
-                OtherAddress1 = new CRMExtendedAddress();
+                OtherAddress1 = new Address();
             }
+            PhoneNumbers = new CRMExtendedPhones();
         }
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredFirstName", ErrorMessageResourceType = typeof(App_GlobalResources.Checkout))]
         public new string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredLastName", ErrorMessageResourceType = typeof(App_GlobalResources.Checkout))]
         public new string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredEmailAddress", ErrorMessageResourceType = typeof(App_GlobalResources.Checkout))]
         public new string EmailAddress { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredUserName", ErrorMessageResourceType = typeof(App_GlobalResources.Checkout))]
         public new string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredUserPassword", ErrorMessageResourceType = typeof(App_GlobalResources.Checkout))]
         public new string UserPassword { get; set; }
         public new bool EmailSubscribed { get; set; }
     }

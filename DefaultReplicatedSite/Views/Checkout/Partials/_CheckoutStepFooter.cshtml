@@ -7,17 +7,24 @@
                 <div class="col-sm-6">
                     @if (Model.PreviousStep != 0)
                     {
-                        <a href="@Url.Action(Model.Type.ToString(), "Checkout", new { step = Model.PreviousStep })"><< @Model.PreviousStep.ToString()</a>
+                        if (Model.PreviousStep == CheckoutSteps.ShoppingCart)
+                        {
+                            <a href="@Url.Action("ShoppingCart", "Checkout")"><< @Model.PreviousStep.ToString().InsertSpaceBeforeUpperCase()</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action(Model.Type.ToString(), "Checkout", new { step = Model.PreviousStep })"><< @Model.PreviousStep.ToString().InsertSpaceBeforeUpperCase()</a>
+                        }
                     }
                     else
                     {
-                        <a href="@Url.Action("index", "Home")">Back to Homepage</a>
+                        <a href="@Url.Action("index", "Home")"><< Back to Homepage</a>
                     }
                 </div>
                 <div class="col-sm-6 text-right">
                     @if (Model.NextStep != 0)
                     {
-                        <button type="submit" class="btn btn-primary">@Model.NextStep.ToString()</button>
+                    <button type="submit" class="btn btn-primary">@Model.NextStep.ToString().InsertSpaceBeforeUpperCase()</button>
                     }
                     else
                     {

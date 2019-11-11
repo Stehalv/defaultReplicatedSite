@@ -1,9 +1,8 @@
 ﻿namespace Common
 {
-    public static class RankGroups
+    public static class OrderTypes
     {
-        public const int Default = Primary;
-
-        public const int Primary = 1;
+        public const int Order = 1;
+        public const int AutoOrder = 2;
     }
 }

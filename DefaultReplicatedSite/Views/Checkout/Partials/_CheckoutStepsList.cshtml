@@ -7,13 +7,13 @@
                 if (step >= Model.CurrentStep)
                 {
                     <li class="step-@step">
-                        @step.ToString()
+                        @step.ToString().InsertSpaceBeforeUpperCase()
                     </li>
                 }
                 else
                 {
                     <li class="step-@step">
-                        <a href="#">@step.ToString()</a>
+                        <a href="#">@step.ToString().InsertSpaceBeforeUpperCase()</a>
                     </li>
                 }
             }

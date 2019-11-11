@@ -15,5 +15,6 @@ namespace DefaultReplicatedSite.Models
         decimal Shipping { get; set; }
         decimal Tax { get; set; }
         decimal Total { get; }
+        bool IsEditable { get; set; }
     }
 }
