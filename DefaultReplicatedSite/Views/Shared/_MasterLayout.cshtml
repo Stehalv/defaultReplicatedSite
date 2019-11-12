@@ -51,7 +51,7 @@
                         <li class="menu-item"><a href="#">Home</a></li>
                         <li class="menu-item"><a href="#">Opportunity</a></li>
                         <li class="menu-item"><a href="#">Products</a>
-                                              <ul class="sub-menu" style="display: block;">
+                                              <ul class="sub-menu" style="display: none;">
                                                   <span class="nav-arrow"></span>
                                                   <li id="menu-item-2277" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2277"><a href="https://luxxium.net/products/kristals/">KRISTALS SKINCARE</a></li>
                                                   <li id="menu-item-2279" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2279"><a href="https://luxxium.net/products/techture/">TECHTURE BEAUTY</a></li>
@@ -79,7 +79,9 @@
     </header>
     <main class="container-fluid">
         @RenderSection("PageHeader")
-        @RenderBody()
+        <div class="content">
+            @RenderBody()
+        </div>
     </main>
 
     @Scripts.Render("~/bundles/jquery")

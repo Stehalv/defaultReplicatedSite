@@ -10,7 +10,7 @@ td, th {
   padding-left: 1em; }
 
 #checkout-page {
-  margin-top: 150px;
+  margin-top: 102px;
   height: 100vh;
   font-size: 12px; }
 
@@ -377,12 +377,20 @@ h2 {
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s; }
 
+.btn.fullwidth {
+  width: 100%; }
+
 .fadein-element {
   opacity: 0;
   -moz-transition: opacity 1.5s;
   -webkit-transition: opacity 1.5s;
   -o-transition: opacity 1.5s;
   transition: opacity 1.5s; }
+
+.content {
+  max-width: 1180px;
+  margin: 0px auto 0px;
+  padding: 48px 4%; }
 
 #main-header {
   position: fixed;

@@ -41,6 +41,7 @@ namespace DefaultReplicatedSite.Services
             foreach (var item in items.Where(c => c.ItemPricing.Where(f => f.CountryCode == request.Configuration.CountryCode).Count() > 0))
             {
                 var _item = new Item(item, request.Configuration);
+                _item.Quantity = 1;
                 list.Add(_item);
             }
             return list;

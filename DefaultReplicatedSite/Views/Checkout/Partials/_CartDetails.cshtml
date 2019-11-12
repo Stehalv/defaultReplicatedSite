@@ -1,44 +1,73 @@
-﻿@model Cart
-@{ 
+﻿@model IOrder
+@{
     var isAutoOrder = (Model is AutoOrder);
+    var orderType = (isAutoOrder) ? Common.OrderTypes.Order : Common.OrderTypes.AutoOrder;
+    var context = Guid.NewGuid();
+    var cartHeading = (!isAutoOrder) ? Resources.Checkout.TodaysOrder : Resources.Checkout.AutoOrder;
+    var hasItems = Model.Items != null && Model.Items.Count() != 0;
 }
-    <section id="ckeckout-order-summary">
-        <div class="summary-items">
-            @foreach (var item in Model.Items)
+<style>
+    .edit-quantity {
+        width: 60px;
+    }
+</style>
+<h3>@cartHeading</h3>
+<section id="ckeckout-order-summary">
+    <div class="summary-items">
+        @if (hasItems)
+        {
+            foreach (var item in Model.Items)
             {
-                <div class="summary-item">
+                var itemTotal = item.ItemPrice.ItemPrice * item.Quantity;
+                <div class="summary-item" id="@context-@item.ItemId">
                     <div class="product-image">
                         <div class="product-thumbnail">
                             <div class="product-thumbnail-wrapper">
                                 <img alt="" class="product-thumbnail-image" src="@item.SmallImage">
                             </div>
-                            <span class="product-thumbnail-quantity" aria-hidden="true">@item.Quantity</span>
+                            @if (!Model.IsEditable)
+                            {
+                                <span class="product-thumbnail-quantity" aria-hidden="true">@item.Quantity</span>
+                            }
                         </div>
                     </div>
                     <div class="product-description" scope="row">
                         <span class="product-description-name order-summary-emphasis">@item.Title</span>
                         <span class="product-description-variant order-summary-small-text">@item.ShortDescr</span>
                     </div>
+                    @if (Model.IsEditable)
+                    {
+                        <div class="product-description" scope="row">
+                            <input type="number" data-id="@item.ItemId" data-type="@orderType" class="form-control edit-quantity" value="@item.Quantity.ToString("n0")" />
+                        </div>
+                    }
                     <div class="product-price">
-                        <span class="order-summary-emphasis">@item.ItemPrice.ItemPrice.ToString("C")</span>
+                        <span class="order-summary-emphasis price item-total-@context-@item.ItemId">@itemTotal.ToString("C")</span>
                     </div>
+                    @if (Model.IsEditable)
+                    {
+                        <div class="product-remove">
+                            <a data-role="remove-item" data-id="@item.ItemId" data-url="@Url.Action("RemoveItemFromCart", "shopping", new { id = item.ItemId, orderType = orderType })"><i class="fa fa-times text-danger"></i></a>
+                        </div>
+                    }
                 </div>
             }
-        </div>
-        @if (Settings.Shop.AllowDiscountCodes)
+        }
+        else
         {
-            <div class="order-summary-discount" data-reduction-form="update">
-                <h3 class="visually-hidden">Rabatt</h3>
+            <div class="row">
+                <h2>@Resources.Checkout.NoItemsInCart</h2>
             </div>
         }
-
-
+    </div>
+    @if (hasItems)
+    {
         <div class="order-summary-total-lines">
             <div class="total-line row">
                 <span class="pull-left">
-                    Sub Total
+                    @Resources.Checkout.SubTotal
                 </span>
-                <span class="pull-right">
+                <span class="pull-right sub-total-@orderType">
                     @Model.SubTotal.ToString("C")
                 </span>
             </div>
@@ -46,7 +75,7 @@
             {
                 <div class="total-line row">
                     <span class="pull-left">
-                        Shipping
+                        @Resources.Checkout.Shipping
                     </span>
                     <span class="pull-right">
                         @Model.Shipping.ToString("C")
@@ -58,20 +87,63 @@
             {
                 <div class="total-line row">
                     <span class="pull-left">
-                        Tax
+                        @Resources.Checkout.Tax
                     </span>
                     <span class="pull-right">
                         @Model.Tax.ToString("C")
                     </span>
                 </div>
-            }        
+            }
         </div>
         <div class="order-summary-total order-summary-emphasis">
             <span class="pull-left">
-                Total
+                @Resources.Checkout.Total
             </span>
-            <span class="pull-right large">
+            <span class="pull-right large total-sum-@orderType">
                 @Model.Total.ToString("C")
             </span>
         </div>
-    </section>
+    }
+</section>
+@section scripts{
+    <script>
+        var context = '@context';
+        var orderType = @orderType;
+        var updateCartItemUrl = '@Url.Action("UpdateCartItem", "Shopping")';
+
+        function registerEventHandlers() {
+            $('[data-role="remove-item]').on("click", function () {
+                var id = $(this).data("id");
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "POST",
+                    success: function (response) {
+                        if (response.success) {
+                            $("#" + context + "-" + id).remove();
+                            $(".total-sum-" + orderType).html(response.total);
+                            $(".sub-total-" + orderType).html(response.subtotal);
+                        }
+                    }
+                })
+            });
+            $('.edit-quantity]').on("keyup", function () {
+                var id = $(this).data("id");
+                var type = $(this).data("type");
+                var quantity = $(this).val();
+                $.ajax({
+                    url: updateCartItemUrl,
+                    type: "POST",
+                    data: { id: id, type: type, quantity: quantity },
+                    success: function (response) {
+                        if (response.success) {
+                            $(".item-total" + context + "-" + id).hteml(response.itemTotal);
+                            $(".total-sum-" + orderType).html(response.total);
+                            $(".sub-total-" + orderType).html(response.subtotal);
+                        }
+                    }
+                })
+            });
+        }
+        registerEventHandlers();
+    </script>
+}
