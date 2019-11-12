@@ -13,6 +13,9 @@ namespace DefaultReplicatedSite
         {
             routes.MapMvcAttributeRoutes();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("fonts/{*pathInfo}");
+            routes.IgnoreRoute("content/{*pathInfo}");
+            routes.IgnoreRoute("scripts/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Replicated",

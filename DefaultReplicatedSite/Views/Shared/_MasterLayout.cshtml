@@ -27,8 +27,8 @@
                         <li id="menu-item-1536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1536"><a href="https://luxxium.net/products/">PRODUCT LINES</a></li>
                         <li id="menu-item-2199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2199"><a href="https://luxxium.net/membership-level/membership-contact/">JOIN NOW</a></li>
                         <li id="menu-item-1540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1540">
-                            <a href="https://luxxium.net/contact/" class="sf-with-ul">CONTACT US</a>
-                            <ul class="sub-menu" style="display: none;">
+                            <a href="https://luxxium.net/contact/" class="sf-with-ul dropdown-toggle">CONTACT US</a>
+                            <ul class="sub-menu dropdown-menu" style="display: none;">
                                 <span class="nav-arrow"></span>
                                 <li id="menu-item-1538" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1538"><a href="https://luxxium.net/testimonials/">TESTIMONIALS</a></li>
                                 <li id="menu-item-1539" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1539"><a href="https://luxxium.net/about-us/">ABOUT</a></li>
@@ -46,16 +46,28 @@
     <header id="main-header">
         <nav class="container-fluid">
             <div class="menu-wrapper">
-                <div class="col-md-5 menu-left hidden-xs hidden-sm vertical-center">
-                    <ul class="nav">
+                <div class="col-md-5 menu-left hidden-xs hidden-sm vertical-center navbar-collapse">
+                    <ul class="nav navbar-nav">
                         <li class="menu-item"><a href="#">Home</a></li>
-                        <li class="menu-item"><a href="#">Opportunity</a></li>
-                        <li class="menu-item"><a href="#">Products</a>
-                                              <ul class="sub-menu" style="display: none;">
-                                                  <span class="nav-arrow"></span>
-                                                  <li id="menu-item-2277" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2277"><a href="https://luxxium.net/products/kristals/">KRISTALS SKINCARE</a></li>
-                                                  <li id="menu-item-2279" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2279"><a href="https://luxxium.net/products/techture/">TECHTURE BEAUTY</a></li>
-                                              </ul>
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opportunity<span class="caret"></span></a>
+                            <ul class="sub-menu dropdown-menu">
+                                <span class="nav-arrow"></span>
+                                <li><a href="@Url.Action("MemberLevel", "Home")">R + R CLUB MEMBER</a></li>
+                                <li><a href="@Url.Action("InfluencerLevel", "Home")">INFLUENCER LEVEL</a></li>
+                                <li><a href="@Url.Action("RetailerLevel", "Home")">RETAILER LEVEL</a></li>
+                                <li><a href="@Url.Action("CompensationPlan", "Home")">COMPENSATION PLAN</a></li>
+                                <li><a href="@Url.Action("WhatIsRR", "Home")">WHAT IS R + R</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products<span class="caret"></span></a>
+                            <ul class="sub-menu dropdown-menu">
+                                <span class="nav-arrow"></span>
+                                <li><a href="kristals-skincare">KRISTALS SKINCARE</a></li>
+                                <li><a href="techture-beauty">TECHTURE BEAUTY</a></li>
+
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -89,5 +101,21 @@
     @Html.Partial("_GlobalScripts")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script>
+    $('.dropdown-toggle').click(function (e) {
+        if ($(document).width() > 768) {
+            e.preventDefault();
+
+            var url = $(this).attr('href');
+
+
+            if (url !== '#') {
+
+                window.location.href = url;
+            }
+
+        }
+    });
+</script>
 </body>
 </html>
