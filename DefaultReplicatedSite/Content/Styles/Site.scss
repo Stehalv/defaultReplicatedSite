@@ -39,6 +39,9 @@ img{
     -o-transition: opacity 1.5s;
     transition: opacity 1.5s;
 }
+.btn.fullwidth{
+    width:100%;
+}
 
 .fadein-element {
     opacity: 0;
@@ -47,7 +50,11 @@ img{
     -o-transition: opacity 1.5s;
     transition: opacity 1.5s;
 }
-
+.content {
+    max-width: 1180px;
+    margin: 0px auto 0px;
+    padding: 48px 4%;
+}
 //Header
 #main-header {
     position: fixed;

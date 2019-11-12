@@ -35,6 +35,11 @@ namespace DefaultReplicatedSite
         }
         public static class Globalization
         {
+            public static Market GetSelectedMaret()
+            {
+                var countryCode = GetSelectedCountryCode();
+                return Settings.Globalization.Markets.AvailableMarkets.FirstOrDefault(c => c.CountryCode == countryCode);
+            }
             public static string GetSelectedLanguage()
             {
                 var defaultLanguage = Settings.Globalization.Markets.AvailableMarkets.Where(c => c.IsDefault).FirstOrDefault().CultureCode;

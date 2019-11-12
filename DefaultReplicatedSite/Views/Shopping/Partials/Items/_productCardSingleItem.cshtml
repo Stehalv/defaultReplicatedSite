@@ -1,25 +1,16 @@
 ﻿@model Item
-    <style>
-        .fullwidth-element{
-            width:100%;
-        }
-    </style>
-    <div class="row fullwidth-element">
-        @using (Ajax.BeginForm("AddItemToOrder", "Shopping", new AjaxOptions
-        {
-            HttpMethod = "POST",
-            OnBegin = "addToOrderBegin",
-            OnSuccess = "addToOrderSuccess"
-        })){
-            @Html.HiddenFor(c => c.ItemId)
-            @Html.HiddenFor(c => c.ItemCode)
-        <div class="col-sm-3">
-            @Html.TextBoxFor(c => c.Quantity, new { @class = "form-control"})
+<div class="item-container">
+    <div class="col-md-4 col-sm-6 item-card">
+        <div class="col-sm-12 image-wrapper">
+            <img src="@Model.MediumImage" class="img-responsive image" />
         </div>
-        <div class="col-sm-9">
-            <a class="btn btn-primary add-item-to-order">Add To Cart</a>
+        <div class="row">
+            <div class="col-sm-12 description-wrapper">
+                <span class="item-description">@Model.Title</span>
+            </div>
         </div>
-        }
+        @Html.Partial("Partials/Items/_CardAddToCartButton", Model)
     </div>
+</div>
   
 

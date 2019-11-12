@@ -1,0 +1,35 @@
+﻿@model WebCategory
+<style>
+    .web-category-item::before{
+
+    }
+    .web-category-item-heading p{
+        background-color: #19193b;
+        font-size: 24px;
+        text-align: center;
+        color: #eee;
+        padding: 20px 30px;
+        line-height: 1.7;
+        border-radius:10px;
+    }
+    .view-collection-button{
+        margin-right:40px;
+    }
+</style>
+<hr/>
+<div class="row webcategory-item">
+    <div class="col-sm-12 web-category-item-heading">
+        <p>
+            @Model.Descr
+        </p>
+    </div>
+    <div class="col-sm-6">
+        <img src="@Model.MediumImage" class="img-responsive" />
+    </div>
+    <div class="col-sm-6">
+        @Html.Raw(Model.Descr)
+    </div>
+    <div class="col-sm-12 text-right">
+        <a class="rounded-button gold  view-collection-button" href="@Url.Action("CategoryProductList", "Shopping", new { category = Model.WebCategoryId })">View Collection</a>
+    </div>
+</div>

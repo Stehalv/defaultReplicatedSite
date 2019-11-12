@@ -38,12 +38,34 @@
     <div class="row">
         <div class="col-sm-12">
             @Html.TextBoxFor(c => c.Customer.EmailAddress, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.EmailAddress) })
+            @Html.ValidationMessageFor(c => c.Customer.EmailAddress)
+        </div>
+    </div>
+    @if (isEnrollment)
+    {
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.PhoneNumbers.CellPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.PhoneNumbers.CellPhone) })
+                @Html.ValidationMessageFor(c => c.Customer.PhoneNumbers.CellPhone)
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(c => c.Customer.PhoneNumbers.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.PhoneNumbers.HomePhone) })
+            </div>
+        </div>
+    }
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.PasswordFor(c => c.Customer.UserPassword, new { @class = "form-control password", @placeholder = Html.DisplayNameFor(c => c.Customer.UserPassword) })
+            @Html.ValidationMessageFor(c => c.Customer.UserPassword)
         </div>
     </div>
     <div class="space-10"></div>
     <div class="row">
         <div class="col-sm-12">
-            @Html.PasswordFor(c => c.Customer.UserPassword, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.UserPassword) })
+            @Html.Password("ConfirmPassword", "", new { @class = "form-control", @placeholder = "Confirm Password" })
+            @Html.ValidationMessage("ConfirmPassword")
         </div>
     </div>
     <div class="space-10"></div>
@@ -57,7 +79,7 @@
     <div class="space-10"></div>
     <div class="row">
         <div class="col-sm-12">
-            <h3>Shipping Info</h3>
+            <h3>Address</h3>
         </div>
     </div>
     @Html.EditorFor(c => c.Customer.MailingAddress, "Address")

@@ -11,6 +11,7 @@ namespace DefaultReplicatedSite
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapMvcAttributeRoutes();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("fonts/{*pathInfo}");
             routes.IgnoreRoute("content/{*pathInfo}");

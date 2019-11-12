@@ -70,9 +70,9 @@ namespace DefaultReplicatedSite.Services
             var request = CheckoutPropertyBag.Order;
             request.Details = Items;
             request.PriceType = orderConfiguration.PriceTypeID;
-            request.CurrencyCode = "usd";
-            request.Country = "US";
-            request.CompanyId = 100;
+            request.CurrencyCode = GlobalUtilities.Globalization.GetSelectedMaret().CurrencyCode;
+            request.Country = GlobalUtilities.Globalization.GetSelectedCountryCode();
+            request.CompanyId = Settings.API.CompanyId;
             request.ReturnAllShipMethods = true;
             request.OrderType = 1;
             request.OrderStatusType = 1;
@@ -87,13 +87,12 @@ namespace DefaultReplicatedSite.Services
         #region Cart
         public CartModel GetShoppingCart(IOrderConfiguration orderConfiguration, IOrderConfiguration autoOrderConfiguration, bool reCalculate = false)
         {
-            //Need to figure out a good way to store the cart so it does not need to calculate all the time. 
             //And need to figure out a good way to handle the items so they dont need to get pulled more then once
             var cart = new CartModel();
             List<Item> items = new List<Item>();
             if (ShoppingCart.OrderItems.Count() == 0)
             {
-                return null;
+
             }
             else if (reCalculate)
             {
@@ -130,6 +129,16 @@ namespace DefaultReplicatedSite.Services
                 items = _itemService.GetItems(new ItemRequest(orderConfiguration, ShoppingCart.OrderItems.Select(c => c.ItemId).ToList())).ToList();
                 items.ForEach(f => f.Quantity = ShoppingCart.OrderItems.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity);
                 cart.Order.Items = items;
+            }
+            if (ShoppingCart.AutoOrderItems.Count() == 0)
+            {
+
+            }
+            else
+            {
+                items = _itemService.GetItems(new ItemRequest(autoOrderConfiguration, ShoppingCart.AutoOrderItems.Select(c => c.ItemId).ToList())).ToList();
+                items.ForEach(f => f.Quantity = ShoppingCart.OrderItems.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity);
+                cart.AutoOrder.Items = items;
             }
             return cart;
         }

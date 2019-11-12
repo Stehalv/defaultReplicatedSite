@@ -91,7 +91,9 @@
     </header>
     <main class="container-fluid">
         @RenderSection("PageHeader")
-        @RenderBody()
+        <div class="content">
+            @RenderBody()
+        </div>
     </main>
 
     @Scripts.Render("~/bundles/jquery")

@@ -1,4 +1,4 @@
-﻿@model CRMExtendedAddress
+﻿@model Address
     @{ 
         var currentMarket = new UnitedStatesMarket();
     }
@@ -35,9 +35,10 @@
         @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
         @Html.ValidationMessageFor(c => c.City)
     </div>
-        <div class="col-sm-4">
-            @Html.TextBoxFor(c => c.RegionProvState, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.RegionProvState) })
-        </div>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(c => c.RegionProvState, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.RegionProvState) })
+        @Html.ValidationMessageFor(c => c.RegionProvState)
+    </div>
         <div class="col-sm-4">
             @Html.TextBoxFor(c => c.PostalCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.PostalCode) })
             @Html.ValidationMessageFor(c => c.PostalCode)
