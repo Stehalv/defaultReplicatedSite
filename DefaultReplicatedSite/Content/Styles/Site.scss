@@ -28,6 +28,10 @@ h2 {
     letter-spacing: -0.6px;
 }
 
+img{
+    max-width: 100%;
+}
+
 .fadein {
     opacity: 0;
     -moz-transition: opacity 1.5s;
@@ -100,7 +104,16 @@ h2 {
     padding: 0px 16px !important;
     border-left: 1px solid rgba(255, 255, 255, .24);
 }
+@media only screen and (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
 @media handheld, only screen and (min-width: 992px){
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+        background-color: transparent !important;
+        border-color: none;
+    }
     .menu-wrapper {
         .col-md-5 {
             width: 37.5% !important;
@@ -129,6 +142,8 @@ h2 {
         margin: 0 auto;
     }
     .nav ul.sub-menu, .nav ul.children {
+        
+
         background-color: #ffffff;
         border-radius: 3px;
         position: absolute;

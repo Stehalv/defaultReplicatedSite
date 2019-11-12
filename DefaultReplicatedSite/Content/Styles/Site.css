@@ -255,26 +255,76 @@ input.form-control, select.form-control {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease; }
 
+.social-menu {
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+  width: 100%; }
+
 .social-icons li a {
   color: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 18px; }
+  border-radius: 18px;
+  width: 36px;
+  height: 36px; }
 
 .social-icons li a {
   display: block;
   color: #666666;
   text-align: center;
   text-decoration: none;
-  line-height: 36px;
+  line-height: 33px;
   min-width: 36px;
   margin: 4px;
   padding: 0px; }
+
+.social-icons li a {
+  color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
 
 .social-icons li {
   display: inline-block;
   list-style: none;
   margin: 0px;
   padding: 0px; }
+
+.social-icons li a:hover {
+  color: #000000;
+  border: 1px solid #000000; }
+
+.social-icons li a::before {
+  font-family: 'FontAwesome';
+  font-size: 16px;
+  font-weight: normal;
+  content: '\f0c1'; }
+
+.social-icons li a span {
+  display: none; }
+
+.social-icons li a[href*="mailto:"]::before {
+  content: '\f0e0'; }
+
+.social-icons li a[href*="facebook.com"]::before {
+  content: '\f09a'; }
+
+.social-icons li a[href*="instagram.com"]::before {
+  content: '\f16d'; }
+
+.social-icons li a[href*="twitter.com"]::before {
+  content: '\f099'; }
+
+.social-icons li a[href*="linkedin.com"]::before {
+  content: '\f0e1'; }
+
+.social-icons li a[href*="plus.google.com"]::before {
+  content: '\f0d5'; }
+
+.social-icons li a[href*="pinterest.com"]::before {
+  content: '\f0d2'; }
 
 .background-content .content {
   max-width: 1080px;
@@ -370,6 +420,9 @@ h2 {
   font-size: 2.8em;
   letter-spacing: -0.6px; }
 
+img {
+  max-width: 100%; }
+
 .fadein {
   opacity: 0;
   -moz-transition: opacity 1.5s;
@@ -438,7 +491,14 @@ h2 {
   padding: 0px 16px !important;
   border-left: 1px solid rgba(255, 255, 255, 0.24); }
 
+@media only screen and (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block; } }
+
 @media handheld, only screen and (min-width: 992px) {
+  .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: transparent !important;
+    border-color: none; }
   .menu-wrapper {
     display: block;
     margin: 0 auto; }

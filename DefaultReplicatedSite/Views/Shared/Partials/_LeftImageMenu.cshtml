@@ -1,0 +1,36 @@
+﻿<style>
+    .widget.widget_media_image img {
+        height: auto;
+        max-width: 90%;
+    }
+    h6.title {
+        font-size: 16px;
+    }
+</style>
+<div class="sidebar left" style="border-right: 1px solid #ccc;">
+    <div style="margin-bottom: 20px;">
+        <h6 class="title">@ViewBag.LeftMenuTitle</h6>
+    </div>
+    @if (@ViewBag.LefMenuExclude != 1)
+    {
+    <div class="widget widget_media_image">
+        <h6 class="title">FOR CONSUMERS</h6>
+        <a href="@Url.Action("MemberLevel", "Home")"><img width="660" height="1176" src="https://i0.wp.com/luxxium.net/wp-content/uploads/2019/09/club_member_feature.jpg?fit=660%2C1176&amp;ssl=1"></a>
+    </div>
+    }
+    @if (@ViewBag.LefMenuExclude != 2)
+    {
+    <div class="widget widget_media_image">
+        <h6 class="title">FOR THE BUSINESS MINDED</h6>
+        <a href="@Url.Action("InfluencerLevel", "Home")"><img width="660" height="1176" src="https://i0.wp.com/luxxium.net/wp-content/uploads/2019/09/influencer_feature.jpg?fit=660%2C1176&amp;ssl=1"></a>
+    </div>
+    }
+    @if (@ViewBag.LefMenuExclude != 3)
+    {
+    <div class="widget widget_media_image">
+        <h6 class="title">FOR RETAILERS</h6>
+        <a href="@Url.Action("RetailerLevel", "Home")"><img width="660" height="1176" src="https://i1.wp.com/luxxium.net/wp-content/uploads/2019/09/retailer_feature.jpg?fit=660%2C1176&amp;ssl=1"></a>
+    </div>
+    }
+    
+</div>
