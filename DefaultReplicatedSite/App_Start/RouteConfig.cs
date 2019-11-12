@@ -12,6 +12,9 @@ namespace DefaultReplicatedSite
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("fonts/{*pathInfo}");
+            routes.IgnoreRoute("content/{*pathInfo}");
+            routes.IgnoreRoute("scripts/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Replicated",

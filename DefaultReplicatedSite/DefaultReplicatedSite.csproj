@@ -223,7 +223,18 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\Amber_set_grande_products_page.jpg" />
+    <Content Include="Content\images\body.jpg" />
+    <Content Include="Content\images\box_interior_4.jpg" />
+    <Content Include="Content\images\box_logo_2_set2.jpg" />
+    <Content Include="Content\images\club_member_feature.jpg" />
+    <Content Include="Content\images\Comp_plan_whole_mobile-1.jpg" />
+    <Content Include="Content\images\diamond_set.jpg" />
+    <Content Include="Content\images\gold_set.jpg" />
+    <Content Include="Content\images\home_party.jpg" />
+    <Content Include="Content\images\influencer_feature.jpg" />
     <Content Include="Content\images\luxxium_front_page.jpg" />
+    <Content Include="Content\images\luxxium_site_comp_plan.jpg" />
     <Content Include="Content\images\luxxium_white_header_logo-1.png" />
     <Content Include="Content\fonts\PlayFairDisplay\PlayfairDisplay-Black.ttf" />
     <Content Include="Content\fonts\PlayFairDisplay\PlayfairDisplay-BlackItalic.ttf" />
@@ -240,6 +251,24 @@
     <Content Include="Content\fonts\ProximaNova\Proxima Nova Thin.otf" />
     <Content Include="Content\fonts\ProximaNova\ProximaNova-Regular.otf" />
     <Content Include="Areas\Luxxium\Views\web.config" />
+    <Content Include="Content\images\rc_micropolish_cleanser.jpg" />
+    <Content Include="Content\images\retailer_feature.jpg" />
+    <Content Include="Content\images\rock_crystal_set.jpg" />
+    <Content Include="Content\images\sapphire_set.jpg" />
+    <Content Include="Content\images\shipping.jpg" />
+    <Content Include="Content\images\shutterstock_1132149689.jpg" />
+    <Content Include="Content\images\shutterstock_245479945.jpg" />
+    <Content Include="Content\images\shutterstock_245480017.jpg" />
+    <Content Include="Content\images\shutterstock_320026151.jpg" />
+    <Content Include="Content\images\shutterstock_513894850.jpg" />
+    <Content Include="Content\images\shutterstock_584416678.jpg" />
+    <Content Include="Content\images\shutterstock_640958347.jpg" />
+    <Content Include="Content\images\shutterstock_678404389.jpg" />
+    <Content Include="Content\images\shutterstock_735691957.jpg" />
+    <Content Include="Content\images\tightening.jpg" />
+    <Content Include="Content\Styles\components\socialicons.scss" />
+    <Content Include="Content\documents\Comp_plan_whole_mobile-1.pdf" />
+    <Content Include="Content\documents\updated_comp_plan.pdf" />
     <None Include="Content\Styles\fonts\fonts.scss" />
     <None Include="Content\Styles\framework\spaces.scss" />
     <Content Include="Content\Styles\components\formelements.css" />
@@ -320,6 +349,12 @@
     <Content Include="Views\Shared\_PageTemplate.cshtml" />
     <Content Include="Views\Shared\Partials\_FrontPageBanner.cshtml" />
     <Content Include="Views\Shared\Partials\_PageBanner.cshtml" />
+    <Content Include="Views\Opportunity\RRClubMember.cshtml" />
+    <Content Include="Views\Opportunity\InfluencerLevel.cshtml" />
+    <Content Include="Views\Opportunity\RetailerLevel.cshtml" />
+    <Content Include="Views\Opportunity\CompensationPlan.cshtml" />
+    <Content Include="Views\Opportunity\WhatIsRR.cshtml" />
+    <Content Include="Views\Shared\Partials\_LeftImageMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
