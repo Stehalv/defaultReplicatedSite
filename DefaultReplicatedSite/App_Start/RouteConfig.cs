@@ -17,6 +17,13 @@ namespace DefaultReplicatedSite
             routes.IgnoreRoute("content/{*pathInfo}");
             routes.IgnoreRoute("scripts/{*pathInfo}");
 
+            // Standard routing
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { action = "index", id = UrlParameter.Optional },
+            //    constraints: new { controller = @"(app|account|dev|error)" }
+            //);
             routes.MapRoute(
                 name: "Replicated",
                 url: "{webalias}/{controller}/{action}/{id}",

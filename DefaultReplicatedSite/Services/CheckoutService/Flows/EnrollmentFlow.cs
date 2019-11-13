@@ -8,6 +8,9 @@ namespace DefaultReplicatedSite.ViewModels
     public class EnrollmentFlow : IFlow
     {
         private CheckoutService _checkoutService = new CheckoutService();
+        /// <summary>
+        /// This is where all the logic for the Flow is placed. We create all models used in the flow, and make them ready.
+        /// </summary>
         public EnrollmentFlow()
         {
             InformationStep = new CustomerInformationStep(
@@ -34,6 +37,9 @@ namespace DefaultReplicatedSite.ViewModels
         public bool HasShopping => true;
         public CheckoutFlowType Type => CheckoutFlowType.Enrollment;
         public CheckoutSteps CurrentStep { get; set; }
+        /// <summary>
+        /// Calculates the previous step from the current
+        /// </summary>
         public CheckoutSteps PreviousStep
         {
             get
@@ -43,6 +49,9 @@ namespace DefaultReplicatedSite.ViewModels
                 return (index > 0) ? CheckoutStepList[index - 1] : 0;
             }
         }
+        /// <summary>
+        /// Calculates the next step from the current
+        /// </summary>
         public CheckoutSteps NextStep
         {
             get
@@ -51,6 +60,9 @@ namespace DefaultReplicatedSite.ViewModels
                 return (index != CheckoutStepList.Count() -1) ? CheckoutStepList[index + 1] : 0;
             }
         }
+        /// <summary>
+        /// List of all steps, needs to be in order of appearance
+        /// </summary>
         public List<CheckoutSteps> CheckoutStepList => new List<CheckoutSteps>
         {
             CheckoutSteps.ShoppingCart,

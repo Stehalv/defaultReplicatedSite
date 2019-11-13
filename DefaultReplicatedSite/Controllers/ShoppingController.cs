@@ -14,8 +14,11 @@ namespace DefaultReplicatedSite.Controllers
     [RoutePrefix("{webalias}/products")]
     public class ShoppingController : Controller
     {
+        #region construction
+
         private ItemService _itemService = new ItemService();
         private CheckoutService _checkoutService = new CheckoutService();
+        private ShoppingService _shoppingService = new ShoppingService();
         private IOrderConfiguration OrderConfiguration = new UnitedStatesMarket().Configurations.Order;
         private IOrderConfiguration AutoOrderConfiguration = new UnitedStatesMarket().Configurations.AutoOrder;
         private ShoppingCartPropertyBag _shoppingCart { get; set; }
@@ -30,50 +33,31 @@ namespace DefaultReplicatedSite.Controllers
                 return _shoppingCart;
             }
         }
-        // GET: Shopping
-        [Route("all")]
+        #endregion
         public ActionResult Index()
         {
-            var model = new WebCategoryViewModel
-            {
-                ChildCategories = new List<WebCategory>
-                {
-                    new WebCategory
-                    {
-                        Name = "Kristals Gemstone Skincare",
-                        MediumImage = "https://i1.wp.com/luxxium.net/wp-content/uploads/2019/04/unnamed.jpg?w=760&amp;ssl=1",
-                        WebCategoryId = 1,
-                        Descr = "KRISTALS<br> GEMSTONE SKINCARE"
-                    },
-                    new WebCategory
-                    {
-                        Name = "TechTure advanced skincare techology",
-                        MediumImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/TECH.png?w=760&amp;ssl=1",
-                        WebCategoryId = 2,
-                        Descr = "TECHTURE ADVANCED <br>SKINCARE TECHNOLOGY"
-                    },
-                }
-            };
+            var model = _shoppingService.GetProductLines();
             return View(model);
         }
-        [Route("category/{category}")]
-        public ActionResult CategoryList(int category)
+        [Route("{productline}")]
+        public ActionResult ProductLine(string productline)
         {
-            var model = new WebCategoryViewModel();
-            model.ChildCategories = _itemService.GetWebCategories(new WebCategoryRequest()).Select(c => new WebCategory { 
-                WebCategoryId = c.WebCategoryId,
-                Descr = c.Descr,
-                MediumImage = c.MediumImage
-            }).ToList();
+            var model = _shoppingService.GetProductLine(productline);
             return View(model);
         }
 
-        [Route("{category}")]
-        public ActionResult CategoryProductList(int category)
+        [Route("{productline}/{category}")]
+        public ActionResult Category(string category)
         {
-            var model = new WebCategoryViewModel();
-            model.Items = _itemService.GetItems(new ItemRequest(OrderConfiguration));
+            var model = _shoppingService.GetCategory(category);
+            model.Items = _itemService.GetItems(new ItemRequest { WebCaegoryID = model.WebCategoryID, Configuration = OrderConfiguration });
             return View(model);
+        }
+
+        [Route("{productline}/{category}/{itemcode}")]
+        public ActionResult Product(string itemcode)
+        {
+            return View();
         }
         #region AjaxRequests
         [HttpPost]
@@ -88,13 +72,17 @@ namespace DefaultReplicatedSite.Controllers
             PropertyBagService.Update(ShoppingCart);
             return new JsonNetResult(new
             {
-                success = true
+                success = true,
+                itemId = item.ItemId,
+                title = item.Title,
+                count = ShoppingCart.OrderItems.Count()
             });
         }
 
         [HttpPost]
         public ActionResult AddItemToutoOrder(ShoppingCartItem item)
         {
+            //Todo: add error handling when flow is not correct, need to return response with choice to user to delete propertybag or continue where they left
             if (ShoppingCart.FlowType != CheckoutFlowType.Shopping)
             {
                 PropertyBagService.Delete(ShoppingCart);

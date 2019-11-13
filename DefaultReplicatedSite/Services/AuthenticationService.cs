@@ -51,7 +51,7 @@ namespace DefaultReplicatedSite
                 }
             }
 
-            var service = new MakoService(Settings.API.TokenUsername, Settings.API.TokenPassword, Settings.API.CompanyId, MakoLibrary.Services.Environment.Development);
+            var service = new MakoService(Settings.API.TokenUsername, Settings.API.TokenPassword, Settings.API.CompanyId, MakoLibrary.Services.Environment.Production);
             SaveToken(service.Token);
 
             return service;

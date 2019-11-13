@@ -1,0 +1,58 @@
+﻿@model Address
+    @{ 
+        var currentMarket = new UnitedStatesMarket();
+    }
+<div class="space-10"></div>
+<div class="row">
+    <div class="col-sm-12">
+        @Html.TextBoxFor(c => c.Address1, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address1) })
+        @Html.ValidationMessageFor(c => c.Address1)
+    </div>
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (currentMarket.AddressSettings.Address2)
+    {
+        <div class="col-sm-12">
+            @Html.TextBoxFor(c => c.Address2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address2) })
+        </div>
+    }
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (currentMarket.AddressSettings.Address3)
+    {
+        <div class="col-sm-12">
+            @Html.TextBoxFor(c => c.Address3, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Address3) })
+        </div>
+    }
+</div>
+<div class="space-10"></div>
+<div class="row">
+    @if (currentMarket.AddressSettings.State)
+    {
+    <div class="col-sm-4">
+        @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
+        @Html.ValidationMessageFor(c => c.City)
+    </div>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(c => c.RegionProvState, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.RegionProvState) })
+        @Html.ValidationMessageFor(c => c.RegionProvState)
+    </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.PostalCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.PostalCode) })
+            @Html.ValidationMessageFor(c => c.PostalCode)
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-8">
+            @Html.TextBoxFor(c => c.City, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.City) })
+            @Html.ValidationMessageFor(c => c.City)
+        </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.PostalCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.PostalCode) })
+            @Html.ValidationMessageFor(c => c.PostalCode)
+        </div>
+    }
+</div>

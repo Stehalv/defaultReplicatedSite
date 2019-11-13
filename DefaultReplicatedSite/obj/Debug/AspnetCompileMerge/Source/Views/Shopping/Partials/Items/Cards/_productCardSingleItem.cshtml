@@ -1,0 +1,18 @@
+﻿@model Item
+    <div class="single-item-container col-md-4 col-sm-6 item-card">
+        <div class="item-content">
+            <a href="@Url.Action("ProductDetail", "Shopping", new { itemId = Model.ItemId })">
+                <div class="col-sm-12 image-wrapper">
+                    <img src="@Model.MediumImage" class="img-responsive image" />
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 description-wrapper">
+                        <span class="item-description">@Model.Title</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @Html.Partial("Partials/Items/Buttons/_CardAddToCartButton", Model)
+    </div>
+  
+

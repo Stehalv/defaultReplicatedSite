@@ -4,6 +4,12 @@ namespace DefaultReplicatedSite.Services
 {
     public class CustomerInformationStep
     {
+        /// <summary>
+        /// Fils the customermodel for the customerinfo step
+        /// </summary>
+        /// <param name="type">What flow are you using this for</param>
+        /// <param name="previousStep">Where were you coming from</param>
+        /// <param name="propertyBag">Propertybag to set the customer</param>
         public CustomerInformationStep(CheckoutFlowType type, CheckoutSteps previousStep, CheckoutPropertyBag propertyBag)
         {
             Type = type;
@@ -17,21 +23,20 @@ namespace DefaultReplicatedSite.Services
         public CheckoutPropertyBag PropertyBag { get; set; }
         public bool RecalculateCart => false;
         public Customer Customer { get; set; }
+        /// <summary>
+        /// Sets the Customer mailing address, and adds the same info to the order.
+        /// Todo: Need to add Complete() function to the address, so we can check if it is allready set. If Shipping address is set skip setting the fields on the order
+        /// </summary>
         public void SubmitStep()
         {
             PropertyBag.Customer = Customer;
-            PropertyBag.Order.FirstName = PropertyBag.Customer.FirstName;
-            PropertyBag.Order.LastName = PropertyBag.Customer.LastName;
-            PropertyBag.Order.Address1 = PropertyBag.Customer.MailingAddress.Address1;
-            PropertyBag.Order.Address2 = PropertyBag.Customer.MailingAddress.Address2;
-            PropertyBag.Order.City = PropertyBag.Customer.MailingAddress.City;
-            PropertyBag.Order.State = PropertyBag.Customer.MailingAddress.RegionProvState;
-            PropertyBag.Order.Zip = PropertyBag.Customer.MailingAddress.PostalCode;
-            PropertyBag.Customer.ShippingAddress = Customer.MailingAddress;
-            if(Settings.Shop.AllowSeparateAutoOrderAddress)
+            if (Type == CheckoutFlowType.SimpleEnrollment)
             {
-                PropertyBag.Customer.OtherAddress1 = Customer.MailingAddress;
+                PropertyBag.BillingSameAsMailing = true;
+                PropertyBag.ShippingSameAsMailing = true;
+                PropertyBag.AutoOrderSameAsMailing = true;
             }
+            PropertyBagService.Update(PropertyBag);
             PropertyBagService.Update(PropertyBag);
         }
     }

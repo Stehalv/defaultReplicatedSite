@@ -15,8 +15,11 @@ namespace DefaultReplicatedSite.Services
         public List<Item> GetItems(ItemRequest request)
         {
             var items = new List<ItemContract>();
-            if(request.WebCaegoryID != 0)
-                items = context.GetWebCategoryItems(request.WebCaegoryID, new LibraryCommon.MakoFilterQueryContract()).Data.ToList();
+            if (request.WebCaegoryID != 0)
+            {
+                var response = context.GetWebCategoryItems(request.WebCaegoryID, new MakoFilterQueryContract());
+                items = response.Data.ToList();
+            }
             else
             {
                 var filter = new MakoFilterQueryContract();

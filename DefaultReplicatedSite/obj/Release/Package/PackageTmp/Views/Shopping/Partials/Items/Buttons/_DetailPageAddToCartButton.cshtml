@@ -1,0 +1,26 @@
+﻿@model Item
+    <style>
+        .fullwidth-element{
+            width:100%;
+        }
+    </style>
+    <div class="row fullwidth-element">
+        @using (Ajax.BeginForm("AddItemToOrder", "Shopping", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnBegin = "addToOrderBegin",
+            OnSuccess = "addToOrderSuccess"
+        }))
+        {
+            @Html.HiddenFor(c => c.ItemId)
+            @Html.HiddenFor(c => c.ItemCode)
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.Quantity, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-9">
+                <a class="btn btn-primary add-item-to-order">Add To Cart</a>
+            </div>
+        }
+    </div>
+  
+

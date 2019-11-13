@@ -3,7 +3,57 @@
     font-family: 'Playfair Display';
     src: url('../fonts/PlayFairDisplay/PlayfairDisplay-Regular.ttf') format('truetype'), url('../fonts/PlayFairDisplay/PlayfairDisplay-Black.ttf') format('truetype'), url('../fonts/PlayFairDisplay/PlayfairDisplay-BlackItalic.ttf') format('truetype'), url('../fonts/PlayFairDisplay/PlayfairDisplay-Bold.ttf') format('truetype'), url('../fonts/PlayFairDisplay/PlayfairDisplay-BoldItalic.ttf') format('truetype'), url('../fonts/PlayFairDisplay/PlayfairDisplay-Italic.ttf') format('truetype');
 }
-@font-face {
+/*@font-face {
     font-family: 'Proxima Nova';
     src: url('../fonts/ProximaNova/ProximaNova-Regular.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Alt Bold.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Alt Light.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Alt Thin.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Black.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Bold.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Extrabold.otf') format('opentype'), url('../fonts/ProximaNova/Proxima Nova Thin.otf') format('opentype');
+}*/
+body {
+    font-size: 16px;
+    font-family: "Proxima Nova",sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 6px 0px;
+    padding: 6px 0px;
+}
+
+h2 {
+    font-size: 2.8em;
+    letter-spacing: -0.6px;
+}
+h3 {
+    font-size: 2.4em;
+    letter-spacing: -0.4px;
+}
+h5 {
+    font-size: 1.4em;
+}
+h6 {
+    font-size: 1.3em;
+    font-weight: 300;
+    line-height: 1.6;
+}
+p {
+    font-family: "proxima-nova","proxima-nova-1",sans-serif;
+    line-height: 1.7;
+    padding: 12px 0px;
+    margin: 0px;
+}
+.small-font-size, .webcategory-item p {
+    font-size: 13px;
+}
+.headline.img-headline {
+    font-size: 2.8em; 
+}
+
+.ingress {
+    font-size: 1.3em;
+    padding-top: 24px;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }

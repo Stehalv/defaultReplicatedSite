@@ -1,0 +1,83 @@
+﻿@model WebCategoryViewModel
+@{
+    Layout = "~/Views/Shopping/_ShoppingLayout.cshtml";
+    ViewBag.Title = Model.Title;
+    ViewBag.HeaderImg = Model.HeaderImageUrl;
+    ViewBag.ProductlineImage = Model.ProductLineImageUrl;
+}
+@section PageHeader{
+    @Html.Partial("Partials/_PageBanner")
+}
+<section>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12 text-center space-bottom-20 space-20">
+            @Html.Raw(Model.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="@Model.DescriptionImageUrl" class="img-responsive" />
+        </div>
+        <div class="col-sm-6">
+            <h5 class="uppercase">Is @Model.Name a match for you</h5>
+            <ul>
+                @foreach (var match in Model.MatchList)
+                {
+                    <li>
+                        @match
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="space-10"></div>
+</section>
+<section>
+    <hr />
+    @Html.Partial("Partials/Items/Cards/_ProductCardStaticKit", Model.KitItem)
+    <hr />
+    @foreach (var item in Model.Items.Where(c => c.ItemType == Common.ItemTypes.SingleItem))
+    {
+        @Html.Partial("Partials/Items/Cards/_ProductCardSingleItem", item)
+    }
+</section>
+<section>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h2 class="uppercase">Key characters of @Model.Name</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <img src="@Model.CharacteristicsImageUrl" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Symbolism:</h3>
+            <p>@Model.SymboslismText</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Mood:</h3>
+            <p>@Model.MoodText</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Color and Character:</h3>
+            <p>@Model.ColorAndCharacterText</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Element:</h3>
+            <p>@Model.ElementText</p>
+        </div>
+    </div>
+    <hr />
+</section>
+

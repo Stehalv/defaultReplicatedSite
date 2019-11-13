@@ -12,12 +12,12 @@ namespace DefaultReplicatedSite
         {
             CountryCode = "US";
             CultureCode = "en-US";
-            CountryCode = "usd";
+            CurrencyCode = "usd";
             IsDefault = true;
             AddressSettings = new AddressFields
             {
                 Address2 = true,
-                State = false
+                State = true
             };
         }
 

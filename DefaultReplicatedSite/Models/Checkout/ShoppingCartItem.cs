@@ -22,5 +22,6 @@ namespace DefaultReplicatedSite.Models
             OrderLineNumber = item.OrderLineNumber;
         }
         public Guid ID { get; set; }
+        public string Title { get; set; }
     }
 }

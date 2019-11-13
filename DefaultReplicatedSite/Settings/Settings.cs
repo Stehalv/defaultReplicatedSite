@@ -11,14 +11,14 @@ namespace DefaultReplicatedSite
         {
             // basic idea for demo purposes, however should move to version control for production client
             public static string Version { get { return "1.0.0"; } }
-            public static int CompanyId { get { return 100; } }
+            public static int CompanyId { get { return 24; } }
 
             // Timeout for FormsAuthentication Cookie - Mins
             public static int SessionTimeout { get { return 120; } }
 
             // Token Data - move to web.config but for demo purposes will leave here
-            public static string TokenUsername { get { return "LifocityBackofficeAPI"; } }
-            public static string TokenPassword { get { return "L1f0cityAp1BO73@#"; } }
+            public static string TokenUsername { get { return "LuxxiumAPIAccess-RepSite"; } }
+            public static string TokenPassword { get { return "Bx1GqvHN%eLo"; } }
             public static int TokenRenewTimeout { get { return 15; } }
             public static string APITokenName = Company.Name + "RepsiteToken";
         }
@@ -61,6 +61,11 @@ namespace DefaultReplicatedSite
             {
 
             }
+        }
+        public static class RegularExpressions
+        {
+            public const string UnitedStatesTaxID = @"^\d{9}$";
+            public const string Password = "^.{1,50}$";
         }
     }
 }

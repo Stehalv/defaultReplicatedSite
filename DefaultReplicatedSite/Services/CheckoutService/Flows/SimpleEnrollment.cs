@@ -51,6 +51,5 @@ namespace DefaultReplicatedSite.ViewModels
         };
         public CustomerInformationStep InformationStep { get; set; }
         public CompleteCheckoutStep CheckoutCompleteStep { get; set;}
-        public CartModel ShoppingCart { get; set; }
     }
 }

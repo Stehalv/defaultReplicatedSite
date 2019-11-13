@@ -1,0 +1,33 @@
+﻿@model ProductLineViewModel
+@{
+    Layout = "~/Views/Shopping/_ShoppingLayout.cshtml";
+    ViewBag.Title = Model.Name;
+    ViewBag.HeaderImg = Model.HeaderImage;
+    ViewBag.ProductlineImage = Model.ProductLineImage;
+}
+@section PageHeader{
+    @Html.Partial("Partials/_PageBanner")
+}
+<section id="webcategory-list" class="narrow-content">
+    <div id="webcategory-list-description"  class="row space-bottom-20">
+        <h2 class="text-center uppercase">@Model.Title</h2>
+        <hr class="block-separator">
+        <div class="col-sm-12">
+            @Html.Partial("Partials/Content/ProductLines/" + Model.Key + "/HeaderHtml")
+        </div>
+    </div>
+    <div class="space-20"></div>
+    @if (Model.Categories.Count() > 0)
+    {
+        foreach (var category in Model.Categories)
+        {
+            @Html.Partial("Partials/Categories/_CategoryItem", category)
+        }
+    }
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.Partial("Partials/Content/ProductLines/" + Model.Key + "/FooterHtml")
+        </div>
+    </div>
+</section>
+

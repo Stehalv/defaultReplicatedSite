@@ -1,0 +1,29 @@
+﻿input.form-control, select.form-control{
+    height:45px;
+}
+
+.rounded-button {
+    background-color: #32373c;
+    border: none;
+    border-radius: 28px;
+    box-shadow: none;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: break-word;
+}
+
+    .rounded-button:hover {
+        color: #fff;
+        text-decoration: none;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+

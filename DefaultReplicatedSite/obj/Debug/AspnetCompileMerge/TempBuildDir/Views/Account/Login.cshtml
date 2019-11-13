@@ -1,0 +1,27 @@
+﻿@model LoginViewModel
+@section PageHeader{}
+@using (Html.BeginForm("Login", "Account"))
+{
+    <div class="container text-center" style="margin-top:250px;">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="row">
+                    <div class="cols-sm-12">
+                        Username: @Html.TextBoxFor(c => c.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols-sm-12">
+                        PAssword: @Html.PasswordFor(c => c.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="cols-sm-12">
+                        <input type="submit" value="Log In" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,33 @@
+﻿@model CreditCard
+<section id="creditcard-editor">
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.TextBoxFor(c => c.NameOnCard, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.NameOnCard) })
+        </div>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(c => c.CardNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.CardNumber) })
+        </div>
+    </div>
+    <div class="space-10"></div>
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.DropDownListFor(c => c.ExpirationMonth,
+                selectList: Html.Months(),
+                htmlAttributes: new
+                {
+                    @class = "form-control"
+                })
+        </div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(c => c.ExpirationMonth,
+                selectList: Html.ExpirationYears(),
+                htmlAttributes: new
+                {
+                    @class = "form-control"
+                })
+        </div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(c => c.CVV, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.CVV) })
+        </div>
+    </div>
+</section>

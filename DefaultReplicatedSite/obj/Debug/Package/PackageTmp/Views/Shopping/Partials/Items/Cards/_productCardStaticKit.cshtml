@@ -1,0 +1,21 @@
+﻿@model Item
+<div class="row static-kit-item-container">
+    <div class="item-card">
+        <div class="col-sm-6 image-wrapper">
+            <div class="image-wrapper">
+                <img src="@Model.MediumImage" class="img-responsive image" />
+            </div>
+            <div class="col-sm-12">
+                <span class="item-description">@Model.Title</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="description-wrapper">
+                <p class="item-description">@Model.ShortDescr</p>
+            </div>
+            @Html.Partial("Partials/Items/Buttons/_CardAddToCartButton", Model)
+        </div>
+    </div>
+</div>
+  
+

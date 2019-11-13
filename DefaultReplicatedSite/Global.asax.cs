@@ -27,7 +27,6 @@ namespace DefaultReplicatedSite
             {
                 var cultureCode = GlobalUtilities.Globalization.GetSelectedLanguage();
                 GlobalUtilities.Globalization.SetCurrentCulture(cultureCode);
-                GlobalUtilities.Globalization.SetCurrentUICulture(cultureCode);
             }
             else
             {
@@ -49,26 +48,6 @@ namespace DefaultReplicatedSite
 
             // If we have an identity and the current identity matches the web alias in the routes, stop here.
             var identity = HttpContext.Current.Items["OwnerWebIdentity"] as OwnerIdentity;
-
-            if (!Request.IsLocal && Request.Url.Host != "aregoreplicatedsite.azurewebsites.net" && Request.Url.Host != "repsitedevelopment.azurewebsites.net")
-            {
-                if (!HttpContext.Current.Request.Url.AbsoluteUri.Contains(".axd") &&
-                    !HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains("bundles"))
-                {
-                    if (routeData != null)
-                    {
-                        var host = HttpContext.Current.Request.Url.Host.Split('.');
-                        if (HttpContext.Current.Request.Url.Host == Settings.Company.ReplicatedHost)
-                        {
-                            routeData.Values["webalias"] = Settings.Site.DefaultWebalias;
-                        }
-                        else
-                        {
-                            routeData.Values["webalias"] = HttpContext.Current.Request.Url.Host.Split('.')[0];
-                        }
-                    }
-                }
-            }
 
             if (routeData == null
                 || routeData.Values["webalias"] == null

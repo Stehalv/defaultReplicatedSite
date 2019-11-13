@@ -15,6 +15,8 @@ namespace DefaultReplicatedSite.Models
         }
         public ShoppingCartItemCollection OrderItems { get; set; }
         public ShoppingCartItemCollection AutoOrderItems { get; set; }
+        public IOrderConfiguration OrderConfiguration { get; set; }
+        public IOrderConfiguration AutoOrderConfiguration { get; set; }
         public bool HasItems
         {
             get
@@ -24,5 +26,6 @@ namespace DefaultReplicatedSite.Models
         }
         public CRMOrderCalcResponseContract CalculatedOrder { get; set; }
         public CheckoutFlowType FlowType { get; set; }
+
     }
 }

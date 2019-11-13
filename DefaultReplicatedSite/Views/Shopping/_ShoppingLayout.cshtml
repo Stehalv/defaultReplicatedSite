@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+@RenderSection("PageHeader")
+<div class="shop content">
+    <div class="row">
+        <div id="shop-content" class="col-sm-12">
+            @RenderBody()
+        </div>
+    </div>
+</div>

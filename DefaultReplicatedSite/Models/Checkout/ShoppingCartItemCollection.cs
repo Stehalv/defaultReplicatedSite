@@ -17,7 +17,7 @@ namespace DefaultReplicatedSite.Models
             newItem.OrderLineNumber = this.Count() + 1;
             // Get a list of all items that have the same item code and type.
             var preExistingItems = this.FindAll(i =>
-                  i.ItemCode == newItem.ItemCode);
+                  i.ItemId == newItem.ItemId);
 
             // If we returned any existing items that match the item code and type, we need to add to those existing items.
             if (preExistingItems.Count() > 0)

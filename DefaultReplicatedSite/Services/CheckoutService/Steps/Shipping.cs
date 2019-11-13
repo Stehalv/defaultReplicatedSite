@@ -7,6 +7,13 @@ namespace DefaultReplicatedSite.Services
 {
     public class ShippingStep
     {
+        /// <summary>
+        /// Fills the model for the shippingstep so it is ready to be used
+        /// </summary>
+        /// <param name="type">What flow are you using it for?</param>
+        /// <param name="previousStep">What step wre you coming from in this flow</param>
+        /// <param name="propertyBag">We need the propertyabg to prepare the model</param>
+        /// <param name="shoppingCart">We need the shoppingvcart info to prepare the model</param>
         public ShippingStep(CheckoutFlowType type, CheckoutSteps previousStep, CheckoutPropertyBag propertyBag, ShoppingCartPropertyBag shoppingCart)
         {
             Type = type;
@@ -17,7 +24,7 @@ namespace DefaultReplicatedSite.Services
             if(Settings.Shop.AllowSeparateAutoOrderAddress)
             {
                 AutoOrderSameAsAccount = PropertyBag.AutoOrderSameAsMailing;
-                AutoOrderAddress = propertyBag.Customer.OtherAddress1;
+                AutoOrderAddress = propertyBag.Customer.AutoOrderAddress;
             }
             HasAutoOrder = ShoppingCart.AutoOrderItems.Count() > 0;
             ShippingSameAsAccount = PropertyBag.ShippingSameAsMailing;
@@ -32,36 +39,28 @@ namespace DefaultReplicatedSite.Services
         public bool HasAutoOrder { get; set; }
         public List<CRMOrderCalcShipMethodContract> ShipMethods { get; set; }
         public bool ShippingSameAsAccount { get; set; }
-        public CRMExtendedAddress ShippingAddress { get; set; }
+        public Address ShippingAddress { get; set; }
         public bool AutoOrderSameAsAccount { get; set; }
-        public CRMExtendedAddress AutoOrderAddress { get; set; }
+        public Address AutoOrderAddress { get; set; }
+        /// <summary>
+        /// Sets the shipping information for order and autoorder, and sets the corresponding addresses on the customer
+        /// </summary>
         public void SubmitStep()
         {
             PropertyBag.ShippingSameAsMailing = ShippingSameAsAccount;
             if(!ShippingSameAsAccount)
             {
-                PropertyBag.Order.Address1 = ShippingAddress.Address1;
-                PropertyBag.Order.Address2 = ShippingAddress.Address2;
-                PropertyBag.Order.City = ShippingAddress.City;
-                PropertyBag.Order.State = ShippingAddress.RegionProvState;
-                PropertyBag.Order.Zip = ShippingAddress.PostalCode;
                 PropertyBag.Customer.ShippingAddress = ShippingAddress;
-                PropertyBagService.Update(PropertyBag);
             }
             if(Settings.Shop.AllowSeparateAutoOrderAddress)
             {
                 PropertyBag.AutoOrderSameAsMailing = AutoOrderSameAsAccount;
                 if (!AutoOrderSameAsAccount)
                 {
-                    PropertyBag.AutoOrder.Address1 = AutoOrderAddress.Address1;
-                    PropertyBag.AutoOrder.Address2 = AutoOrderAddress.Address2;
-                    PropertyBag.AutoOrder.City = AutoOrderAddress.City;
-                    PropertyBag.AutoOrder.State = AutoOrderAddress.RegionProvState;
-                    PropertyBag.AutoOrder.Zip = AutoOrderAddress.PostalCode;
-                    PropertyBag.Customer.OtherAddress1 = AutoOrderAddress;
-                    PropertyBagService.Update(PropertyBag);
+                    PropertyBag.Customer.AutoOrderAddress = AutoOrderAddress;
                 }
             }
+            PropertyBagService.Update(PropertyBag);
         }
     }
 }

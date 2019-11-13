@@ -1,0 +1,24 @@
+﻿.single-item-container {
+    min-height:400px;
+    .image-wrapper{
+        min-height:200px;
+    }
+    .description-wrapper {
+        min-height:60px;
+        width:80%;
+        text-align:center
+    }
+}
+.static-kit-item-container {
+    min-height: 400px;
+
+    .image-wrapper {
+        min-height: 300px;
+    }
+
+    .description-wrapper {
+        min-height: 270px;
+        width: 80%;
+        text-align: center
+    }
+}

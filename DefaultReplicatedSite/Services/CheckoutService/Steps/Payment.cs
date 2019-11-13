@@ -9,6 +9,13 @@ namespace DefaultReplicatedSite.Services
 {
     public class PaymentStep
     {
+        /// <summary>
+        /// Fills the payment model so it is ready to be used
+        /// Todo: need to add paymentmethods and handle token creation
+        /// </summary>
+        /// <param name="type">What flow are you using this step for?</param>
+        /// <param name="previousStep">What step did you come from, needed for navigation</param>
+        /// <param name="propertyBag">Need the propertybag to decide what info is allready set</param>
         public PaymentStep(CheckoutFlowType type, CheckoutSteps previousStep, CheckoutPropertyBag propertyBag)
         {
             Type = type;
@@ -25,12 +32,16 @@ namespace DefaultReplicatedSite.Services
         public bool HasAutoOrder { get; set; }
         public bool BillingSameAsAccount { get; set; }
         public CreditCard Card { get; set; }
-        public CRMExtendedAddress BillingAddress { get; set; }
+        public Address BillingAddress { get; set; }
 
         public void SubmitStep()
         {
-            var CheckoutPropertyBag = _service.CheckoutPropertyBag;
-            PropertyBagService.Update(CheckoutPropertyBag);
+            PropertyBag.BillingSameAsMailing = BillingSameAsAccount;
+            if(!BillingSameAsAccount)
+            {
+                PropertyBag.Customer.BillingAddress = BillingAddress;
+            }
+            PropertyBagService.Update(PropertyBag);
         }
     }
 }
