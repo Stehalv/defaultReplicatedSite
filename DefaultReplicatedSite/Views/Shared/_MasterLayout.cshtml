@@ -93,7 +93,15 @@
                     <ul class="nav">
                         <li class="menu-item"><a href="@Url.Action("Index", "Checkout", new { type = CheckoutFlowType.SimpleEnrollment })">Join Now</a></li>
                         <li class="menu-item"><a href="#">Contact</a></li>
-                        <li class="menu-item"><a href="#">About Us</a></li>
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us<span class="caret"></span></a>
+                            <ul class="sub-menu dropdown-menu">
+                                <span class="nav-arrow"></span>
+                                <li><a href="@Url.Action("About", "Home")">WHO WE ARE</a></li>
+                                <li><a href="#">HOW TO LUXXIUM</a></li>
+                                <li><a href="#">TESTIMONIALS</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
