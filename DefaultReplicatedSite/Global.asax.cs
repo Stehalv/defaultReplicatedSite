@@ -45,17 +45,15 @@ namespace DefaultReplicatedSite
             {
                 routeData = ((List<RouteData>)routeData.Values["MS_DirectRouteMatches"]).First();
             }
-
             // If we have an identity and the current identity matches the web alias in the routes, stop here.
-            var identity = HttpContext.Current.Items["OwnerWebIdentity"] as OwnerIdentity;
-
+            var identity = HttpContext.Current.Cache[Settings.Company.CookieName + "_OwnerWebIdentity"] as OwnerIdentity;
+            if(identity != null)
             if (routeData == null
                 || routeData.Values["webalias"] == null
                 || (identity != null && identity.WebAlias.Equals(routeData.Values["webalias"].ToString(), StringComparison.InvariantCultureIgnoreCase)))
             {
                 return;
             }
-
 
             // Determine some web alias data
             var urlHelper = new UrlHelper(new RequestContext(new HttpContextWrapper(HttpContext.Current), RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current))));
@@ -85,21 +83,16 @@ namespace DefaultReplicatedSite
                 // create new url using new route values and add the query at the end.
                 defaultPage = urlHelper.Action(routeData.Values["action"].ToString(), routeData.Values["controller"].ToString(), newList) + query;
             }
-
-
             // If we are an orphan and we don't allow them, redirect to a capture page.
             if (!Settings.Site.AllowOrphans && currentWebAlias.Equals(defaultWebAlias, StringComparison.InvariantCultureIgnoreCase))
             {
                 HttpContext.Current.Response.Redirect(urlHelper.Action("webaliasrequired", "error"));
             }
 
-
-
-
             // Attempt to authenticate the web alias
             var identityService = new IdentityService();
-            HttpContext.Current.Items["OwnerWebIdentity"] = identityService.GetOwnerIdentity(currentWebAlias);
-            if (HttpContext.Current.Items["OwnerWebIdentity"] == null)
+            HttpContext.Current.Cache[Settings.Company.CookieName + "_OwnerWebIdentity"] = identityService.GetOwnerIdentity(currentWebAlias);
+            if (HttpContext.Current.Cache[Settings.Company.CookieName + "_OwnerWebIdentity"] == null)
             {
                 HttpContext.Current.Response.Redirect(urlHelper.Action("invalidwebalias", "error"));
             }

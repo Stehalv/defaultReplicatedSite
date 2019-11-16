@@ -33,7 +33,7 @@ namespace DefaultReplicatedSite
                 {
                     var jwt = jwtHandler.ReadJwtToken(token);
 
-                    if (DateTime.UtcNow.AddMinutes(Settings.API.TokenRenewTimeout) > jwt.ValidTo)
+                    if (DateTime.UtcNow.AddMinutes(Settings.API.TokenRenewTimeout) > jwt.ValidTo && DateTime.UtcNow < jwt.ValidTo)
                     {
                         var request = new MakoService(cookie.Value).RenewToken();
 

@@ -9,7 +9,7 @@ namespace DefaultReplicatedSite.Models
     public interface IOrder
     {
         int OrderID { get; set; }
-        List<Item> Items { get; set; }
+        List<ProductModel> Items { get; set; }
         int ShipMethodID { get; set; }
         decimal SubTotal { get; }
         decimal Shipping { get; set; }

@@ -1,5 +1,63 @@
-﻿@{
-    Layout = "~/Views/Shopping/_ShoppingLayout.cshtml";
+﻿@model ProductModel
+@{ 
+    Layout = "~/Views/Shopping/_ShoppingLayout2.cshtml";
+    ViewBag.Title = Model.ItemDescription;
+    ViewBag.HeaderImg = Model.PageHeaderImage;
 }
-
-Product
+@section PageHeader{
+    @Html.Partial("Partials/_PageBanner")
+}
+<div class="shop content">
+    <div class="row item-detail-image">
+        <div class="col-sm-12 text-center">
+            <img src="~/Content/images/kri-prl-set_grande.jpg" />
+            <img src="@Model.LargeImage" />
+        </div>
+        <div class="col-sm-12 text-center">
+            <h2>@Model.ItemDescription</h2>
+        </div>
+        <div class="col-sm-6 text-right">
+            <h3>@Model.Price.ToString("C")</h3>
+            <h5 style="text-decoration:line-through">@Model.StoreFrontPrice.ToString("C")</h5>
+        </div>
+        <div class="col-sm-6">
+            @Html.Partial("Partials/Items/Buttons/_DetailPageAddToCartButton")
+        </div>
+    </div>
+    <div class="row item-details">
+        <div class="col-sm-12">
+            <ul id="product-menu" class="nav nav-tabs">
+                <li class="product-menu-item active"><a  data-toggle="tab" href="#product">Product</a></li>
+                <li class="product-menu-item"><a data-toggle="tab" href="#description">Description</a></li>
+                <li class="product-menu-item"><a data-toggle="tab" href="#howto">How To Use</a></li>
+                <li class="product-menu-item"><a data-toggle="tab" href="#Ingredients">Ingredients</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="product" class="product-info-box tab-pane fade-show active">
+                    <div class="col-sm-12 text-center">
+                        <h3>Product Info</h3>
+                    </div>
+                    @Html.Raw(Model.ItemProductInfo)
+                </div>
+                <div id="description" class="product-info-box tab-pane fade">
+                    <div class="col-sm-12 text-center">
+                        <h3>Description</h3>
+                    </div>
+                    @Html.Raw(Model.ShortDescription)
+                </div>
+                <div id="howto" class="product-info-box tab-pane fade">
+                    <div class="col-sm-12 text-center">
+                        <h3>How To Use</h3>
+                    </div>
+                    @Html.Raw(Model.HowToUse)
+                </div>
+                <div id="Ingredients" class="product-info-box tab-pane fade">
+                    <div class="col-sm-12 text-center">
+                        <h3>Ingredients</h3>
+                    </div>
+                    @Html.Raw(Model.Ingredients)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

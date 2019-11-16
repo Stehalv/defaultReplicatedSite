@@ -18,16 +18,16 @@ namespace DefaultReplicatedSite.ViewModels
         public string Key { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
-        public List<Item> Items { get; set; }
-        public Item KitItem
+        public List<ProductModel> Items { get; set; }
+        public ProductModel KitItem
         {
             get
             {
                 if(Items != null && Items.Count() > 0)
                 {
-                    return (Items.FirstOrDefault(c => c.ItemType == ItemTypes.StaticKit) ?? new Item());
+                    return (Items.FirstOrDefault(c => c.ItemType == ItemTypes.StaticKit) ?? new ProductModel());
                 }
-                return new Item();
+                return new ProductModel();
             }
         }
         public int ProductLineId { get; set; }

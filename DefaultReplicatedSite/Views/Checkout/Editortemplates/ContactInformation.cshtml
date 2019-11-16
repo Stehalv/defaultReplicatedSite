@@ -28,11 +28,11 @@
     <div class="row">
         <div class="col-sm-6">
             @Html.TextBoxFor(c => c.Customer.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.FirstName) })
-            @Html.ValidationMessageFor(c => c.Customer.FirstName)
+            @Html.ValidationMessageFor(c => c.Customer.FirstName, null, new { @class = "text-danger" })
         </div>
         <div class="col-sm-6">
             @Html.TextBoxFor(c => c.Customer.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.LastName) })
-            @Html.ValidationMessageFor(c => c.Customer.LastName)
+            @Html.ValidationMessageFor(c => c.Customer.LastName, null, new { @class = "text-danger" })
         </div>
     </div>
     @if (isEnrollment)
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-sm-12">
                 @Html.TextBoxFor(c => c.Customer.CompanyName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.CompanyName) })
-                @Html.ValidationMessageFor(c => c.Customer.CompanyName)
+                @Html.ValidationMessageFor(c => c.Customer.CompanyName, null, new { @class = "text-danger" })
             </div>
         </div>
     }
@@ -49,7 +49,7 @@
     <div class="row">
         <div class="col-sm-12">
             @Html.TextBoxFor(c => c.Customer.EmailAddress, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.EmailAddress) })
-            @Html.ValidationMessageFor(c => c.Customer.EmailAddress)
+            @Html.ValidationMessageFor(c => c.Customer.EmailAddress, null, new { @class = "text-danger" })
         </div>
     </div>
     @if (isEnrollment)
@@ -58,10 +58,19 @@
         <div class="row">
             <div class="col-sm-6">
                 @Html.TextBoxFor(c => c.Customer.CellPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.CellPhone) })
-                @Html.ValidationMessageFor(c => c.Customer.CellPhone)
+                @Html.ValidationMessageFor(c => c.Customer.CellPhone, null, new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
                 @Html.TextBoxFor(c => c.Customer.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(c => c.Customer.HomePhone) })
+            </div>
+        </div>
+        <div class="space-10"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                @Html.TextBoxFor(c => c.Customer.TaxId, new { @class = "form-control password", @placeholder = Html.DisplayNameFor(c => c.Customer.TaxId) })
+                @Html.ValidationMessageFor(c => c.Customer.TaxId, null, new { @class = "text-danger" })
+                <span id="taxid-validation" class="text-danger" style="display:none">@Resources.Checkout.TaxIDUnavailable</span>
+                <input type="hidden" id="taxId-validated" value="0" />
             </div>
         </div>
     }
@@ -70,22 +79,23 @@
     <div class="row">
         <div class="col-sm-12">
             @Html.TextBoxFor(c => c.Customer.UserName, new { @class = "form-control password", @placeholder = Html.DisplayNameFor(c => c.Customer.UserName) })
-            @Html.ValidationMessageFor(c => c.Customer.UserName)
+            <span id="username-validation" class="text-danger" style="display:none">@Resources.Checkout.UserNameUnavailable</span>
+            <input type="hidden" id="username-validated" value="0" />
         </div>
     </div>
     <div class="space-10"></div>
     <div class="row">
         <div class="col-sm-12">
             @Html.PasswordFor(c => c.Customer.UserPassword, new { @class = "form-control password", @placeholder = Html.DisplayNameFor(c => c.Customer.UserPassword) })
-            @Html.ValidationMessageFor(c => c.Customer.UserPassword)
+            @Html.ValidationMessageFor(c => c.Customer.UserPassword, null, new { @class = "text-danger" })
         </div>
     </div>
     <div class="space-10"></div>
 
     <div class="row">
         <div class="col-sm-12">
-            @Html.Password("ConfirmPassword", "", new { @class = "form-control", @placeholder = @Resources.Checkout.ConfirmPassword })
-            @Html.ValidationMessage("ConfirmPassword")
+            @Html.PasswordFor(c => c.Customer.ConfirmPassword, new { @class = "form-control confirm-password", @placeholder = @Resources.Checkout.ConfirmPassword })
+            <span id="confirm-password-validation" class="text-danger" style="display:none">@Resources.Checkout.RequiredPasswordMismatch</span>
         </div>
     </div>
     <div class="space-10"></div>
@@ -105,3 +115,42 @@
     @Html.EditorFor(c => c.Customer.MailingAddress, "Address")
     <div class="space-10"></div>
 </section>
+<script>
+    $("#InformationStep_Customer_ConfirmPassword").on("keyup", function () {
+        if ($("#InformationStep_Customer_UserPassword").val() != "" && $("#InformationStep_Customer_UserPassword").val() != $("#InformationStep_Customer_ConfirmPassword").val()) {
+            $("#confirm-password-validation").show();
+        } else {
+            $("#confirm-password-validation").hide();
+        }
+    });
+    $("#InformationStep_Customer_UserName").on("focusout", function () {
+        $.ajax({
+            url: "@Url.Action("IsUserNameAvailable", "Checkout")",
+            data: { UserName: $(this).val() },
+            success: function(response) {
+                if (!response.Success) {
+                    $("#username-validation").show();
+                    $("#username-validated").val("0");
+                } else {
+                    $("#username-validation").hide();
+                    $("#username-validated").val("1");
+                }
+            }
+        })
+    });
+    $("#InformationStep_Customer_TaxId").on("focusout", function () {
+        $.ajax({
+            url: "@Url.Action("IsTaxIdAvailable", "Checkout")",
+            data: { UserName: $(this).val() },
+            success: function(response) {
+                if (!response.Success) {
+                    $("#taxid-validation").show();
+                    $("#taxid-validated").val("0");
+                } else {
+                    $("#taxid-validation").hide();
+                    $("#taxid-validated").val("1");
+                }
+            }
+        })
+    });
+</script>

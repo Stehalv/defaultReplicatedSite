@@ -54,10 +54,11 @@ namespace DefaultReplicatedSite.Controllers
             return View(model);
         }
 
-        [Route("{productline}/{category}/{itemcode}")]
-        public ActionResult Product(string itemcode)
+        [Route("{productline}/{category}/{itemid}")]
+        public ActionResult Product(string itemid)
         {
-            return View();
+            var item = _itemService.GetItems(new ItemRequest { Configuration = OrderConfiguration, SingleItemRequest = true, ItemId = itemid.ToString() }).FirstOrDefault();
+            return View(item);
         }
         #region AjaxRequests
         [HttpPost]
@@ -74,7 +75,7 @@ namespace DefaultReplicatedSite.Controllers
             {
                 success = true,
                 itemId = item.ItemId,
-                title = item.Title,
+                title = item.ItemDescription,
                 count = ShoppingCart.OrderItems.Count()
             });
         }
@@ -93,57 +94,6 @@ namespace DefaultReplicatedSite.Controllers
             return new JsonNetResult(new
             {
                 success = true
-            });
-        }
-        [HttpPost]
-        public ActionResult RemoveItemFromCart(int id, int type)
-        {
-            if(type == OrderTypes.Order)
-            {
-                ShoppingCart.OrderItems.Remove(id);
-            }
-            else
-            {
-                ShoppingCart.AutoOrderItems.Remove(id);
-            }
-            PropertyBagService.Update(ShoppingCart);
-            var cart = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
-
-            var total = (type == OrderTypes.Order) ? cart.Order.Total : cart.AutoOrder.Total;
-            var subTotal = (type == OrderTypes.Order) ? cart.Order.SubTotal : cart.AutoOrder.SubTotal;
-            return new JsonNetResult(new
-            {
-                success = true,
-                total = total.ToString("C"),
-                subtotal = subTotal.ToString("C")
-            });
-        }
-        public ActionResult UpdateCartItem(int id, int type, decimal quantity)
-        {
-            if (type == OrderTypes.Order)
-            {
-                ShoppingCart.OrderItems.Update(id, quantity);
-            }
-            else
-            {
-                ShoppingCart.AutoOrderItems.Update(id, quantity);
-            }
-            PropertyBagService.Update(ShoppingCart);
-            var cart = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
-            decimal itemTotal = 0;
-            if (type == OrderTypes.Order)
-            {
-                var item = cart.Order.Items.FirstOrDefault(c => c.ItemId == id);
-                itemTotal = item.Quantity * item.ItemPrice.ItemPrice;
-            }
-            var total = (type == OrderTypes.Order) ? cart.Order.Total : cart.AutoOrder.Total;
-            var subTotal = (type == OrderTypes.Order) ? cart.Order.SubTotal : cart.AutoOrder.SubTotal;
-            return new JsonNetResult(new
-            {
-                success = true,
-                itemTotal = itemTotal.ToString("C"),
-                total = total.ToString("C"),
-                subtotal = subTotal.ToString("C")
             });
         }
         #endregion

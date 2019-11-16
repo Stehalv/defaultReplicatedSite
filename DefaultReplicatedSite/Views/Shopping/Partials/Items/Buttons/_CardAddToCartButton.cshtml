@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model ProductModel
 <style>
     .fullwidth-element {
         width: 100%;
@@ -15,13 +15,14 @@
         @Html.HiddenFor(c => c.ItemId)
         @Html.HiddenFor(c => c.ItemCode)
         @Html.HiddenFor(c => c.Quantity)
-        @Html.HiddenFor(c => c.Title)
-        <div class="col-sm-12">
+        @Html.HiddenFor(c => c.ItemDescription)
+        @*<div class="col-sm-12">
             <a class="btn fullwidth btn-default" href="@Url.Action("ProductDetail", "Shopping", new { itemId = Model.ItemId })">Details</a>
-        </div>
-        <div class="col-sm-12 space-10">
-            <a class="btn fullwidth btn-primary  add-item-to-order">Add To Cart</a>
-        </div>
+        </div>*@
+    <div class="col-sm-12 space-10">
+        @*<a class="btn fullwidth btn-primary  add-item-to-order">Add To Cart</a>*@
+        <a class="btn fullwidth btn-primary">Shop Coming Soon</a>
+    </div>
         <span class="text-success" style="display:none" id="added-text-@Model.ItemId"></span>
     }
 </div>

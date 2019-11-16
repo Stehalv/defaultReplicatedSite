@@ -20,7 +20,7 @@
                             <a href="@Url.Action(Model.Type.ToString(), "Checkout", new { step = Model.PreviousStep })"><< @Model.PreviousStep.ToString().InsertSpaceBeforeUpperCase()</a>
                         }
                     }
-                    else
+                    else if(Model.Type != CheckoutFlowType.SimpleEnrollment)
                     {
                         <a href="@Url.Action("index", "Shopping")"><< @Resources.Checkout.BackToShopping</a>
                     }

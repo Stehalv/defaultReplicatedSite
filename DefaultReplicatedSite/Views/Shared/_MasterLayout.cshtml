@@ -4,13 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Luxxium Skin Care</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Styles/Site.css" rel="stylesheet" />
     <link href="~/Content/Styles/Themes/Luxxium.css" rel="stylesheet" />
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="https://kit.fontawesome.com/840f2e2cb6.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <style>
+        .row{
+            margin-left: 0px !imortant;
+            margin-right: 0px !important;
+        }
+    </style>
     <div class="nav-mobile hidden-md hidden-lg">
         <div class="cart-container">
             <a href="@Url.Action("index", "checkout")">
@@ -32,7 +39,7 @@
                         <li id="menu-item-2858" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2858"><a href="https://luxxium.net/r-r-program/">OPPORTUNITY</a></li>
                         <li id="menu-item-1536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1536"><a href="@Url.Action("Index", "Shopping")">PRODUCT LINES</a></li>
                         <li id="menu-item-2199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2199"><a href="@Url.Action("Index", "Checkout", new { type = CheckoutFlowType.SimpleEnrollment })">JOIN NOW</a></li>
-                        <li id="menu-item-1540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1540">
+                        @*<li id="menu-item-1540" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1540">
                             <a href="https://luxxium.net/contact/" class="sf-with-ul">CONTACT US</a>
                             <ul class="sub-menu" style="display: none;">
                                 <span class="nav-arrow"></span>
@@ -40,7 +47,7 @@
                                 <li id="menu-item-1539" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1539"><a href="https://luxxium.net/about-us/">ABOUT</a></li>
                                 <li id="menu-item-3166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3166"><a href="https://luxxium.net/home-2/how-to-luxxium/">HOW TO LUXXIUM</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
                 <!-- END #navigation -->
@@ -92,21 +99,33 @@
                 <div class="col-md-5 menu-right hidden-sm hidden-xs vertical-center">
                     <ul class="nav">
                         <li class="menu-item"><a href="@Url.Action("Index", "Checkout", new { type = CheckoutFlowType.SimpleEnrollment })">Join Now</a></li>
-                        <li class="menu-item"><a href="#">Contact</a></li>
-                        <li class="menu-item"><a href="#">About Us</a></li>
+                        @*<li class="menu-item"><a href="#">Contact</a></li>*@
+                        <li class="menu-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us<span class="caret"></span></a>
+                            <ul class="sub-menu dropdown-menu">
+                                <span class="nav-arrow"></span>
+                                <li><a href="@Url.Action("WhoWeAre", "Home")">WHO WE ARE</a></li>
+                                <li><a href="@Url.Action("HowToLuxxium", "Home")">HOW TO LUXXIUM</a></li>
+                                <li><a href="@Url.Action("Testimonials", "Home")">TESTIMONIALS</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
-            
+
         </nav>
     </header>
     <main class="container-fluid">
         @RenderBody()
     </main>
-
-    @Scripts.Render("~/bundles/jqueryval")
+    @Html.Partial("Partials/_Footer")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     @Html.Partial("_GlobalScripts")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -11,6 +11,7 @@ namespace DefaultReplicatedSite.Services
     public class CheckoutService
     {
         private ItemService _itemService = new ItemService();
+        private CustomerService _customerService = new CustomerService();
 
         #region PropertyBags
         //All propertybag handling is put in the service. 
@@ -131,18 +132,18 @@ namespace DefaultReplicatedSite.Services
             ShoppingCart.OrderConfiguration = orderConfiguration;
             ShoppingCart.AutoOrderConfiguration = autoOrderConfiguration;
             PropertyBagService.Update(ShoppingCart);
-            List<Item> items = new List<Item>();
+            List<ProductModel> items = new List<ProductModel>();
             //If it is specified to recalculate the order, do it
             if (reCalculate)
             {
 
                 //Todo: handle the calculated order and make it ready for the shoppingcart
                 var calculatedOrder = CalculateOrder(orderConfiguration);
-                items = _itemService.GetItems(new ItemRequest(orderConfiguration, calculatedOrder.Details.Select(c => c.ItemId).ToList())).ToList();
+                items = _itemService.GetItems(new ItemRequest(orderConfiguration, calculatedOrder.Details.Select(c => c.ItemId).ToList()));
                 items.ForEach(f =>
                 {
                     f.Quantity = calculatedOrder.Details.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity;
-                    f.ItemPrice.ItemPrice = calculatedOrder.Details.FirstOrDefault(x => x.ItemId == f.ItemId).ItemPrice;
+                    f.CalculatedPrice = calculatedOrder.Details.FirstOrDefault(x => x.ItemId == f.ItemId).ItemPrice;
                 });
                 cart.Order.Items = items;
                 cart.Order.Tax = calculatedOrder.TaxTotal;
@@ -153,11 +154,11 @@ namespace DefaultReplicatedSite.Services
             else if( ShoppingCart.CalculatedOrder != null && ShoppingCart.CalculatedOrder.CrmOrder.Details != null)
             {
                 //Todo: need to find a way to store the items, so we dont have to look them up every time
-                items = _itemService.GetItems(new ItemRequest(orderConfiguration, ShoppingCart.CalculatedOrder.CrmOrder.Details.Select(c => c.ItemId).ToList())).ToList();
+                items = _itemService.GetItems(new ItemRequest(orderConfiguration, ShoppingCart.CalculatedOrder.CrmOrder.Details.Select(c => c.ItemId).ToList()));
                 items.ForEach(f =>
                 {
                     f.Quantity = ShoppingCart.CalculatedOrder.CrmOrder.Details.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity;
-                    f.ItemPrice.ItemPrice = ShoppingCart.CalculatedOrder.CrmOrder.Details.FirstOrDefault(x => x.ItemId == f.ItemId).ItemPrice;
+                    f.CalculatedPrice = f.Price;
                 });
                 cart.Order.Items = items;
                 cart.Order.Tax = ShoppingCart.CalculatedOrder.CrmOrder.TaxTotal;
@@ -166,8 +167,13 @@ namespace DefaultReplicatedSite.Services
             //If none of the above, use the shoppingcart propertybag to create the shoppingcart model
             else
             {
-                items = _itemService.GetItems(new ItemRequest(orderConfiguration, ShoppingCart.OrderItems.Select(c => c.ItemId).ToList())).ToList();
-                items.ForEach(f => f.Quantity = ShoppingCart.OrderItems.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity);
+                items = _itemService.GetItems(new ItemRequest(orderConfiguration, ShoppingCart.OrderItems.Select(c => c.ItemId).ToList()));
+                items.ForEach(f =>
+                {
+                    f.Quantity = ShoppingCart.OrderItems.FirstOrDefault(x => x.ItemId == f.ItemId).Quantity;
+                    f.CalculatedPrice = f.Price;
+
+                });
                 cart.Order.Items = items;
             }
             //Todo: HAndle the autoOrder correctly, needs calculation?
@@ -183,7 +189,7 @@ namespace DefaultReplicatedSite.Services
 
         #region SubMitCheckout
         //Todo: this need to get done when the API authentication is fixed
-        public Response SubmitCheckout(CheckoutFlowType type)
+        public CheckoutResponse SubmitCheckout(CheckoutFlowType type)
         {
             var orderConfiguration = ShoppingCart.OrderConfiguration;
             var autoOrderConfiguration = ShoppingCart.OrderConfiguration;
@@ -209,11 +215,16 @@ namespace DefaultReplicatedSite.Services
                 if (orderConfiguration == null && autoOrderConfiguration == null)
                 {
                     var response = Teqnavi.ServiceContext().CreateCrmCustomer(customer);
-                    //Todo: Set propertybagValues
-                    return new Response
+                    if(response.Success)
+                    {
+                        CheckoutPropertyBag.Customer.CustomerId = response.Data;
+                        PropertyBagService.Update(CheckoutPropertyBag);
+                    }
+                    return new CheckoutResponse
                     {
                         Success = response.Success,
-                        Message = response.ErrorMessage
+                        Message = response.ErrorMessage,
+                        Result = response
                     };
                 }
                 else
@@ -228,7 +239,7 @@ namespace DefaultReplicatedSite.Services
                     var response = Teqnavi.ServiceContext().CreateTransactionRequest(request);
 
                     //Todo: Set propertybagValues
-                    return new Response
+                    return new CheckoutResponse
                     {
                         Success = response.Success,
                         Message = response.ErrorMessage
@@ -246,7 +257,7 @@ namespace DefaultReplicatedSite.Services
 
                     //Todo: Set Propertybag  VAlues
                     if(!orderresponse.Success)
-                        return new Response
+                        return new CheckoutResponse
                         {
                             Success = orderresponse.Success,
                             Message = orderresponse.ErrorMessage
@@ -257,14 +268,14 @@ namespace DefaultReplicatedSite.Services
                     var autoOrderresponse = Teqnavi.ServiceContext().CreateOrderRecurringTemplate(customerID, autoOrder);
                     //Todo: Set Propertybag  VAlues
                     if (!autoOrderresponse.Success)
-                        return new Response
+                        return new CheckoutResponse
                         {
                             Success = autoOrderresponse.Success,
                             Message = autoOrderresponse.ErrorMessage
                         };
                 }
 
-                return new Response
+                return new CheckoutResponse
                 {
                     Success = true,
                     Message = ""
@@ -279,11 +290,17 @@ namespace DefaultReplicatedSite.Services
             //Todo: need to add logiic for taxId check
             return true;
         }
+
+        public bool IsUserNameAvailable(string UserName)
+        {
+            return _customerService.IsUserNameAvailable(UserName);
+        }
         #endregion
     }
-    public class Response
+    public class CheckoutResponse
     {
         public bool Success { get; set; }
         public string Message { get; set; }
+        public dynamic Result { get; set; }
     }
 }

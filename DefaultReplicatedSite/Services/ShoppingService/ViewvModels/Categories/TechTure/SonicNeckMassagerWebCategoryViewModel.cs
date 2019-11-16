@@ -21,7 +21,7 @@ namespace DefaultReplicatedSite.Services
                 "Three sonic modes: Low speed (blue), medium speed (green), and high speed (red). Vibration begins when massage head make contact with skin, after mode is selected.",
                 "Massage duration can be programmed with mode memory function"
             };
-            ShortDescriptionImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/Front_red_New_720x.jpg?resize=683%2C1024&ssl=1";
+            ShortDescriptionImage = "/Content/Images/Front_red_New_720x.jpg";
             Description = "TORRE HOT/COLD SONIC NECK MASSAGER";
         }
     }

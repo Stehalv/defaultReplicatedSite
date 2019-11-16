@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,7 +49,10 @@
       <HintPath>..\packages\LibraryCommon.0.1.6\lib\net451\LibraryCommon.dll</HintPath>
     </Reference>
     <Reference Include="MakoLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MakoLibrary.0.1.117\lib\net451\MakoLibrary.dll</HintPath>
+      <HintPath>..\packages\MakoLibrary.0.1.118\lib\net451\MakoLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -145,11 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -179,7 +177,10 @@
     <Compile Include="Models\Checkout\Interfaces\IShoppingCartItem.cs" />
     <Compile Include="Models\Checkout\ShoppingCartItem.cs" />
     <Compile Include="Models\Checkout\ShoppingCartItemCollection.cs" />
+    <Compile Include="Models\Shopping\ProductModel.cs" />
     <Compile Include="Models\Shopping\WebCategory.cs" />
+    <Compile Include="Models\Types\TaxTypes.cs" />
+    <Compile Include="Models\Types\PriceTypes.cs" />
     <Compile Include="Models\Types\GenderTypes.cs" />
     <Compile Include="Models\Types\CustomerSubTypes.cs" />
     <Compile Include="Models\Types\CustomerStatuses.cs" />
@@ -211,9 +212,9 @@
     <Compile Include="Services\CheckoutService\Steps\Payment.cs" />
     <Compile Include="Services\CheckoutService\Steps\CustomerInformation.cs" />
     <Compile Include="Services\CustomerService\CustomerService.cs" />
-    <Compile Include="Services\ItemService\ItemRequest.cs" />
+    <Compile Include="Services\ItemService\Requests\ItemRequest.cs" />
     <Compile Include="Services\ItemService\ItemService.cs" />
-    <Compile Include="Services\ItemService\WebCategoryRequest.cs" />
+    <Compile Include="Services\ItemService\Requests\WebCategoryRequest.cs" />
     <Compile Include="Services\PropertyBagService\PropertyBagService.cs" />
     <Compile Include="Services\ShoppingService\ShoppingService.cs" />
     <Compile Include="Services\ShoppingService\ViewvModels\Categories\Amber\DiamondWebCategoryViewModel.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Services\CheckoutService\Steps\Shipping.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Shopping\IWebCategoryViewModel.cs" />
+    <Compile Include="ViewModels\Shopping\ProductViewModel.cs" />
     <Compile Include="ViewModels\Shopping\ProductLineViewModel.cs" />
     <Compile Include="ViewModels\Shopping\WebCategoryViewModel.cs" />
   </ItemGroup>
@@ -263,17 +265,43 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\AMBER_1_2048x2048-1.jpg" />
+    <Content Include="Content\images\Amber_B2.jpg" />
+    <Content Include="Content\images\amber_feature.jpg" />
     <Content Include="Content\images\Amber_set_grande_products_page.jpg" />
+    <Content Include="Content\images\Amethyst_b2.jpg" />
+    <Content Include="Content\images\Amethyst_Set_products_page.jpg" />
+    <Content Include="Content\images\Amethys_b2_big.jpg" />
+    <Content Include="Content\images\Aquamarine_B2.jpg" />
+    <Content Include="Content\images\Aventurine_B2.jpg" />
     <Content Include="Content\images\body.jpg" />
     <Content Include="Content\images\box_interior_4.jpg" />
     <Content Include="Content\images\box_logo_2_set2.jpg" />
     <Content Include="Content\images\box_tagline_box_front.png" />
     <Content Include="Content\images\club_member_feature.jpg" />
     <Content Include="Content\images\Comp_plan_whole_mobile-1.jpg" />
+    <Content Include="Content\images\Diamond_B2.jpg" />
+    <Content Include="Content\images\Diamond_banner_2048x2048.jpg" />
     <Content Include="Content\images\diamond_set.jpg" />
+    <Content Include="Content\images\EMS2_800_720x.jpg" />
+    <Content Include="Content\images\Front_red_New_720x.jpg" />
+    <Content Include="Content\images\gold_2048x2048-1.jpg" />
+    <Content Include="Content\images\Gold_B2_big.jpg" />
     <Content Include="Content\images\gold_set.jpg" />
     <Content Include="Content\images\home_party.jpg" />
     <Content Include="Content\images\influencer_feature.jpg" />
+    <Content Include="Content\images\influencer_small.jpg" />
+    <Content Include="Content\images\kri-aven-set_1024x1024.jpg" />
+    <Content Include="Content\images\KRI-DIA-SET_grande.jpg" />
+    <Content Include="Content\images\kri-gold-set_grande.jpg" />
+    <Content Include="Content\images\kri-prl-set_grande.jpg" />
+    <Content Include="Content\images\KristalCosmetics.jpg" />
+    <Content Include="Content\images\KRISTALS_AQUAMARINE_2048x2048.jpg" />
+    <Content Include="Content\images\kristals_logo_black.jpg" />
+    <Content Include="Content\images\kristals_product_header-1.jpg" />
+    <Content Include="Content\images\Kristals_sapphire_2048x2048.jpg" />
+    <Content Include="Content\images\kristals_stones.jpg" />
+    <Content Include="Content\images\LMB_001_2000x.jpg" />
     <Content Include="Content\images\luxxium_front_page.jpg" />
     <Content Include="Content\images\luxxium_site_comp_plan.jpg" />
     <Content Include="Content\images\luxxium_white_header_logo-1.png" />
@@ -292,26 +320,69 @@
     <Content Include="Content\fonts\ProximaNova\Proxima Nova Thin.otf" />
     <Content Include="Content\fonts\ProximaNova\ProximaNova-Regular.otf" />
     <Content Include="Content\images\luxxium_white_plain_logo-1.png" />
+    <Content Include="Content\images\member_small.jpg" />
+    <Content Include="Content\images\Men_s_Set_grande_products_page.jpg" />
+    <Content Include="Content\images\New\beautiful-girl-jewelry-set-woman-450w-708413008.jpg" />
+    <Content Include="Content\images\New\mebmership.png" />
+    <Content Include="Content\images\New\test-image.jpg" />
+    <Content Include="Content\images\New\Test-image.png" />
+    <Content Include="Content\images\PEARLSS_2048x2048-2.jpg" />
+    <Content Include="Content\images\Pearl_B2.jpg" />
     <Content Include="Content\images\rc_micropolish_cleanser.jpg" />
     <Content Include="Content\images\retailer_feature.jpg" />
+    <Content Include="Content\images\rock_crystal.jpg" />
+    <Content Include="Content\images\ROCK_CRYSTAL_1_2048x2048.jpg" />
+    <Content Include="Content\images\Rock_Crystal_B2.jpg" />
+    <Content Include="Content\images\rock_crystal_feature.jpg" />
     <Content Include="Content\images\rock_crystal_set.jpg" />
+    <Content Include="Content\images\rose_quartz-set_grande.jpg" />
+    <Content Include="Content\images\Rose_Quartz_B1.jpg" />
+    <Content Include="Content\images\Rose_Quartz_B2_big.jpg" />
+    <Content Include="Content\images\ruby-set_1_grande.jpg" />
+    <Content Include="Content\images\ruby_2048x2048-1.jpg" />
+    <Content Include="Content\images\Ruby_B2_big.jpg" />
+    <Content Include="Content\images\Sapphire_B2.jpg" />
+    <Content Include="Content\images\sapphire_feature.jpg" />
+    <Content Include="Content\images\sapphire_grande.jpg" />
     <Content Include="Content\images\sapphire_set.jpg" />
     <Content Include="Content\images\shipping.jpg" />
+    <Content Include="Content\images\Short-2.png" />
+    <Content Include="Content\images\shutterstock_1081362410.jpg" />
+    <Content Include="Content\images\shutterstock_1126285136.jpg" />
     <Content Include="Content\images\shutterstock_1132149689.jpg" />
+    <Content Include="Content\images\shutterstock_140711065.jpg" />
+    <Content Include="Content\images\shutterstock_167974427.jpg" />
+    <Content Include="Content\images\shutterstock_197153348_ruby.jpg" />
     <Content Include="Content\images\shutterstock_245479945.jpg" />
     <Content Include="Content\images\shutterstock_245480017.jpg" />
+    <Content Include="Content\images\shutterstock_279651938.jpg" />
+    <Content Include="Content\images\shutterstock_316715627.jpg" />
     <Content Include="Content\images\shutterstock_320026151.jpg" />
+    <Content Include="Content\images\shutterstock_325468397.jpg" />
+    <Content Include="Content\images\shutterstock_358164647.jpg" />
+    <Content Include="Content\images\shutterstock_500657872.jpg" />
     <Content Include="Content\images\shutterstock_513894850.jpg" />
+    <Content Include="Content\images\shutterstock_513894895.jpg" />
+    <Content Include="Content\images\shutterstock_516001579.jpg" />
     <Content Include="Content\images\shutterstock_584416678.jpg" />
+    <Content Include="Content\images\shutterstock_612498125.jpg" />
     <Content Include="Content\images\shutterstock_640958347.jpg" />
     <Content Include="Content\images\shutterstock_678404389.jpg" />
     <Content Include="Content\images\shutterstock_735691957.jpg" />
+    <Content Include="Content\images\Spark9_800_2000x.jpg" />
+    <Content Include="Content\images\ST_03_360x.jpg" />
+    <Content Include="Content\images\TECH.png" />
+    <Content Include="Content\images\TECHTURE_Supersonic_Skin_SCRUBBER_Device_with_Purifying_Facial_Mist_720x.jpg" />
     <Content Include="Content\images\tightening.jpg" />
+    <Content Include="Content\images\UCG_Front_2000x.jpg" />
+    <Content Include="Content\images\Untitled-2.jpg" />
     <Content Include="Content\Styles\components\socialicons.scss" />
     <Content Include="Content\documents\Comp_plan_whole_mobile-1.pdf" />
     <Content Include="Content\documents\updated_comp_plan.pdf" />
     <None Include="Content\Styles\fonts\fonts.scss" />
     <Content Include="Content\Styles\framework\colors.scss" />
+    <Content Include="Content\Styles\framework\animations.scss" />
+    <Content Include="Content\Styles\framework\navigation.scss" />
     <None Include="Content\Styles\framework\spaces.scss" />
     <Content Include="Content\Styles\components\formelements.css" />
     <None Include="Content\Styles\sections\contentpages.scss" />
@@ -340,10 +411,12 @@
     <Content Include="Content\Styles\framework\margins.scss" />
     <Content Include="Content\Styles\sections\shop.scss" />
     <Content Include="Content\Styles\sections\main.scss" />
+    <Content Include="Content\Styles\sections\sections.scss" />
     <None Include="Content\Styles\Site.scss" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Content\Styles\Themes\Luxxium.scss" />
+    <Content Include="Content\Styles\topbanner\topbanner.scss" />
     <None Include="Properties\PublishProfiles\steinarhalvorsen - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\steinarhalvorsen - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\steinarhalvorsen - Web Deploy.pubxml" />
@@ -361,7 +434,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Shopping.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -372,7 +447,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_MasterLayout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_GlobalScripts.cshtml" />
@@ -423,12 +497,24 @@
     <Content Include="Views\Opportunity\RRClubMember.cshtml" />
     <Content Include="Views\Opportunity\WhatIsRR.cshtml" />
     <Content Include="Views\Shared\Partials\_LeftImageMenu.cshtml" />
-    <Content Include="Views\Checkout\_Layout.cshtml" />
+    <Content Include="Views\Shopping\Category - Copy.cshtml" />
+    <Content Include="Views\Shopping\_ShoppingLayout2.cshtml" />
+    <Content Include="Views\Shared\Partials\_Footer.cshtml" />
+    <Content Include="Views\Home\Returns.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\TermsOfUse.cshtml" />
+    <Content Include="Views\Home\Policies.cshtml" />
+    <Content Include="Views\Home\Membership.cshtml" />
+    <Content Include="Views\Checkout\DisplayTemplates\NewEnrollmentCustomer.cshtml" />
+    <Content Include="Views\Home\WhoWeAre.cshtml" />
+    <Content Include="Views\Home\HowToLuxxium.cshtml" />
+    <Content Include="Views\Home\Testimonials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\App\" />
     <Folder Include="Views\Enrollment\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shopping\Partials\Items\Details\" />
   </ItemGroup>
   <ItemGroup>
@@ -483,8 +569,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\BuildWebCompiler.1.12.405\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.12.405\build\BuildWebCompiler.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\BuildWebCompiler.1.12.405\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.12.405\build\BuildWebCompiler.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

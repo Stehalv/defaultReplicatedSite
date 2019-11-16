@@ -1,19 +1,26 @@
-﻿@model Item
+﻿@model ProductModel
 <div class="row static-kit-item-container">
     <div class="item-card">
-        <div class="col-sm-6 image-wrapper">
-            <div class="image-wrapper">
-                <img src="@Model.MediumImage" class="img-responsive image" />
-            </div>
-            <div class="col-sm-12">
-                <span class="item-description">@Model.Title</span>
-            </div>
+        <div class="row static-kit-header">
+            <h2>@Model.ItemDescription</h2>
         </div>
-        <div class="col-sm-6">
-            <div class="description-wrapper">
-                <p class="item-description">@Model.ShortDescr</p>
-            </div>
-            @Html.Partial("Partials/Items/Buttons/_CardAddToCartButton", Model)
+        <div class="row space-20">
+            <a href="@Url.Action("Product", "Shopping", new { itemId = Model.ItemId })">
+                <div class="col-sm-6 image-wrapper">
+                    <div class="image-wrapper">
+                        <img src="@Model.TinyImage" class="img-responsive image" />
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <span class="item-description">@Model.ItemDescription</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="description-wrapper">
+                        <p class="item-description">@Html.Raw(Model.ShortDescription)</p>
+                        @Html.Partial("Partials/Items/Buttons/_CardAddToCartButton", Model)
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>

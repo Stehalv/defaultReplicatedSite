@@ -1,4 +1,5 @@
-﻿using MakoLibrary.Contracts;
+﻿using DefaultReplicatedSite.Services;
+using MakoLibrary.Contracts;
 using System;
 
 namespace DefaultReplicatedSite.Models
@@ -19,6 +20,7 @@ namespace DefaultReplicatedSite.Models
         public long EnrollerID {get; set;}
         public bool AutoOrderSameAsMailing { get; set; }
         public CheckoutFlowType FlowType { get; set; }
+        public CheckoutResponse Response { get; set; }
 
     }
 }

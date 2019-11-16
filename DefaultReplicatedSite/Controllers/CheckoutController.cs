@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using MakoLibrary.Contracts;
 using DefaultReplicatedSite.Services;
 using LibraryCommon;
+using Common;
 
 namespace DefaultReplicatedSite.Controllers
 {
@@ -112,6 +113,11 @@ namespace DefaultReplicatedSite.Controllers
                 model.PaymentStep.SubmitStep();
                 model.CheckoutCompleteStep.SubmitStep();
             }
+            if (model.NextStep == CheckoutSteps.CompleteCheckout)
+            {
+                PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
+                PropertyBagService.Delete(_checkoutService.ShoppingCart);
+            }
             return RedirectToAction("Shopping", new { step = model.NextStep });
         }
         #endregion
@@ -164,6 +170,11 @@ namespace DefaultReplicatedSite.Controllers
                 model.PaymentStep.SubmitStep();
                 model.CheckoutCompleteStep.SubmitStep();
             }
+            if (model.NextStep == CheckoutSteps.CompleteCheckout)
+            {
+                PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
+                PropertyBagService.Delete(_checkoutService.ShoppingCart);
+            }
             return RedirectToAction("Enrollment", new { step = model.NextStep });
         }
         #endregion
@@ -175,31 +186,42 @@ namespace DefaultReplicatedSite.Controllers
             //Does not need to verify shoppingcart as this flow has no shopping
             var model = new SimpleEnrollmentFlow();
             model.CurrentStep = step;
+            if (step == CheckoutSteps.CompleteCheckout)
+            {
+                PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
+                PropertyBagService.Delete(_checkoutService.ShoppingCart);
+            }
             return View(model);
         }
         [HttpPost]
         [Route("submitsimpleenrollment")]
         public ActionResult SubmitSimpleEnrollment(SimpleEnrollmentFlow model)
         {
-            
             if (model.CurrentStep == CheckoutSteps.CustomerInformation)
             {
                 model.InformationStep.SubmitStep();
-                model.CheckoutCompleteStep.SubmitStep();
-            }
-            if (model.CurrentStep == CheckoutSteps.CompleteCheckout)
-            {
-                PropertyBagService.Delete(_checkoutService.CheckoutPropertyBag);
-                PropertyBagService.Delete(_checkoutService.ShoppingCart);
+                _checkoutService.CheckoutPropertyBag.Response = model.CheckoutCompleteStep.SubmitStep();
+                PropertyBagService.Update(_checkoutService.CheckoutPropertyBag);
             }
             return RedirectToAction("SimpleEnrollment", new { step = model.NextStep });
         }
         #endregion
 
         #region Validations
-        public JsonResult IsTaxIDAvailable([Bind(Prefix = "Customer.TaxID")]string TaxID)
+        public JsonNetResult IsTaxIDAvailable(string TaxID)
         {
-            return Json(_checkoutService.IsTaxIDAvailable(TaxID), JsonRequestBehavior.AllowGet);
+            return new JsonNetResult(new
+            {
+                Success = _checkoutService.IsTaxIDAvailable(TaxID)
+            });
+        }
+
+        public JsonNetResult IsUserNameAvailable(string UserName)
+        {
+            return new JsonNetResult(new
+            {
+                Success = _checkoutService.IsUserNameAvailable(UserName)
+            });
         }
         #endregion
 
@@ -211,6 +233,60 @@ namespace DefaultReplicatedSite.Controllers
             {
                 success = true,
                 count = Count
+            });
+        }
+
+        [HttpPost]
+        public ActionResult RemoveItemFromCart(int id, int type)
+        {
+            var ShoppingCart = _checkoutService.ShoppingCart;
+            if (type == OrderTypes.Order)
+            {
+                ShoppingCart.OrderItems.Remove(id);
+            }
+            else
+            {
+                ShoppingCart.AutoOrderItems.Remove(id);
+            }
+            PropertyBagService.Update(ShoppingCart);
+            var cart = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
+
+            var total = (type == OrderTypes.Order) ? cart.Order.Total : cart.AutoOrder.Total;
+            var subTotal = (type == OrderTypes.Order) ? cart.Order.SubTotal : cart.AutoOrder.SubTotal;
+            return new JsonNetResult(new
+            {
+                success = true,
+                total = total.ToString("C"),
+                subtotal = subTotal.ToString("C")
+            });
+        }
+        public ActionResult UpdateCartItem(int id, int type, decimal quantity)
+        {
+            var ShoppingCart = _checkoutService.ShoppingCart;
+            if (type == OrderTypes.Order)
+            {
+                ShoppingCart.OrderItems.Update(id, quantity);
+            }
+            else
+            {
+                ShoppingCart.AutoOrderItems.Update(id, quantity);
+            }
+            PropertyBagService.Update(ShoppingCart);
+            var cart = _checkoutService.GetShoppingCart(OrderConfiguration, AutoOrderConfiguration);
+            decimal itemTotal = 0;
+            if (type == OrderTypes.Order)
+            {
+                var item = cart.Order.Items.FirstOrDefault(c => c.ItemId == id);
+                itemTotal = item.TotalPrice;
+            }
+            var total = (type == OrderTypes.Order) ? cart.Order.Total : cart.AutoOrder.Total;
+            var subTotal = (type == OrderTypes.Order) ? cart.Order.SubTotal : cart.AutoOrder.SubTotal;
+            return new JsonNetResult(new
+            {
+                success = true,
+                itemTotal = itemTotal.ToString("C"),
+                total = total.ToString("C"),
+                subtotal = subTotal.ToString("C")
             });
         }
         #endregion

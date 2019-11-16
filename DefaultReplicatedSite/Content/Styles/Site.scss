@@ -10,4 +10,64 @@
 @import "sections/shop";
 @import "sections/checkout";
 @import "sections/pagebanner";
-@import "sections/items";
+@import "sections/items";@import "sections/sections";
+@import "framework/animations";
+@import "framework/navigation";
+
+
+.bottom-divider {
+    width:100%;
+    margin:0;
+    .social-menu {
+        padding:5px 0;
+        float: right;
+        margin-right: 20px;
+ 
+        .social-icons li a {
+            color: #fff;
+        }
+
+        .social-icons li a::before {
+            font-size: 15px;
+        }
+    }
+}
+footer {
+    background-color:gray;
+}
+.footer-inner-content {
+    position: relative;
+    height: 8px;
+    background-color: #333;
+    padding-top:15px;
+    color:#fff;
+    
+}
+#footer-menu{
+    font-size:12px;
+    list-style:none;
+    li{
+        display:inline-block;
+        margin-left:15px;
+    }
+    li a{
+        color:#fff;
+    }
+}
+.background-wrapper.frontpage-bottom {
+    height: 650px;
+    background-position: center center;
+    background-size: cover;
+}
+#cookie-info{
+    position:fixed;
+    background-color:white;
+    bottom:70px;
+    margin: 0px auto;
+    width:90%;
+    height:60px;
+    border:1px solid gray;
+    font-size:12px;
+    padding-top:15px;
+    display:none;
+}

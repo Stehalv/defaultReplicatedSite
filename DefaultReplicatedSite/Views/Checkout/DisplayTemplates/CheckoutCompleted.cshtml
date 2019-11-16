@@ -6,13 +6,30 @@
     <section id="contact-information">
         <div class="row">
             <div class="col-sm-6">
-                @if (isEnrollment)
+                @if (Model.PropertyBag.Response.Success)
                 {
-                    <h3>Enrollment Completed</h3>
+                    if (isEnrollment)
+                    {
+                        <h3>Enrollment Completed</h3>
+                        @Html.Partial("DisplayTemplates/NewEnrollmentCustomer", Model.PropertyBag.Customer)
+                    }
+                    else
+                    {
+                        <h3>Order Completed</h3>
+                    }
                 }
                 else
                 {
-                    <h3>Order Completed</h3>
+                    if (isEnrollment)
+                    {
+                        <h3>Enrollment Failed</h3>
+                        <span>@Model.PropertyBag.Response.Message</span>
+                    }
+                    else
+                    {
+                        <h3>Order Failed</h3>
+                        <span>@Model.PropertyBag.Response.Message</span>
+                    }
                 }
             </div>
         </div>

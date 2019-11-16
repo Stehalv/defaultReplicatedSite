@@ -7,12 +7,7 @@
         <div id="sidebar-form">
             <div class="pull-right main">
 
-                @using (Html.BeginForm("SubmitShoppingFlow", "Checkout", new AjaxOptions
-                {
-                    HttpMethod = "POST",
-                    OnBegin = "beginRequest",
-                    OnFailure = "saveFailed"
-                }))
+                @using (Html.BeginForm("SubmitShoppingFlow", "Checkout", ))
                 {
                     @Html.HiddenFor(c => c.CurrentStep)
                     @Html.Partial("Partials/_CheckoutStepsList", Model)

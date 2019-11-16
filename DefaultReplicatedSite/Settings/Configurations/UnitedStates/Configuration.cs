@@ -39,7 +39,7 @@ namespace DefaultReplicatedSite
         {
             public BaseOrderConfiguration()
             {
-                PriceTypeID = 1;
+                PriceTypeID = 2;
                 CountryCode = "US";
             }
 
@@ -57,21 +57,21 @@ namespace DefaultReplicatedSite
         {
             public AutoOrderConfiguration()
             {
-                PriceTypeID = 2;
+                PriceTypeID = 3;
             }
         }
         public class EnrollmentConfiguration : BaseOrderConfiguration
         {
             public EnrollmentConfiguration()
             {
-                PriceTypeID = 2;
+                PriceTypeID = 3;
             }
         }
         public class EnrollmentAutoOrderConfiguration : BaseOrderConfiguration
         {
             public EnrollmentAutoOrderConfiguration()
             {
-                PriceTypeID = 2;
+                PriceTypeID = 3;
             }
         }
     }

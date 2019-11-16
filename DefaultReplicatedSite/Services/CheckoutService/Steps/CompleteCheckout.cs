@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DefaultReplicatedSite.Services
 {
@@ -34,12 +35,14 @@ namespace DefaultReplicatedSite.Services
         public IOrderConfiguration OrderConfiguration { get; set; }
         public IOrderConfiguration AutoOrderConfiguration { get; set; }
         public ShoppingCartPropertyBag ShoppingCart { get; set; }
+        public CheckoutResponse Response { get; set; }
         /// <summary>
         /// Completes the flow, and adds all the records needed.
         /// </summary>
-        public void SubmitStep()
+        public CheckoutResponse SubmitStep()
         {
             var response = new CheckoutService().SubmitCheckout(Type);
+            return response;
         }
     }
 }

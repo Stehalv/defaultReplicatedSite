@@ -1,4 +1,5 @@
 ﻿using DefaultReplicatedSite.Models;
+using DefaultReplicatedSite.ViewModels;
 using LibraryCommon;
 using MakoLibrary.Contracts;
 using MakoLibrary.Services;
@@ -12,13 +13,32 @@ namespace DefaultReplicatedSite.Services
     public class ItemService
     {
         public MakoService context = Teqnavi.ServiceContext();
-        public List<Item> GetItems(ItemRequest request)
+        public List<ProductModel> GetItems(ItemRequest request)
         {
             var items = new List<ItemContract>();
             if (request.WebCaegoryID != 0)
             {
                 var response = context.GetWebCategoryItems(request.WebCaegoryID, new MakoFilterQueryContract());
                 items = response.Data.ToList();
+            }
+            else if(request.SingleItemRequest)
+            {
+                var filter = new MakoFilterQueryContract();
+                filter.SearchList = new List<MakoFilterSearchData>
+                {
+                    new MakoFilterSearchData
+                    {
+                        SearchFilter    = nameof(ItemContract.ItemId),
+                        SearchMethod    = ApiQuery.SearchMethod.IsEqual,
+                        SearchValue     = request.ItemId.ToString()
+                    }
+                };
+
+                items = context.GetItems(filter).Data.ToList();
+                if (request.ItemIds != null)
+                {
+                    items = items.Where(c => request.ItemIds.Contains(c.ItemId)).ToList();
+                }
             }
             else
             {
@@ -30,24 +50,12 @@ namespace DefaultReplicatedSite.Services
                     items = items.Where(c => request.ItemIds.Contains(c.ItemId)).ToList();
                 }
             }
-            
-            return ConvertToItem(items, request);
+            return new ProductModel().ReturnCorrectTypeList(items, request);
         }
         public List<WebCategoryContract> GetWebCategories(WebCategoryRequest request)
         {
             var categories = context.GetWebCategories();
             return categories.Data.ToList();
-        }
-        private List<Item> ConvertToItem(List<ItemContract> items, ItemRequest request)
-        {
-            List<Item> list = new List<Item>();
-            foreach (var item in items.Where(c => c.ItemPricing.Where(f => f.CountryCode == request.Configuration.CountryCode).Count() > 0))
-            {
-                var _item = new Item(item, request.Configuration);
-                _item.Quantity = 1;
-                list.Add(_item);
-            }
-            return list;
         }
     }
 }

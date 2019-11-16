@@ -13,8 +13,8 @@ namespace DefaultReplicatedSite.ViewModels
         string Key { get; set; }
         string Name { get; set; }
         string Title { get; set; }
-        List<Item> Items { get; set; }
-        Item KitItem { get; }
+        List<ProductModel> Items { get; set; }
+        ProductModel KitItem { get; }
         int ProductLineId { get; set; }
         string ProductLineImageUrl { get; set; }
         string HeaderImageUrl { get; set; }

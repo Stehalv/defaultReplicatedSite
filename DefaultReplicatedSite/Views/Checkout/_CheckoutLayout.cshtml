@@ -7,6 +7,25 @@
         background-color: #000000;
     }
 </style>
-<div class="content">
-    @RenderBody();
+<div class="content checkout">
+    @RenderBody()
 </div>
+<script>
+    $('form').submit(function (e) {
+        if ($("#InformationStep_Customer_UserPassword").val() != "" && $("#InformationStep_Customer_UserPassword").val() != $("#InformationStep_Customer_ConfirmPassword").val()) {
+            console.log("stopped by password validation")
+            e.preventDefault();
+            $("#confirm-password-validation").show();
+        }
+        if ($("#username-validated").val() == "0") {
+            console.log("stopped by username validation")
+            e.preventDefault();
+            $("#username-validation").show();
+        }
+        if ($("#taxid-validated").val() == "0") {
+            console.log("stopped by username validation")
+            e.preventDefault();
+            $("#taxid-validation").show();
+        }
+    });
+</script>

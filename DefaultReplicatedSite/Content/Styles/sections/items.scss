@@ -1,7 +1,7 @@
 ﻿.single-item-container {
     min-height:400px;
     .image-wrapper{
-        min-height:200px;
+        min-height:380px;
     }
     .description-wrapper {
         min-height:60px;
@@ -18,7 +18,20 @@
 
     .description-wrapper {
         min-height: 270px;
-        width: 80%;
-        text-align: center
+        padding-left: 10%;
+        text-align: center;
+
+        .item-description {
+            font-size: 14px;
+        }
+    }
+
+    .static-kit-header {
+        border-bottom: 1px solid black;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 36px;
     }
 }

@@ -1,0 +1,44 @@
+﻿<footer>
+    @*<div id="cookie-info">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-10">
+                    By accessing and browsing this website, you accept, without limitation or qualification, the following terms and conditions of use. If you do not agree, please discontinue your use of this website.
+                    <a href="@Url.Action("TermsOfUse", "Home")">TERMS OF USE</a>
+                </div>
+                <div class="col-sm-2 pull-left-right">
+                    <a class="btn btn-default" data-role="accept-cookies">Close and Accept</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <section id="footer-content">
+        <div class="row bottom-divider">
+            <div class="col-sm-3" style="margin-top:10px; font-size:12px;">
+                All Rights Reseved © Luxxium
+            </div>
+            <div class="col-sm-5" style="margin-top:10px;">
+                <ul id="footer-menu">
+                    <li>
+                        <a href="@Url.Action("TermsOfUse", "Home")">Terms of Use</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Policies", "Home")">Poilicies</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Returns", "Home")">Returns</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PrivacyPolicy", "Home")">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("WhatIsRR", "Home")">Membership</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4 pull-right">
+                @Html.Partial("_SocialIconsBar")
+            </div>
+        </div>
+    </section>
+</footer>

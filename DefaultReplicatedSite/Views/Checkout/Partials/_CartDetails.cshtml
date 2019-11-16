@@ -1,7 +1,7 @@
 ﻿@model IOrder
 @{
     var isAutoOrder = (Model is AutoOrder);
-    var orderType = (isAutoOrder) ? Common.OrderTypes.Order : Common.OrderTypes.AutoOrder;
+    var orderType = (!isAutoOrder) ? Common.OrderTypes.Order : Common.OrderTypes.AutoOrder;
     var context = Guid.NewGuid();
     var cartHeading = (!isAutoOrder) ? Resources.Checkout.TodaysOrder : Resources.Checkout.AutoOrder;
     var hasItems = Model.Items != null && Model.Items.Count() != 0;
@@ -18,12 +18,12 @@
         {
             foreach (var item in Model.Items)
             {
-                var itemTotal = item.ItemPrice.ItemPrice * item.Quantity;
+                var itemTotal = item.Price * item.Quantity;
                 <div class="summary-item" id="@context-@item.ItemId">
                     <div class="product-image">
                         <div class="product-thumbnail">
                             <div class="product-thumbnail-wrapper">
-                                <img alt="" class="product-thumbnail-image" src="@item.SmallImage">
+                                <img alt="" class="product-thumbnail-image" src="@item.TinyImage">
                             </div>
                             @if (!Model.IsEditable)
                             {
@@ -32,8 +32,8 @@
                         </div>
                     </div>
                     <div class="product-description" scope="row">
-                        <span class="product-description-name order-summary-emphasis">@item.Title</span>
-                        <span class="product-description-variant order-summary-small-text">@item.ShortDescr</span>
+                        <span class="product-description-name order-summary-emphasis">@item.ItemDescription</span>
+                        <span class="product-description-variant order-summary-small-text">@item.ShortDescription</span>
                     </div>
                     @if (Model.IsEditable)
                     {
@@ -47,7 +47,7 @@
                     @if (Model.IsEditable)
                     {
                         <div class="product-remove">
-                            <a data-role="remove-item" data-id="@item.ItemId" data-context="@context" data-ordertype="@orderType" data-url="@Url.Action("RemoveItemFromCart", "shopping", new { id = item.ItemId, orderType = orderType })"><i class="fa fa-times text-danger"></i></a>
+                            <a class="link" data-role="remove-item" data-id="@item.ItemId" data-context="@context" data-ordertype="@orderType" data-url="@Url.Action("RemoveItemFromCart", "Checkout", new { id = item.ItemId, type = orderType })"><i class="fa fa-times text-danger"></i></a>
                         </div>
                     }
                 </div>

@@ -2,104 +2,139 @@
 
 @Html.Partial("Scripts/Shopping")
 <script>
-        var elements;
-        var windowHeight;
+    
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      var expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+        }
+        return "";
+    }
+    var elements;
+    var windowHeight;
 
-        // Event Handlers
-        function registerEventHandlers() {
-            $(window).scroll(function () {
-                actions.setMenustatus();
-                actions.checkPosition();
-            });
-            $(".mobile_menu_bar_toggle").on("click", function () {
-                if ($("#mobile_menu").hasClass("open")) {
-                    $("#mobile_menu").removeClass("open");
-                } else {
-                    $("#mobile_menu").addClass("open");
+    // Event Handlers
+    function registerEventHandlers() {
+      $(".fade-on-load").fadeIn(5000);
+        $(window).scroll(function () {
+            actions.setMenustatus();
+            actions.checkPosition();
+        });
+        $(".mobile_menu_bar_toggle").on("click", function () {
+            if ($("#mobile_menu").hasClass("open")) {
+                $("#mobile_menu").removeClass("open");
+            } else {
+                $("#mobile_menu").addClass("open");
+            }
+        });
+
+        $('.dropdown-toggle').click(function (e) {
+            if ($(document).width() > 768) {
+                e.preventDefault();
+
+                var url = $(this).attr('href');
+
+
+                if (url !== '#') {
+
+                    window.location.href = url;
                 }
-            });
-            
-            $('.dropdown-toggle').click(function (e) {
-                if ($(document).width() > 768) {
-                    e.preventDefault();
 
-                    var url = $(this).attr('href');
-
-
-                    if (url !== '#') {
-
-                        window.location.href = url;
-                    }
-
-                }
-            });
-        };
-        // Actions
-            var actions = {
-            checkPosition: function() {
-                for (var i = 0; i < elements.length; i++) {
-                    var element = elements[i];
-                    if (!$(element).hasClass("fadedin")) {
-                        var positionFromTop = elements[i].getBoundingClientRect().top;
-                        if (positionFromTop - windowHeight <= 0) {
-                            if ($(element).hasClass("fadein")) {
-                                actions.animateElement(element);
-                            } else {
-                                actions.animateContainerChild(element);
-                            }
+            }
+        });
+        $('[data-role="accept-cookies"]').on("click", function () {
+            setCookie("@Settings.Company.CookieName-AcceptedCookies", "true", 60);
+            $("#cookie-info").hide();
+        });
+    };
+    // Actions
+    var actions = {
+        checkPosition: function () {
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                if (!$(element).hasClass("fadedin")) {
+                    var positionFromTop = elements[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        if ($(element).hasClass("fade-in")) {
+                            actions.animateElement(element);
+                        } else {
+                            actions.animateContainerChild(element);
                         }
                     }
                 }
-            },
-            animateContainerChild: function (e) {
-                $(e).each(function () {
-                    var time = 1;
-                    $(this).children().each(function (i, e) {
-                        setTimeout( function(){ $(e).animate({ 'opacity': 1.0 }, 500); }, time )
-                        time = time + 500;
-                    });
-                    $(e).addClass("fadedin");
-                });
-            },
-            animateElement: function (e) {
-                $(e).each(function () {
-                    $(this).animate({ 'opacity': 1.0 }, 500);
-                    $(this).addClass("fadedin");
-                });
-            },
-            setMenustatus: function() {
-                var menu = $('#main-header'),
-                    scroll = $(window).scrollTop(),
-                    bannerLogo = $('.banner-logo');
-                if (scroll >= 1) {
-                    menu.addClass('fixed-header');
-                    bannerLogo.attr("src", "/Content/images/luxxium_white_plain_logo-1.png");
-                }
-                else {
-                    menu.removeClass('fixed-header');
-                    bannerLogo.attr("src", "/Content/images/luxxium_white_header_logo-1.png");
-                }
             }
-        };
-
-
-        // Initialization
-        function init() {
-            elements = document.querySelectorAll('.animate');
-            windowHeight = window.innerHeight;
-            registerEventHandlers();
-            actions.checkPosition()
-
-        }
-        function getFormData($form){
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
-
-            $.map(unindexed_array, function(n, i){
-                indexed_array[n['name']] = n['value'];
+        },
+        animateContainerChild: function (e) {
+            $(e).each(function () {
+                var time = 1;
+                $(this).children().each(function (i, e) {
+                    setTimeout(function () { $(e).animate({ 'opacity': 1.0 }, 500); }, time)
+                    time = time + 500;
+                });
+                $(e).addClass("fadedin");
             });
-
-            return indexed_array;
+        },
+        animateElement: function (e) {
+            $(e).each(function () {
+                $(this).stop().delay(1000).animate({ 'opacity': 1.0 }, 700);
+                $(this).addClass("fadedin");
+            });
+        },
+        setMenustatus: function () {
+            var menu = $('#main-header'),
+                scroll = $(window).scrollTop(),
+                bannerLogo = $('.banner-logo');
+            if (scroll >= 1) {
+                menu.addClass('fixed-header');
+                bannerLogo.attr("src", "/Content/images/luxxium_white_plain_logo-1.png");
+            }
+            else {
+                menu.removeClass('fixed-header');
+                bannerLogo.attr("src", "/Content/images/luxxium_white_header_logo-1.png");
+            }
+        },
+        checkForCookie: function () {
+            var acceptedCookie = getCookie("@Settings.Company.CookieName-AcceptedCookies");
+            if (acceptedCookie != "true") {
+                $("#cookie-info").show();
+            }
         }
-        init();
+
+    };
+
+
+    // Initialization
+    function init() {
+        elements = document.querySelectorAll('.fade-in');
+        windowHeight = window.innerHeight;
+        registerEventHandlers();
+        actions.checkPosition();
+        actions.checkForCookie();
+
+    }
+    function getFormData($form) {
+        var unindexed_array = $form.serializeArray();
+        var indexed_array = {};
+
+        $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return indexed_array;
+    }
+    init();
 </script>

@@ -21,7 +21,7 @@ namespace DefaultReplicatedSite.Services
                 "Deep clean your complexion without any redness or irritation",
                 "Preps skin for deeper moisturizing allowing all your products to work better and infuse nutrients directly into your skin. "
             };
-            ShortDescriptionImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/TECHTURE_Supersonic_Skin_SCRUBBER_Device_with_Purifying_Facial_Mist_720x.jpg?resize=683%2C1024&ssl=1";
+            ShortDescriptionImage = "/Content/Images/TECHTURE_Supersonic_Skin_SCRUBBER_Device_with_Purifying_Facial_Mist_720x.jpg";
             Description = "SUPERSONIC SKIN SCRUBBER";
         }
     }

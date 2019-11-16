@@ -1,0 +1,23 @@
+﻿@model Customer
+    <div class="row space-bottom-20">
+        <div class="col-sm-12">
+            <h4>Welcome to us, @Model.FullName</h4>
+        </div>
+        <div class="col-sm-12">
+            <label>Your Customerid with us is : @Model.CustomerId</label>
+        </div>
+        <div class="col-sm-12">
+            <p>
+                You will any minute recieve your welcome emial with information about your account details.<br />
+                We are truly looking forward to cooperating with you!
+            </p>
+        </div>
+        <div class="col-sm-12">
+            <p>
+                Best regards, the Luxxium team.
+            </p>
+        </div>
+        <div class="col-sm-12">
+            <a class="btn btn-primary" href="@Url.Action("index", "Home")">Go back to Homepage</a>
+        </div>
+    </div>

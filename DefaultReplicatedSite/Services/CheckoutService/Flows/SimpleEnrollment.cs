@@ -50,6 +50,7 @@ namespace DefaultReplicatedSite.ViewModels
             CheckoutSteps.CompleteCheckout
         };
         public CustomerInformationStep InformationStep { get; set; }
+        public CheckoutResponse Response { get; set; }
         public CompleteCheckoutStep CheckoutCompleteStep { get; set;}
     }
 }

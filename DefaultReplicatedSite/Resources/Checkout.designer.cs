@@ -655,6 +655,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected username is taken, please find another username.
+        /// </summary>
+        public static string UserNameUnavailable {
+            get {
+                return ResourceManager.GetString("UserNameUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string UserPassword {

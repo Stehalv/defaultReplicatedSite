@@ -23,7 +23,7 @@ namespace DefaultReplicatedSite.Services
                 "Tighter ",
                 "More toned"
             };
-            ShortDescriptionImage = "https://i2.wp.com/luxxium.net/wp-content/uploads/2019/04/EMS2_800_720x.jpg?resize=683%2C1024&ssl=1";
+            ShortDescriptionImage = "/Content/Images/EMS2_800_720x.jpg";
             Description = "E-PULSE EMS PRO TECH SKIN TIGHTENING TREATMENT";
         }
     }

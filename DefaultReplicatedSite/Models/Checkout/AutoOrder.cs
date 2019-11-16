@@ -9,7 +9,7 @@ namespace DefaultReplicatedSite.Models
     {
         public int OrderID { get; set; }
         public DateTime StartDate { get; set; }
-        public List<Item> Items { get; set; }
+        public List<ProductModel> Items { get; set; }
         public int ShipMethodID { get; set; }
         public decimal SubTotal
         {
@@ -17,7 +17,7 @@ namespace DefaultReplicatedSite.Models
             {
                 if (Items != null)
                 {
-                    return Items.Sum(c => c.Quantity * c.ItemPrice.ItemPrice);
+                    return Items.Sum(c => c.Quantity * c.Price);
                 }
                 return 0;
             }

@@ -23,7 +23,7 @@ namespace DefaultReplicatedSite.Services
                 "Painless",
                 "Easy to use"
             };
-            ShortDescriptionImage = "https://i1.wp.com/luxxium.net/wp-content/uploads/2019/04/Spark9_800_2000x.jpg?resize=683%2C1024&ssl=1";
+            ShortDescriptionImage = "/Content/Images/Spark9_800_2000x.jpg";
             Description = "SPARK PHOTON LED BEAUTY TECH";
         }
     }

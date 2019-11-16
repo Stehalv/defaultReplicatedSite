@@ -1,5 +1,6 @@
 ﻿.shop.content {
     max-width: 1080px;
+    margin-bottom:40px;
 }
 
 #categories-sidebar {
@@ -10,12 +11,16 @@
 .web-category-item::before {
 }
 
+.web-category-item-heading {
+    margin-bottom:15px;
+}
+
 .web-category-item-heading p {
-    background-color: #19193b;
+    background-color: #333;
     font-size: 24px;
     text-align: center;
     color: #eee;
-    padding: 20px 30px;
+    padding: 0px 30px;
     line-height: 1.7;
     border-radius: 10px;
 }
@@ -73,4 +78,25 @@ blockquote {
 
 .main-category-image {
     min-height: 425px;
+}
+
+#shopping-page {
+    section {
+        padding-bottom: 70px;
+    }
+
+}
+
+.item-detail-image{
+    min-height:500px;
+}
+#product-menu{
+    li a{
+        color:#333;
+    }
+}
+.item-details {
+    .product-info-box {
+        min-height: 400px;
+    }
 }

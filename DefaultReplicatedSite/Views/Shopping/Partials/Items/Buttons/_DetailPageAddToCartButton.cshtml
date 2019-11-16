@@ -1,10 +1,10 @@
-﻿@model Item
+﻿@model ProductModel
     <style>
         .fullwidth-element{
             width:100%;
         }
     </style>
-    <div class="row fullwidth-element">
+    <div class="row fullwidth-element" style="margin-top:15px;">
         @using (Ajax.BeginForm("AddItemToOrder", "Shopping", new AjaxOptions
         {
             HttpMethod = "POST",
@@ -14,12 +14,15 @@
         {
             @Html.HiddenFor(c => c.ItemId)
             @Html.HiddenFor(c => c.ItemCode)
+            @Html.HiddenFor(c => c.ItemDescription)
             <div class="col-sm-3">
                 @Html.TextBoxFor(c => c.Quantity, new { @class = "form-control" })
             </div>
-            <div class="col-sm-9">
-                <a class="btn btn-primary add-item-to-order">Add To Cart</a>
+            <div class="col-sm-9" style="margin-top:6px">
+                @*<a class="btn fullwidth btn-primary  add-item-to-order">Add To Cart</a>*@
+                <a class="btn fullwidth btn-primary">Shop Coming Soon</a>
             </div>
+            <span class="text-success" style="display:none" id="added-text-@Model.ItemId"></span>
         }
     </div>
   

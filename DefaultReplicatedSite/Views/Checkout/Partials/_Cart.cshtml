@@ -8,10 +8,11 @@
     @Html.Partial("Partials/_CartDetails", Model.AutoOrder)
 }
     <script>
-        var updateCartItemUrl = '@Url.Action("UpdateCartItem", "Shopping")';
+        var updateCartItemUrl = '@Url.Action("UpdateCartItem", "Checkout")';
 
         function registerEventHandlers() {
-            $('[data-role="remove-item]').on("click", function () {
+            $('[data-role="remove-item"]').on("click", function () {
+                console.log("remove-item");
                 var context = $(this).data("context");
                 var orderType = $(this).data("ordertype");
                 var id = $(this).data("id");
@@ -28,7 +29,6 @@
                 })
             });
             $('.edit-quantity').on("change", function () {
-                console.log("edit-quantity");
                 var context = $(this).data("context");
                 var orderType = $(this).data("ordertype");
                 var id = $(this).data("id");
@@ -37,10 +37,10 @@
                 $.ajax({
                     url: updateCartItemUrl,
                     type: "POST",
-                    data: { id: id, type: type, quantity: quantity },
+                    data: { id: id, type: orderType, quantity: quantity },
                     success: function (response) {
                         if (response.success) {
-                            $(".item-total" + context + "-" + id).html(response.itemTotal);
+                            $(".item-total-" + context + "-" + id).html(response.itemTotal);
                             $(".total-sum-" + orderType).html(response.total);
                             $(".sub-total-" + orderType).html(response.subtotal);
                         }

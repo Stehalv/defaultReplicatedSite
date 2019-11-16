@@ -3,16 +3,11 @@
     Layout = "~/Views/Checkout/_CheckoutLayout.cshtml";
 }
 <div id="checkout-page">
-    <div class="wrap">
-        <div id="sidebar-form">
-            <div class="pull-right main">
+    <div class="row">
+        <div id="sidebar-form" class="col-sm-6">
+            <div class="main">
 
-                @using (Html.BeginForm("SubmitSimpleEnrollment", "Checkout", new AjaxOptions
-                {
-                    HttpMethod = "POST",
-                    OnBegin = "beginRequest",
-                    OnFailure = "saveFailed"
-                }))
+                @using (Html.BeginForm("SubmitSimpleEnrollment", "Checkout"))
                 {
                     @Html.HiddenFor(c => c.CurrentStep)
                     @Html.Partial("Partials/_CheckoutStepsList", Model)
@@ -34,20 +29,10 @@
                 }
             </div>
         </div>
-        <aside id="sidebar-cart">
+        <div id="sidebar-cart" class="col-sm-6">
             <section id="cart">
                 @Html.Partial("Partials/_Enrollmentinformation")
             </section>
-        </aside>
+        </div>
     </div>
 </div>
-
-<script>
-
-    function beginRequest(e) {
-        console.log(e);
-    }
-    function SaveFailed(response) {
-        alert(response);
-    }
-</script>

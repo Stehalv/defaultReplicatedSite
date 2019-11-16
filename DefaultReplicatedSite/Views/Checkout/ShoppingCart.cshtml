@@ -13,12 +13,12 @@
         </div>
         @Html.Partial("Partials/_Cart", Model)
         <div class="row space-20">
-            <div class="col-xs-2">
+            <div class="col-sm-2 col-xs-4">
                 <a class="btn btn-primary" onclick="javascrip:history.back()">@Resources.Checkout.BackToShopping</a>
             </div>
             @if (hasItems)
             {
-                <div class="col-xs-2 pull-right text-right">
+                <div class="col-sm-2 col-xs-4 pull-right text-right space-right-20">
                     <a class="btn btn-primary" href="@Url.Action("Index", "Checkout", new { type = Model.Type })">@Resources.Checkout.CheckoutLabel</a>
                 </div>
             }

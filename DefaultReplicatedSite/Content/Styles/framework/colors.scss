@@ -1,7 +1,8 @@
 ﻿body {
     color: #333333;
 }
-a {
+a,
+a:hover {
     color: #333333;
     text-decoration: none;
 }
@@ -15,9 +16,17 @@ a {
 .text-white {
     color: white;
 }
+.ingress {
+    color: #040230;
+}
 .btn-primary {
-    background-color: #040230;
+    background-color: dimgray;
     color: #fff;
+    border-color: #000;
+}
+.btn-primary:hover {
+    background-color: #fff;
+    color: dimgray;
     border-color: #000;
 }
 .cart-container a {
@@ -43,7 +52,19 @@ hr {
 .nav a {
     color: #fff;
 }
-item-content a {
+item-content a, item-card a {
     color: #333333;
     text-decoration:none;
+}
+.section-dark {
+    color: #fff;
+    background-color: #040230;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #fff;
+    }
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent !important;
 }

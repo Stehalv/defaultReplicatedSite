@@ -23,7 +23,7 @@ namespace DefaultReplicatedSite.Services
                 "Easy at home use",
                 "Painless"
             };
-            ShortDescriptionImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/09/ST_03_360x.jpg?w=360&ssl=1";
+            ShortDescriptionImage = "/Content/Images/ST_03_360x.jpg";
             Description = "SPARK PHOTON LED BEAUTY TECH";
         }
     }

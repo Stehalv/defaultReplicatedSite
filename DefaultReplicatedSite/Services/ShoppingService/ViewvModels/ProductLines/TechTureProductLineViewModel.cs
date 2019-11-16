@@ -15,8 +15,8 @@ namespace DefaultReplicatedSite.Services
             Name = "TechTure Beauty Products";
             Description = "TECHTURE ADVANCED <br>SKINCARE TECHNOLOGY";
             Title = "Beauty Meets Technology";
-            HeaderImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/shutterstock_1081362410.jpg?resize=2400%2C1800&ssl=1";
-            ProductLineImage = "https://i0.wp.com/luxxium.net/wp-content/uploads/2019/04/TECH.png?w=760&amp;ssl=1";
+            HeaderImage = "/Content/Images/shutterstock_1081362410.jpg";
+            ProductLineImage = "/Content/Images/TECH.png";
         }
     }
 }

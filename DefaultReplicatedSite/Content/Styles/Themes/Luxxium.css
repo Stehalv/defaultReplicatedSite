@@ -1,28 +1,4 @@
-﻿.banner-content .headline.img-headline:after {
-  position: absolute;
-  color: #ffffff;
-  content: '';
-  bottom: 0;
-  left: 50%;
-  width: 180px;
-  margin-left: -90px;
-  border-bottom: 4px solid #ffffff; }
-
-.headline.img-headline {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2.8em;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  width: 76%;
-  font-size: 4em;
-  text-align: center;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  text-transform: uppercase; }
-
-#sidebar-cart {
+﻿#sidebar-cart {
   padding-top: 30px;
   position: relative;
   color: #535353;

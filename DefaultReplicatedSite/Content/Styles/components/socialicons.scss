@@ -1,19 +1,16 @@
-﻿.social-menu {
+﻿#home-search{
+}
+.social-menu {
     padding: 15px 0;
-    border-bottom: 1px solid #ddd;
     width: 100%;
+    list-style:none;
+    li{
+        display:inline-block;
+        margin-left:25px;
+    }
 }
 
 .social-icons li a {
-    .social-icons li a {
-        color: rgba(0, 0, 0, 0.4);
-        color: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 18px;
-    }
-
-    border-radius: 18px;
     width: 36px;
     height: 36px;
 }
@@ -22,20 +19,17 @@
 .social-icons li a {
     .social-icons li a {
         display: block;
-        display: block;
-        color: #666666;
         color: #666666;
         text-align: center;
-        text-align: center;
-        text-decoration: none;
         text-decoration: none;
         line-height: 36px;
-        line-height: 33px;
         min-width: 36px;
-        min-width: 36px;
-        margin: 4px;
         margin: 4px;
         padding: 0px;
+    }
+
+    .social-icons li a:hover {
+        text-decoration: none;
     }
 
     padding: 0px;
@@ -44,8 +38,6 @@
 
 .social-icons li a {
     color: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 18px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -74,7 +66,7 @@
 
 .social-icons li a::before {
     font-family: 'FontAwesome';
-    font-size: 16px;
+    font-size: 30px;
     font-weight: normal;
     content: '\f0c1';
 }

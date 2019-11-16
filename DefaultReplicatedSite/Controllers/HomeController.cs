@@ -79,5 +79,52 @@ namespace DefaultReplicatedSite.Controllers
             return View("~/Views/Opportunity/WhatIsRR.cshtml");
         }
 
+        public ActionResult WhoWeAre()
+        {
+            ViewBag.LeftMenu = true;
+            ViewBag.LeftMenuTitle = "MEMBERSHIP LEVELS";
+            ViewBag.LefMenuExclude = 3;
+            ViewBag.HeaderImg = "../../Content/images/shutterstock_735691957.jpg?resize=2400%2C1800&ssl=1";
+            ViewBag.Title = "Who Is Luxxium";
+            return View("~/Views/Home/WhoWeAre.cshtml");
+        }
+        public ActionResult HowToLuxxium()
+        {
+            ViewBag.LeftMenu = true;
+            ViewBag.LeftMenuTitle = "MEMBERSHIP LEVELS";
+            ViewBag.LefMenuExclude = 3;
+            ViewBag.HeaderImg = "../../Content/images/shutterstock_735691957.jpg?resize=2400%2C1800&ssl=1";
+            ViewBag.Title = "How To Luxxium";
+            return View("~/Views/Home/HowToLuxxium.cshtml");
+        }
+        public ActionResult Testimonials()
+        {
+            ViewBag.LeftMenu = true;
+            ViewBag.LeftMenuTitle = "MEMBERSHIP LEVELS";
+            ViewBag.LefMenuExclude = 3;
+            ViewBag.HeaderImg = "../../Content/images/shutterstock_735691957.jpg?resize=2400%2C1800&ssl=1";
+            ViewBag.Title = "Testimonials";
+            return View("~/Views/Home/Testimonials.cshtml");
+        }
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+        public ActionResult Membership()
+        {
+            return View();
+        }
+        public ActionResult Policies()
+        {
+            return View();
+        }
+        public ActionResult Returns()
+        {
+            return View();
+        }
+        public ActionResult TermsOfUse()
+        {
+            return View();
+        }
     }
 }

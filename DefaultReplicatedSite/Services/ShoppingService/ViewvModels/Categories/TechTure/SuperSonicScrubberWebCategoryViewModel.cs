@@ -19,7 +19,7 @@ namespace DefaultReplicatedSite.Services
                 "This gentle formula contains Organic Aloe Vera Gel, Witch Hazel Extract and Vitamin B5 to soothe and protect skin. The Micro Current Activator is an important first step before any EMS treatment to ensure your device delivers maximum microcurrent conductivity. " +
                 "Easy to apply, easy to wash off. Your skin will thank you!";
             ShortDescriptionListItems = new List<string>();
-            ShortDescriptionImage = "https://i2.wp.com/luxxium.net/wp-content/uploads/2019/10/UCG_Front_2000x.jpg?resize=683%2C1024&ssl=1";
+            ShortDescriptionImage = "/Content/Images/UCG_Front_2000x.jpg";
             Description = "SUPERSONIC SKIN SCRUBBER";
         }
     }

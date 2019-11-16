@@ -1,13 +1,13 @@
-﻿@model Item
+﻿@model ProductModel
     <div class="single-item-container col-md-4 col-sm-6 item-card">
         <div class="item-content">
-            <a href="@Url.Action("ProductDetail", "Shopping", new { itemId = Model.ItemId })">
+            <a href="@Url.Action("Product", "Shopping", new { itemId = Model.ItemId })">
                 <div class="col-sm-12 image-wrapper">
-                    <img src="@Model.MediumImage" class="img-responsive image" />
+                    <img src="@Model.TinyImage" class="img-responsive image" />
                 </div>
                 <div class="row">
                     <div class="col-sm-12 description-wrapper">
-                        <span class="item-description">@Model.Title</span>
+                        <span class="item-description">@Model.ItemDescription</span>
                     </div>
                 </div>
             </a>
