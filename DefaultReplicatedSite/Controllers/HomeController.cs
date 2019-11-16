@@ -19,7 +19,11 @@ namespace DefaultReplicatedSite.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.LeftMenu = true;
+            ViewBag.LeftMenuTitle = "MEMBERSHIP LEVELS";
+            ViewBag.LefMenuExclude = 0;
+            ViewBag.HeaderImg = "../../Content/images/shutterstock_1132149689-b.jpg?resize=2400%2C1800&ssl=1";
+            ViewBag.Title = "WHO IS LUXXIUM";
 
             return View();
         }
